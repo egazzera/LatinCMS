@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Capacitacion LatinCMS v1.0</title>
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="Content/bootstrap-theme.min.css" />
+
+    <script type="text/javascript" src="/Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/Scripts/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container" style="width:30%">
+        <form class="form-signin" action="Controllers/LoginController.php" method="POST" role="form">
+            <h2 class="form-signin-heading">Login LatinCMS</h2>
+            <input type="text" class="form-control" placeholder="Usuario" name="usuario" required autofocus>
+            <input type="password" class="form-control" placeholder="Clave" name="password" required autofocus>
+            <input type="submit" class="form-group btn btn-primary btn-lg btn-block">
+        </form>
+    </div>
+</body>
+</html>
