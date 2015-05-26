@@ -25,7 +25,7 @@ namespace LatinCMS.Controllers
             session.Transaction.Commit();
             session.Close();
 
-            return View();
+            return View(); //Home
         }
 
     }
