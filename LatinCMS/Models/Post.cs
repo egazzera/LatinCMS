@@ -10,6 +10,8 @@ namespace LatinCMS.Models
         public virtual int Id { get; set; }
         public virtual int Usuario_Id { get; set; }
         public virtual int Tipo_Post_Id { get; set; }
+        public virtual string Descripcion { get; set; }
+
 
     }
 }

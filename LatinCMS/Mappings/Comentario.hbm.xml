@@ -17,6 +17,10 @@
       <column name="estado_comentario"  />
     </property>
 
+    <property name="Descripcion">
+      <column name="descripcion"  />
+    </property>
+
   </class>
 
 </hibernate-mapping>

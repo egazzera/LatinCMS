@@ -1,0 +1,61 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head lang="es-ar">
+    <meta charset="UTF-8">
+    <title>Latin CMS - Registrese</title>
+    <link rel="stylesheet" href="Content/bootstrap.css" />
+</head>
+<body>
+    <div class="container" style="width: 400px;margin-top: 50px">
+        <fieldset class="login">
+            <legend>Registraci&oacute;n</legend>
+            <form action='@Url.Action("NuevoUsuario", "Signup")' method="POST" id="formulario" class="form-signin">
+                <h2 class="form-signin-heading">Registrese</h2>
+
+                <div class="control-group">
+                    <label class="control-label">Usuario:</label>
+                    <div class="controls">
+                        <input type="text" name="apodo" id="apodo" placeholder="Usuario" class="form-control" required autofocus>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Nombre:</label>
+                    <div class="controls">
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" required autofocus>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Apellido:</label>
+                    <div class="controls">
+                        <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" required autofocus>   
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Email:</label>
+                    <div class="controls">
+                        <input type="email" name="email" id="email" placeholder="Email" class="form-control" required autofocus>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Contraseña:</label>
+                    <div class="controls">
+                        <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control" required autofocus>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <input type="submit" value="Registrarse" class="btn btn-lg btn-primary btn-block">
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js" type="javascript"></script>
+</body>
+</html>

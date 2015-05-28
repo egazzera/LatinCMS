@@ -16,15 +16,6 @@ namespace LatinCMS.Controllers
 
         public ActionResult Index()
         {
-            Configuration cfg = new Configuration();
-            cfg.Configure();
-            cfg.AddAssembly(typeof(Config).Assembly);
-            ISession session = cfg.BuildSessionFactory().OpenSession();
-            session.BeginTransaction();
-            List<Config> configs = (List<Config>)session.CreateCriteria(typeof(Config)).List<Config>();
-            session.Transaction.Commit();
-            session.Close();
-
             return View();
         }
 

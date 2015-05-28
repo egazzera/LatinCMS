@@ -8,6 +8,7 @@ namespace LatinCMS.Models
     public class Rol
     {
         public virtual int Id { get; set; }
+        public virtual string Descripcion { get; set; }
 
     }
 }

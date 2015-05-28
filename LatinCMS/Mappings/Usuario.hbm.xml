@@ -13,6 +13,26 @@
       <column name="rol_id"  />
     </property>
 
+    <property name="Nombre">
+      <column name="nombre"  />
+    </property>
+
+    <property name="Apellido">
+      <column name="apellido"  />
+    </property>
+    
+    <property name="Email">
+      <column name="email"  />
+    </property>
+
+    <property name="Apodo">
+      <column name="apodo"  />
+    </property>
+    
+    <property name="Password">
+      <column name="password"  />
+    </property>
+
   </class>
 
 </hibernate-mapping>

@@ -10,6 +10,10 @@
       <generator class="identity" />
     </id>
 
+    <property name="Descripcion">
+      <column name="descripcion"  />
+    </property>
+
   </class>
 
 </hibernate-mapping>

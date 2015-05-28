@@ -17,6 +17,10 @@
       <column name="tipo_post_id"  />
     </property>
 
+    <property name="Descripcion">
+      <column name="descripcion"  />
+    </property>
+
   </class>
 
 </hibernate-mapping>
