@@ -16,42 +16,45 @@ namespace LatinCMS.Controllers
 
         public ActionResult Index()
         {
-            
-            Configuration cfg = new Configuration();
-            cfg.Configure();
-            cfg.AddAssembly(typeof(Config).Assembly);
-            ISession session = cfg.BuildSessionFactory().OpenSession();
-            //session.BeginTransaction();
-            List<Config> configs = (List<Config>)session.CreateCriteria(typeof(Config)).List<Config>();
-            //session.Transaction.Commit();
-            session.Close();
-
-            if (ValidarUsuario(Request["usuario"], Request["password"]))
-            return View(); //Home
-
-            return View(); //login fail
-
-                        
+            return View();
         }
 
-        public bool ValidarUsuario(string user, string pass)
+        public ActionResult ValidarUsuario()
         {
+            string apodo = Request["apodo"];
+            string password = Request["password"];
+
             try
             {
                 Configuration cfg = new Configuration();
                 cfg.Configure();
                 cfg.AddAssembly(typeof(Usuario).Assembly);
+              
                 ISession session = cfg.BuildSessionFactory().OpenSession();
-                List<Usuario> usuarios = (List<Usuario>)session.CreateCriteria(typeof(Usuario)).List<Usuario>();
+                IQuery query = session.CreateQuery("FROM Usuario WHERE apodo = :nuser  AND password = :pass ");
+                query.SetString("nuser", apodo);
+                query.SetString("pass", password);
+                
+                IList<Usuario> registro = query.List<Usuario>();
                 session.Close();
+                
+                if (registro.Count == 0){
+                    ViewBag.Error = "El usuario o la clave ingresada no son correctas.";
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Apodo = apodo;
+                    return RedirectToAction("Index", "Home"); 
+                }
+
             }
             catch(Exception e)
             {
                 Console.WriteLine("Se produjo una excepción. El mensaje fue: {0}", e.Message);
+                return View(e.Message); //TODO: enviar a Index
             }
 
-            return true;
-        
         }
 
 

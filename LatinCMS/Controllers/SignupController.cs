@@ -47,9 +47,7 @@ namespace LatinCMS.Controllers
                 Console.WriteLine("Se produjo una excepción. El mensaje fue: {0}", e.Message);
             }
 
-            return RedirectToAction("Index", "Home");
-
-            //return View();
+            return RedirectToAction("Index", "Home"); // TODO: enviar tambien Request["apodo"]
 
         }
 

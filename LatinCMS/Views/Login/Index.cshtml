@@ -13,13 +13,13 @@
     <div class="container" style="width: 400px;margin-top: 50px">
         <fieldset class="login">
             <legend>Login</legend>
-            <form action='@Url.Action("Index", "Login")' method="POST" id="formulario" class="form-signin">
+            <p class="text-danger">@ViewBag.Error</p>
+            <form action='@Url.Action("ValidarUsuario", "Login")' method="POST" id="formulario" class="form-signin">
                 <h2 class="form-signin-heading">Ingrese</h2>
-
                 <div class="control-group">
                     <label class="control-label">Usuario:</label>
                     <div class="controls">
-                        <input type="text" name="usuario" id="usuario" placeholder="Usuario" class="form-control" required autofocus>
+                        <input type="text" name="apodo" id="apodo" placeholder="Usuario" class="form-control" required autofocus>
                     </div>
                     <br />
                 </div>
