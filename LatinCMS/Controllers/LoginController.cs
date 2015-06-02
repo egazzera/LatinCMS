@@ -44,15 +44,16 @@ namespace LatinCMS.Controllers
                 }
                 else
                 {
-                    ViewBag.Apodo = apodo;
+                    TempData["Apodo"] = apodo;
                     return RedirectToAction("Index", "Home"); 
                 }
 
             }
             catch(Exception e)
             {
+                ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
                 Console.WriteLine("Se produjo una excepción. El mensaje fue: {0}", e.Message);
-                return View(e.Message); //TODO: enviar a Index
+                return View("Index");
             }
 
         }

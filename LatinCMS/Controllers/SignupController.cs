@@ -44,10 +44,12 @@ namespace LatinCMS.Controllers
             }
             catch (Exception e)
             {
+                ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
                 Console.WriteLine("Se produjo una excepción. El mensaje fue: {0}", e.Message);
             }
 
-            return RedirectToAction("Index", "Home"); // TODO: enviar tambien Request["apodo"]
+            ViewBag.Apodo = Request["apodo"];
+            return RedirectToAction("Index", "Home"); // Post
 
         }
 

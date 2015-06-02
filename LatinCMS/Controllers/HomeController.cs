@@ -16,6 +16,9 @@ namespace LatinCMS.Controllers
 
         public ActionResult Index()
         {
+            if (TempData["apodo"] != null)
+                ViewBag.Apodo = TempData["apodo"];
+
             return View();
         }
 
