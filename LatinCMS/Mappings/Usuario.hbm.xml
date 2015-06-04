@@ -1,38 +1,30 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
-                   assembly="LatinCMS"
-                   namespace="LatinCMS.Models">
-
-  <class name="Usuario">
-
-    <id name="Id" type="int" column="id">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="LatinCMS" namespace="LatinCMS.Models" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Usuario" table="usuario" lazy="true" >
+    <id name="Id" column="id">
       <generator class="identity" />
     </id>
-
-    <property name="Rol_Id">
-      <column name="rol_id"  />
-    </property>
-
+    <many-to-one name="Rol">
+      <column name="rol_id" sql-type="int" not-null="true" />
+    </many-to-one>
     <property name="Nombre">
-      <column name="nombre"  />
+      <column name="nombre" sql-type="nvarchar" not-null="false" />
     </property>
-
     <property name="Apellido">
-      <column name="apellido"  />
+      <column name="apellido" sql-type="nvarchar" not-null="false" />
     </property>
-    
     <property name="Email">
-      <column name="email"  />
+      <column name="email" sql-type="nvarchar" not-null="false" />
     </property>
-
     <property name="Apodo">
-      <column name="apodo"  />
+      <column name="apodo" sql-type="nvarchar" not-null="false" />
     </property>
-    
     <property name="Password">
-      <column name="password"  />
+      <column name="password" sql-type="nchar" not-null="false" />
     </property>
-
+    <bag name="Post">
+      <key column="usuario_id" />
+      <one-to-many class="Post" />
+    </bag>
   </class>
-
 </hibernate-mapping>

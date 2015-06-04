@@ -1,26 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
-                   assembly="LatinCMS"
-                   namespace="LatinCMS.Models">
-
-  <class name="Post">
-
-    <id name="Id" type="int" column="id">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping assembly="LatinCMS" namespace="LatinCMS.Models" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Post" table="post" lazy="true" >
+    <id name="Id" column="id">
       <generator class="identity" />
     </id>
-
-    <property name="Usuario_Id">
-      <column name="usuario_id"  />
+    <many-to-one name="Usuario">
+      <column name="usuario_id" sql-type="int" not-null="true" />
+    </many-to-one>
+    <many-to-one name="TipoPost">
+      <column name="tipo_post_id" sql-type="int" not-null="true" />
+    </many-to-one>
+    <property name="Fecha">
+      <column name="fecha" sql-type="smalldatetime" not-null="false" />
     </property>
-
-    <property name="Tipo_Post_Id">
-      <column name="tipo_post_id"  />
-    </property>
-
     <property name="Descripcion">
-      <column name="descripcion"  />
+      <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-
+    <bag name="Comentario">
+      <key column="post_id" />
+      <one-to-many class="Comentario" />
+    </bag>
+    <bag name="Menu">
+      <key column="post_id" />
+      <one-to-many class="Menu" />
+    </bag>
   </class>
-
 </hibernate-mapping>

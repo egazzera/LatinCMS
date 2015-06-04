@@ -16,11 +16,26 @@ namespace LatinCMS.Controllers
 
         public ActionResult Index()
         {
-            if (TempData["apodo"] != null)
-                ViewBag.Apodo = TempData["apodo"];
+            if (TempData["Apodo"] != null)
+            {
+                ViewBag.Apodo = TempData["Apodo"];
+                ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
+            }
 
             return View();
         }
+
+        public ActionResult Admin()
+        {
+            if (TempData["Apodo"] != null)
+            {
+                ViewBag.Apodo = TempData["Apodo"];
+                ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
+            }
+
+            return View();
+        }
+
 
     }
 }

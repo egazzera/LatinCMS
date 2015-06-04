@@ -23,7 +23,7 @@ namespace LatinCMS.Controllers
         {
             Usuario usuario = new Usuario();
 
-            usuario.Rol_Id = 6; // Suscriptor --TODO: Administrador
+            usuario.Rol.Descripcion = "Suscriptor"; // Suscriptor --TODO: Administrador
             usuario.Apodo = Request["apodo"];
             usuario.Nombre = Request["nombre"];
             usuario.Apellido = Request["apellido"];
