@@ -124,7 +124,7 @@
     </Compile>
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Config.cs" />
-    <Compile Include="Models\EstadoComentario.cs" />
+    <Compile Include="Models\EstadoComen.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\Rol.cs" />
@@ -205,7 +205,9 @@
     <Content Include="Icon.png" />
     <EmbeddedResource Include="Mappings\Config.hbm.xml" />
     <EmbeddedResource Include="Mappings\Comentario.hbm.xml" />
-    <EmbeddedResource Include="Mappings\EstadoComentario.hbm.xml" />
+    <EmbeddedResource Include="Mappings\EstadoComen.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mappings\Menu.hbm.xml" />
     <EmbeddedResource Include="Mappings\Post.hbm.xml" />
     <EmbeddedResource Include="Mappings\Rol.hbm.xml" />

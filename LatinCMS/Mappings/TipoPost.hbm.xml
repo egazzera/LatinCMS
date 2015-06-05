@@ -7,9 +7,5 @@
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-    <bag name="Post">
-      <key column="tipo_post_id" />
-      <one-to-many class="Post" />
-    </bag>
   </class>
 </hibernate-mapping>

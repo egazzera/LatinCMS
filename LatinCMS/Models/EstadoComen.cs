@@ -7,10 +7,11 @@ using System.Web;
 namespace LatinCMS.Models
 {
 
-    public class Estadocomentario
+    public class EstadoComen
     {
-        public Estadocomentario() { }
+        public EstadoComen() { }
         public virtual int Id { get; set; }
         public virtual string Descripcion { get; set; }
     }
 }
+

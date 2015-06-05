@@ -16,13 +16,9 @@
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-    <bag name="Comentario">
-      <key column="post_id" />
-      <one-to-many class="Comentario" />
-    </bag>
-    <bag name="Menu">
-      <key column="post_id" />
-      <one-to-many class="Menu" />
+    <bag name="TipoPost">
+      <key column="id" />
+      <one-to-many class="TipoPost" />
     </bag>
   </class>
 </hibernate-mapping>

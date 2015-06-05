@@ -26,5 +26,9 @@
       <key column="usuario_id" />
       <one-to-many class="Post" />
     </bag>
+    <bag name="Rol">
+      <key column="id" />
+      <one-to-many class="Rol" />
+    </bag>
   </class>
 </hibernate-mapping>

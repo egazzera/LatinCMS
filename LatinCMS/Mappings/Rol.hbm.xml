@@ -7,9 +7,5 @@
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-    <bag name="Usuario">
-      <key column="rol_id" />
-      <one-to-many class="Usuario" />
-    </bag>
   </class>
 </hibernate-mapping>

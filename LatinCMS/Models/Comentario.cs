@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
+
 namespace LatinCMS.Models
 {
 
@@ -11,7 +12,7 @@ namespace LatinCMS.Models
     {
         public virtual int Id { get; set; }
         public virtual Post Post { get; set; }
-        public virtual Estadocomentario Estadocomentario { get; set; }
+        public virtual EstadoComen Estadocomen { get; set; }
         public virtual string Descripcion { get; set; }
     }
 }
