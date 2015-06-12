@@ -4,21 +4,13 @@
     <id name="Id" column="id">
       <generator class="identity" />
     </id>
-    <many-to-one name="Usuario">
-      <column name="usuario_id" sql-type="int" not-null="true" />
-    </many-to-one>
-    <many-to-one name="TipoPost">
-      <column name="tipo_post_id" sql-type="int" not-null="true" />
-    </many-to-one>
     <property name="Fecha">
       <column name="fecha" sql-type="smalldatetime" not-null="false" />
     </property>
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-    <bag name="TipoPost">
-      <key column="id" />
-      <one-to-many class="TipoPost" />
-    </bag>
+    <many-to-one name="Usuario" class="Usuario" foreign-key="Usuario" column="id" />
+    <many-to-one name="TipoPost" class="TipoPost" foreign-key="TipoPost" column="id" />
   </class>
 </hibernate-mapping>

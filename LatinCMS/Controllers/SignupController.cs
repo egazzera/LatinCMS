@@ -1,4 +1,5 @@
-﻿using LatinCMS.Models;
+﻿using LatinCMS.DAO;
+using LatinCMS.Models;
 using NHibernate;
 using NHibernate.Cfg;
 using System;
@@ -22,30 +23,29 @@ namespace LatinCMS.Controllers
         public ActionResult NuevoUsuario()
         {
             Usuario usuario = new Usuario();
+            GenericDAO<Rol> util = new GenericDAO<Rol>();
 
-            usuario.Rol.Descripcion = "Suscriptor"; // Suscriptor --TODO: Administrador
+            usuario.Rol = util.GetByDescripcion("Suscriptor"); // Suscriptor --TODO: Administrador query
             usuario.Apodo = Request["apodo"];
             usuario.Nombre = Request["nombre"];
             usuario.Apellido = Request["apellido"];
             usuario.Email = Request["email"];
             usuario.Password = Request["password"];
 
-            Configuration cfg = new Configuration();
-            cfg.Configure();
-            cfg.AddAssembly(typeof(Usuario).Assembly);
-
             try
             {
-                ISession session = cfg.BuildSessionFactory().OpenSession();
-                session.BeginTransaction();
-                session.Save(usuario);
-                session.Transaction.Commit();
-                session.Close();
+                using (ISession session = NHibernateHelper.OpenSession())
+                using (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Save(usuario);
+                    session.Transaction.Commit();
+                    session.Close();
+                }
             }
             catch (Exception e)
             {
                 ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
-                Console.WriteLine("Se produjo una excepción. El mensaje fue: {0}", e.Message);
+                return RedirectToAction("Index", "Signup"); //Registracion
             }
 
             ViewBag.Apodo = Request["apodo"];

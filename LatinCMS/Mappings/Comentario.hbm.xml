@@ -4,18 +4,10 @@
     <id name="Id" column="id">
       <generator class="identity" />
     </id>
-    <many-to-one name="Post">
-      <column name="post_id" sql-type="int" not-null="true" />
-    </many-to-one>
-    <many-to-one name="Estadocomen">
-      <column name="ec_id" sql-type="int" not-null="true" />
-    </many-to-one>
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-    <bag name="Post">
-      <key column="id" />
-      <one-to-many class="Comentario" />
-    </bag>
+    <many-to-one name="Post" class="Post" foreign-key="Post" column="id" />
+    <many-to-one name="Estadocomen" class="EstadoComen" foreign-key="Estadocomen" column="id" />
   </class>
 </hibernate-mapping>

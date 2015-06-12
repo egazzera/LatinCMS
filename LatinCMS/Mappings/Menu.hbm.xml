@@ -4,18 +4,10 @@
     <id name="Id" column="id">
       <generator class="identity" />
     </id>
-    <many-to-one name="Post">
-      <column name="post_id" sql-type="int" not-null="true" />
-    </many-to-one>
-    <many-to-one name="MenuVal">
-      <column name="padre_id" sql-type="int" not-null="false" />
-    </many-to-one>
     <property name="Titulo">
       <column name="titulo" sql-type="nvarchar" not-null="true" />
     </property>
-    <bag name="MenuVal">
-      <key column="padre_id" />
-      <one-to-many class="Menu" />
-    </bag>
+    <many-to-one name="MenuVal" class="Menu" foreign-key="MenuVal" column="padre_id" />
+    <many-to-one name="Post" class="Post" foreign-key="Post" column="id" />
   </class>
 </hibernate-mapping>
