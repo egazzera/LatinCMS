@@ -26,24 +26,39 @@ namespace LatinCMS.DAO
         }
 
 
-        public T SaveOrUpdate(T entity)
+        public T Guardar(T entity)
         {
             using (ISession session = GetSession())
-            using (ITransaction transaction = session.BeginTransaction()) { 
-                session.SaveOrUpdate(entity);
-                transaction.Commit();
-                session.Close();
+            using (ITransaction transaction = session.BeginTransaction()) {
+                try
+                {
+                    session.SaveOrUpdate(entity);
+                    transaction.Commit();
+                    session.Close();
+                }
+                catch (Exception e) 
+                {
+                    transaction.Rollback();
+                    Console.WriteLine("Se produjo una excepción. El mensaje fue: " + e.Message);
+                }
             }
 
             return entity;
         }
 
 
-        public void Delete(T entity)
+        public void Eliminar(T entity)
         {
-            using (ISession session = GetSession()) { 
-                session.Delete(entity);
-                session.Close();
+            using (ISession session = GetSession()) {
+                try
+                {
+                    session.Delete(entity);
+                    session.Close();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Se produjo una excepción. El mensaje fue: " + e.Message);
+                }
             }
 
         }

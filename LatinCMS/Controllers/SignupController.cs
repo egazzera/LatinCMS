@@ -17,35 +17,41 @@ namespace LatinCMS.Controllers
 
         public ActionResult Index()
         {
+            if (TempData["Error"] != null)
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+
             return View();
         }
 
         public ActionResult NuevoUsuario()
         {
             Usuario usuario = new Usuario();
-            GenericDAO<Rol> util = new GenericDAO<Rol>();
+            RolDAO util = new RolDAO();
 
-            usuario.Rol = util.GetByDescripcion("Suscriptor"); // Suscriptor --TODO: Administrador query
+            usuario.Rol = util.GetRolByDescripcion("Suscriptor"); //TODO: Administrador
             usuario.Apodo = Request["apodo"];
             usuario.Nombre = Request["nombre"];
             usuario.Apellido = Request["apellido"];
             usuario.Email = Request["email"];
             usuario.Password = Request["password"];
 
-            try
+            using (ISession session = NHibernateHelper.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
             {
-                using (ISession session = NHibernateHelper.OpenSession())
-                using (ITransaction transaction = session.BeginTransaction())
+                try
                 {
                     session.Save(usuario);
-                    session.Transaction.Commit();
+                    transaction.Commit();
                     session.Close();
                 }
-            }
-            catch (Exception e)
-            {
-                ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
-                return RedirectToAction("Index", "Signup"); //Registracion
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    TempData["Error"] = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    return RedirectToAction("Index", "Signup"); //Registracion
+                }
             }
 
             ViewBag.Apodo = Request["apodo"];

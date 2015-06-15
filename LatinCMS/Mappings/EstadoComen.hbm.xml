@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping assembly="LatinCMS" namespace="LatinCMS.Models" xmlns="urn:nhibernate-mapping-2.2">
   <class name="EstadoComen" table="estadocomen" lazy="true" >
-    <id name="Id" column="id" />
-    <property name="Descripcion">
+    <id name="Id" type="int" column="id">
+      <generator class="identity" />
+    </id>    <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
   </class>

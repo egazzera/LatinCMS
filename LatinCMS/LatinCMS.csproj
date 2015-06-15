@@ -117,6 +117,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
+    <Compile Include="DAO\RolDAO.cs" />
     <Compile Include="DAO\NHibernateHelper.cs" />
     <Compile Include="DAO\GenericDAO.cs" />
     <Compile Include="Global.asax.cs">
