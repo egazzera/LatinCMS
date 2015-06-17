@@ -53,6 +53,7 @@ namespace LatinCMS.DAO
                 try
                 {
                     session.Delete(entity);
+                    session.Transaction.Commit();
                     session.Close();
                 }
                 catch (Exception e)

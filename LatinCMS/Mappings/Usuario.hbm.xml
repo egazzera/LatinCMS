@@ -19,6 +19,6 @@
     <property name="Password">
       <column name="password" sql-type="nchar" not-null="false" />
     </property>
-    <many-to-one name="Rol" class="Rol" foreign-key="Rol" column="id" />
+    <many-to-one name="Rol" column="rol_id" />
   </class>
 </hibernate-mapping>

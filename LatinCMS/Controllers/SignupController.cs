@@ -29,7 +29,7 @@ namespace LatinCMS.Controllers
         {
             Usuario usuario = new Usuario();
             RolDAO util = new RolDAO();
-
+            
             usuario.Rol = util.GetRolByDescripcion("Suscriptor"); //TODO: Administrador
             usuario.Apodo = Request["apodo"];
             usuario.Nombre = Request["nombre"];
@@ -42,7 +42,7 @@ namespace LatinCMS.Controllers
             {
                 try
                 {
-                    session.Save(usuario);
+                    session.SaveOrUpdate(usuario);
                     transaction.Commit();
                     session.Close();
                 }
@@ -54,8 +54,10 @@ namespace LatinCMS.Controllers
                 }
             }
 
-            ViewBag.Apodo = Request["apodo"];
-            return RedirectToAction("Index", "Home"); // Post
+            TempData["Apodo"] = Request["apodo"];
+            TempData["Tipo_Usuario"] = "Suscriptor";
+
+            return RedirectToAction("Index", "Home"); // Ver Post
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LatinCMS.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

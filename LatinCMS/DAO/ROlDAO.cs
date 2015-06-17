@@ -8,7 +8,7 @@ using System.Web;
 
 namespace LatinCMS.DAO
 {
-    public class RolDAO
+    public class RolDAO : GenericDAO<Rol>
     {
 
         public Rol GetRolByDescripcion(string descripcion)

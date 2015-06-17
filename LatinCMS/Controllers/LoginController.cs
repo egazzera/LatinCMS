@@ -27,58 +27,58 @@ namespace LatinCMS.Controllers
             string apodo = Request["apodo"];
             string password = Request["password"];
 
-            try
-            {
-                //Configuration cfg = new Configuration();
-                //cfg.Configure();
-                //cfg.AddAssembly(typeof(Usuario).Assembly);
-              
-                //ISession session = cfg.BuildSessionFactory().OpenSession();
+            UsuarioDAO util = new UsuarioDAO();
 
-                ISession session = NHibernateHelper.OpenSession();
-                Usuario regitro_usuario = session.CreateCriteria(typeof(Usuario)).UniqueResult<Usuario>();
-                
-                //IList<Usuario> registro = query.List<Usuario>();
+            ISession session = NHibernateHelper.OpenSession();
 
-                //u.Rol.Descripcion;
-                
-                session.Close();
+            try{
 
-                if (regitro_usuario.Equals(typeof(Usuario))){
-                    ViewBag.Error = "El usuario o la clave ingresada no son correctas.";
+                Usuario registro_usuario = util.GetUsuarioByApodoPass(apodo, password);
+
+                if (registro_usuario == null){
+                    ViewBag.Error = "El usuario o la clave ingresada no son correctos.";
+                    session.Close();
                     return View("Index");
                 }
                 else
                 {
-
-                    if(regitro_usuario.Rol.Descripcion == "Suscriptor")
+                    if(registro_usuario.Rol.Descripcion == "Suscriptor")
                     {
                         TempData["Apodo"] = apodo;
                         TempData["Tipo_Usuario"] = "Suscriptor";
+                        session.Close();
                         return RedirectToAction("Index", "Home");
                     }
 
-                    if (regitro_usuario.Rol.Descripcion == "Adminstrador")
+                    if (registro_usuario.Rol.Descripcion == "Adminstrador")
                     { 
                         TempData["Apodo"] = apodo;
                         TempData["Tipo_Usuario"] = "Administrador";
+                        session.Close();
                         return RedirectToAction("Admin", "Home");
                     }
 
                     ViewBag.Error = "Se produjo un error inesperado en el Login, llame al 911.";
+                    session.Close();
                     return View("Index");
-
                 }
-
             }
             catch(Exception e)
             {
                 ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                session.Close();
                 return View("Index");
             }
+                
 
         }
 
 
+
+
+
     }
+
 }
+
+

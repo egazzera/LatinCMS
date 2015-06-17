@@ -10,7 +10,7 @@
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
-    <many-to-one name="Usuario" class="Usuario" foreign-key="Usuario" column="id" />
-    <many-to-one name="TipoPost" class="TipoPost" foreign-key="TipoPost" column="id" />
+    <many-to-one name="Usuario" column="usuario_id" />
+    <many-to-one name="TipoPost" column="tipo_post_id" />
   </class>
 </hibernate-mapping>

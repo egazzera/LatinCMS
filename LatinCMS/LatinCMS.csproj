@@ -117,12 +117,14 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
+    <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="DAO\RolDAO.cs" />
     <Compile Include="DAO\NHibernateHelper.cs" />
     <Compile Include="DAO\GenericDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BasePersistableEntity.cs" />
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\EstadoComen.cs" />

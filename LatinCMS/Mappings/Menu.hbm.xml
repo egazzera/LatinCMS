@@ -7,7 +7,7 @@
     <property name="Titulo">
       <column name="titulo" sql-type="nvarchar" not-null="true" />
     </property>
-    <many-to-one name="MenuVal" class="Menu" foreign-key="MenuVal" column="padre_id" />
-    <many-to-one name="Post" class="Post" foreign-key="Post" column="id" />
+    <many-to-one name="MenuVal" column="padre_id" />
+    <many-to-one name="Post" column="post_id" />
   </class>
 </hibernate-mapping>
