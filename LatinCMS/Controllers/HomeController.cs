@@ -20,6 +20,11 @@ namespace LatinCMS.Controllers
             {
                 ViewBag.Apodo = TempData["Apodo"];
                 ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
+                ViewBag.Id = TempData["Id"];
+
+                Session["Apodo"] = TempData["Apodo"];
+                Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
+                Session["Id"] = TempData["Id"].ToString();
             }
 
             return View();
@@ -31,6 +36,7 @@ namespace LatinCMS.Controllers
             {
                 ViewBag.Apodo = TempData["Apodo"];
                 ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
+                ViewBag.Id = TempData["Id"];
             }
 
             return View();

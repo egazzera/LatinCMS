@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping assembly="LatinCMS" namespace="LatinCMS.Models" xmlns="urn:nhibernate-mapping-2.2">
-  <class name="Post" table="post" lazy="true" >
+  <class name="Post" table="post" lazy="false" >
     <id name="Id" type="int" column="id">
       <generator class="identity" />
     </id>
@@ -9,6 +9,9 @@
     </property>
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Titulo">
+      <column name="titulo" sql-type="nvarchar" not-null="false" />
     </property>
     <many-to-one name="Usuario" column="usuario_id" />
     <many-to-one name="TipoPost" column="tipo_post_id" />

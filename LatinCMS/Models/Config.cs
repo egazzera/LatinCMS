@@ -12,5 +12,8 @@ namespace LatinCMS.Models
         public virtual int Id { get; set; }
         public virtual int? Clave { get; set; }
         public virtual int? Valor { get; set; }
+        public virtual string Titulo { get; set; }
+        public virtual string Descripcion { get; set; }
+        public virtual int? CantPost { get; set; }
     }
 }

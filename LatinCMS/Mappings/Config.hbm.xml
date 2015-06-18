@@ -10,5 +10,14 @@
     <property name="Valor">
       <column name="valor" sql-type="int" not-null="false" />
     </property>
+    <property name="Titulo">
+      <column name="titulo" sql-type="nvarchar" not-null="false" />
+    </property>
+    <property name="Descripcion">
+      <column name="descripcion" sql-type="nchar" not-null="false" />
+    </property>
+    <property name="CantPost">
+      <column name="cant_post" sql-type="int" not-null="false" />
+    </property>
   </class>
 </hibernate-mapping>

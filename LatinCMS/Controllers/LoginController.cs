@@ -46,6 +46,7 @@ namespace LatinCMS.Controllers
                     {
                         TempData["Apodo"] = apodo;
                         TempData["Tipo_Usuario"] = "Suscriptor";
+                        TempData["Id"] = registro_usuario.Id;
                         session.Close();
                         return RedirectToAction("Index", "Home");
                     }
@@ -54,6 +55,7 @@ namespace LatinCMS.Controllers
                     { 
                         TempData["Apodo"] = apodo;
                         TempData["Tipo_Usuario"] = "Administrador";
+                        TempData["Id"] = registro_usuario.Id;
                         session.Close();
                         return RedirectToAction("Admin", "Home");
                     }
@@ -72,6 +74,7 @@ namespace LatinCMS.Controllers
                 
 
         }
+
 
 
 

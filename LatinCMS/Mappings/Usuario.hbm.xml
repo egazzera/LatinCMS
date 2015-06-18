@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <hibernate-mapping assembly="LatinCMS" namespace="LatinCMS.Models" xmlns="urn:nhibernate-mapping-2.2">
-  <class name="Usuario" table="usuario" lazy="true">
+  <class name="Usuario" table="usuario" lazy="false">
     <id name="Id" type="int" column="id">
       <generator class="identity" />
     </id>

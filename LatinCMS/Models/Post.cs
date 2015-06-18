@@ -15,5 +15,6 @@ namespace LatinCMS.Models
         public virtual TipoPost TipoPost { get; set; }
         public virtual DateTime? Fecha { get; set; }
         public virtual string Descripcion { get; set; }
+        public virtual string Titulo { get; set; }
     }
 }
