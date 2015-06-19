@@ -1,4 +1,5 @@
-﻿using LatinCMS.Models;
+﻿using LatinCMS.DAO;
+using LatinCMS.Models;
 using NHibernate;
 using NHibernate.Cfg;
 using System;
@@ -18,13 +19,19 @@ namespace LatinCMS.Controllers
         {
             if (TempData["Apodo"] != null)
             {
-                ViewBag.Apodo = TempData["Apodo"];
-                ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
-                ViewBag.Id = TempData["Id"];
+                //ViewBag.Apodo = TempData["Apodo"];
+                //ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
+                //ViewBag.Id = TempData["Id"];
+
+                ConfigDAO utils = new ConfigDAO();
+                Config registro_config = utils.GetAllConfig();
 
                 Session["Apodo"] = TempData["Apodo"];
                 Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
                 Session["Id"] = TempData["Id"].ToString();
+                Session["Titulo_Home"] = registro_config.Titulo;
+                Session["Descripcion_Home"] = registro_config.Descripcion;
+                Session["Cant_Post"] = registro_config.CantPost;
             }
 
             return View();

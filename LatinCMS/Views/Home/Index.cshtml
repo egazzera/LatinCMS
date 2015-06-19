@@ -1,100 +1,73 @@
 ﻿@{
     Layout = null;
-    string apodo_usuario = (string)Session["Apodo"];
-    string tipo_usuario = (string)Session["Tipo_Usuario"];
-    int id_usuario = (int)Session["Id"];
-
+    string apodo_usuario = Session["Apodo"].ToString().Trim();
+    string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
+    int id_usuario = Convert.ToInt32(Session["Id"]);
+    string titulo_home = Session["Titulo_Home"].ToString().Trim();
+    string descripcion_home = Session["Descripcion_Home"].ToString().Trim();
+    int cant_post = Convert.ToInt32(Session["Cant_Post"]);
 }
-
+<!DOCTYPE html>
 <html>
 <head lang="es-ar">
     <meta charset="UTF-8">
     <title>Latin CMS - Home</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
-<body data-spy="scroll" data-target=".bs-sidebar" data-twttr-rendered="true">
+<body>
     <div class="navbar navbar-default">
-        <ul class="nav navbar-nav navbar-left">
-            <li>
+        <div class="container">
+            <div class="navbar-header">
                 <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
-                    <img class="logo img-responsive" src="~/Images/logo.png" style="width: px; height: 50px" alt="LatinNet">
+                    <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
                 </a>
-            </li>
-        </ul>
-         <ul class="nav navbar-nav">
-             <li><a href='@Url.Action("Index", "Login")'>Administrar (Solo Admin!)</a></li>
-         </ul>
-         <ul class="nav navbar-nav navbar-right">
-             <li class="dropdown">
-                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                      @apodo_usuario
-                     <span class="caret"></span>
-                 </a>
-                 <ul class="dropdown-menu" role="menu">
-                     <li><a href='@Url.Action("Edit", "Usuario", id_usuario)'>Editar Perfil</a></li>
-                     <li><a href='@Url.Action("Index", "Login")'>Cerrar Sesion</a></li>
-                 </ul>
-             </li>
-         </ul>
-     </div>
-     <div class="container">
-         <h1>Titulo</h1>
-         <h4>La descripcion del sitio va aqui</h4>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href='@Url.Action("Index", "Login")'>Administrar (Solo Admin!)</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @apodo_usuario
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", id_usuario)'>Editar Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Index", "Login")'>Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-         <div class="post-container">
-             <div class="post">
-                 <h1><a href="/LatinCMS/post.html">Titulo del Post</a></h1>
-                 <p>
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                 </p>
-                 <h5>13/05/2015 10:00 hs</h5>
-             </div>
-             <div class="post">
-                 <h1><a href="/LatinCMS/post.html">Titulo del Post</a></h1>
-                 <p>
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                 </p>
-                 <h5>10/05/2015 10:00 hs</h5>
-             </div>
-             <div class="post">
-                 <h1><a href="/LatinCMS/post.html">Titulo del Post</a></h1>
-                 <p>
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                 </p>
-                 <h5>05/05/2015 10:00 hs</h5>
-             </div>
-         </div>
-         <div class="tree-posts">
-             <ul>
-                 <li>
-                     2015
-                     <ul>
-                         <li>Mayo</li>
-                         <ul>
-                             <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
-                             <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
-                             <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
-                         </ul>
-                     </ul>
-                 </li>
-             </ul>
-         </div>
-     </div>
+    <div class="container">
+        <h1>@titulo_home</h1>
+        <h4>@descripcion_home</h4>
+
+        <!--TODO: Traerme todo los POST y hacerlo general para todos!-->
+
+
+        <div class="post-container">
+            <div class="post">
+                <h1><a href="/LatinCMS/post.html">Titulo del Post</a></h1>
+                <p>
+                    Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
+                    Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
+                    Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
+                    Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
+                    Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
+                    Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
+                </p>
+                <h5>13/05/2015 10:00 hs</h5>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -108,6 +81,5 @@
         </div>
     </footer>
 
-     <script src="~/Scripts/bootstrap.min.js" type="javascript"></script>
 </body>
 </html>

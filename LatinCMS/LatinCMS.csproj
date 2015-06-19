@@ -119,6 +119,7 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="DAO\ConfigDAO.cs" />
     <Compile Include="DAO\UsuarioDAO.cs" />
     <Compile Include="DAO\RolDAO.cs" />
     <Compile Include="DAO\NHibernateHelper.cs" />
