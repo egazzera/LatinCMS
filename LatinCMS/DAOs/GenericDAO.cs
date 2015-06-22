@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LatinCMS.DAO
+namespace LatinCMS.DAOs
 {
     public class GenericDAO<T>
     {

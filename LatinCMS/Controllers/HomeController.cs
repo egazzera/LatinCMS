@@ -1,4 +1,4 @@
-﻿using LatinCMS.DAO;
+﻿using LatinCMS.DAOs;
 using LatinCMS.Models;
 using NHibernate;
 using NHibernate.Cfg;
@@ -23,15 +23,26 @@ namespace LatinCMS.Controllers
                 //ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
                 //ViewBag.Id = TempData["Id"];
 
-                ConfigDAO utils = new ConfigDAO();
-                Config registro_config = utils.GetAllConfig();
+                try
+                {
+                    ConfigDAO utils = new ConfigDAO();
+                    Config registro_config = utils.GetAllConfig();
 
-                Session["Apodo"] = TempData["Apodo"];
-                Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
-                Session["Id"] = TempData["Id"].ToString();
-                Session["Titulo_Home"] = registro_config.Titulo;
-                Session["Descripcion_Home"] = registro_config.Descripcion;
-                Session["Cant_Post"] = registro_config.CantPost;
+                    Session["Apodo"] = TempData["Apodo"];
+                    Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
+                    Session["Id"] = TempData["Id"].ToString();
+                    Session["Titulo_Home"] = registro_config.Titulo;
+                    Session["Descripcion_Home"] = registro_config.Descripcion;
+                    Session["Cant_Post"] = registro_config.CantPost;
+
+                    PostDAO utilPost = new PostDAO();
+                    IList<Post> posts = utilPost.GetAllPosts();
+                    //enviar la lista a la vista HOME
+                }
+                catch (Exception e) {
+                    ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                }
+
             }
 
             return View();

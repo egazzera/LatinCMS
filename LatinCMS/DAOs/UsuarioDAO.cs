@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace LatinCMS.DAO
+namespace LatinCMS.DAOs
 {
     public class UsuarioDAO : GenericDAO<Usuario>
     {

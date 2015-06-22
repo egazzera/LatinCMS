@@ -119,11 +119,12 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
-    <Compile Include="DAO\ConfigDAO.cs" />
-    <Compile Include="DAO\UsuarioDAO.cs" />
-    <Compile Include="DAO\RolDAO.cs" />
-    <Compile Include="DAO\NHibernateHelper.cs" />
-    <Compile Include="DAO\GenericDAO.cs" />
+    <Compile Include="DAOs\PostDAO.cs" />
+    <Compile Include="DAOs\ConfigDAO.cs" />
+    <Compile Include="DAOs\UsuarioDAO.cs" />
+    <Compile Include="DAOs\RolDAO.cs" />
+    <Compile Include="DAOs\NHibernateHelper.cs" />
+    <Compile Include="DAOs\GenericDAO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -203,6 +204,7 @@
     <Content Include="Content\DataTables\swf\copy_csv_xls_pdf.swf" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\home.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

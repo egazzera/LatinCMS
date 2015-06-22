@@ -1,4 +1,4 @@
-﻿using LatinCMS.DAO;
+﻿using LatinCMS.DAOs;
 using LatinCMS.Models;
 using NHibernate;
 using NHibernate.Cfg;

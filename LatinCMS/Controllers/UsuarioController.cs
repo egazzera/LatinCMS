@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LatinCMS.DAO;
+using LatinCMS.DAOs;
 using LatinCMS.Models;
 
 namespace LatinCMS.Controllers

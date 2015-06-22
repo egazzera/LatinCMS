@@ -6,7 +6,11 @@
     string titulo_home = Session["Titulo_Home"].ToString().Trim();
     string descripcion_home = Session["Descripcion_Home"].ToString().Trim();
     int cant_post = Convert.ToInt32(Session["Cant_Post"]);
+    
 }
+
+<%@ Page Language="C#" %>
+
 <!DOCTYPE html>
 <html>
 <head lang="es-ar">
@@ -14,6 +18,7 @@
     <title>Latin CMS - Home</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="~/Content/home.css" />
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
@@ -47,16 +52,16 @@
     </div>
 
     <div class="container">
-        <h1>@titulo_home</h1>
-        <h4>@descripcion_home</h4>
+        <h1 id="titulo-home">@titulo_home</h1>
+        <h4 id="descripcion-home">@descripcion_home</h4>
 
         <!--TODO: Traerme todo los POST y hacerlo general para todos!-->
-
+        <%# foreach(posts in post) %>
 
         <div class="post-container">
             <div class="post">
-                <h1><a href="/LatinCMS/post.html">Titulo del Post</a></h1>
-                <p>
+                <h1 class="titulo-post"><a href="/LatinCMS/post.html">Titulo del Post</a></h1>
+                <p class="descripcion-post">
                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
@@ -64,7 +69,7 @@
                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
                     Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
                 </p>
-                <h5>13/05/2015 10:00 hs</h5>
+                <h5 class="fecha-post">13/05/2015 10:00 hs</h5>
             </div>
         </div>
     </div>
