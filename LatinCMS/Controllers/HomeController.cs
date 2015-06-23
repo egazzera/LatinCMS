@@ -30,14 +30,14 @@ namespace LatinCMS.Controllers
 
                     Session["Apodo"] = TempData["Apodo"];
                     Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
-                    Session["Id"] = TempData["Id"].ToString();
+                    Session["Id"] = TempData["Id"];
                     Session["Titulo_Home"] = registro_config.Titulo;
                     Session["Descripcion_Home"] = registro_config.Descripcion;
                     Session["Cant_Post"] = registro_config.CantPost;
 
                     PostDAO utilPost = new PostDAO();
                     IList<Post> posts = utilPost.GetAllPosts();
-                    //enviar la lista a la vista HOME
+                    return View(posts);
                 }
                 catch (Exception e) {
                     ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;

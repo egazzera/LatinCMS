@@ -1,58 +1,61 @@
 ﻿@{
-    ViewBag.Title = "Edit";
+    @model LatinCMS.Models.Usuario
 }
 
 <html>
 <head lang="es-ar">
     <meta charset="UTF-8">
     <title>Latin CMS - Editar Perfil</title>
-    <link rel="stylesheet" href="Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
 </head>
 <body>
     <div class="container" style="width: 400px;margin-top: 50px">
         <fieldset class="login">
-            <legend>Editar</legend>
-            <form action='@Url.Action("GuardarUsuario", "Usuario")' method="POST" id="formulario" class="form-signin">
+            <legend>Edici&oacute;n</legend>
+            <form action='@Url.Action("GuardarUsuario", "Usuario", new { idUsuario = Model.Id })' method="POST" id="formulario" class="form-signin">
                 <p style="color: red">@ViewBag.Error</p>
                 <h2 class="form-signin-heading">Editar Usuario</h2>
 
                 <div class="control-group">
                     <label class="control-label">Usuario:</label>
                     <div class="controls">
-                        <input type="text" name="apodo" id="apodo" placeholder="Usuario" class="form-control" maxlength="50" required autofocus>
+                        <input type="text" name="apodo" id="apodo" placeholder="Usuario" class="form-control" maxlength="50" value="@Model.Apodo" required autofocus>
                     </div>
                     <br />
                 </div>
                 <div class="control-group">
                     <label class="control-label">Nombre:</label>
                     <div class="controls">
-                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" maxlength="50" required autofocus>
+                        <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" maxlength="50" value="@Model.Nombre" required autofocus>
                     </div>
                     <br />
                 </div>
                 <div class="control-group">
                     <label class="control-label">Apellido:</label>
                     <div class="controls">
-                        <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" maxlength="50" required autofocus>
+                        <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" maxlength="50" value="@Model.Apellido" required autofocus>
                     </div>
                     <br />
                 </div>
                 <div class="control-group">
                     <label class="control-label">Email:</label>
                     <div class="controls">
-                        <input type="email" name="email" id="email" placeholder="Email" class="form-control" required autofocus>
+                        <input type="email" name="email" id="email" placeholder="Email" class="form-control" value="@Model.Email" required autofocus>
                     </div>
                     <br />
                 </div>
                 <div class="control-group">
                     <label class="control-label">Contraseña:</label>
                     <div class="controls">
-                        <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control" maxlength="10" required autofocus>
+                        <input type="password" name="password" id="password" placeholder="Contraseña" class="form-control" value="@Model.Password" maxlength="10" required autofocus>
                     </div>
                     <br />
                 </div>
                 <div class="control-group">
-                    <input type="submit" value="Registrarse" class="btn btn-lg btn-primary btn-block">
+                    <input type="submit" value="Guardar" class="btn btn-lg btn-primary">
+                    <a href='@Url.Action("Index", "Home")'>
+                        <input type="button" class="btn btn-lg btn-default" value="Cancelar" />
+                    </a>
                 </div>
             </form>
         </fieldset>
