@@ -17,15 +17,34 @@ namespace LatinCMS.DAOs
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 var posts = session.CreateCriteria<Post>("p")
-                    .AddOrder(Order.Desc("p.Fecha"))
                     .CreateCriteria("p.TipoPost", JoinType.InnerJoin)
                     .Add(Restrictions.Eq("Descripcion", "Post"))
+                    .AddOrder(Order.Desc("p.Fecha"))
                     .List<Post>();
                 
                 return posts;
             }
 
         }
+
+        public IList<Comentario> GetAllComentsFromPostID(int id)
+        {
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var post = session.Get<Post>(id);
+
+                var comentarios = session.CreateCriteria<Comentario>("c")
+                    .Add(Restrictions.Eq("c.Post", post))
+                    .CreateCriteria("c.Estadocomen", JoinType.InnerJoin)
+                    .Add(Restrictions.Eq("Descripcion", "Aprobado"))
+                    .AddOrder(Order.Desc("c.Fecha"))
+                    .List<Comentario>();
+
+                return comentarios;
+            }
+
+        }
+
 
 
     }

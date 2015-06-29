@@ -1,87 +1,85 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    string apodo_usuario = Session["Apodo"].ToString().Trim();
+    string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
+    int id_usuario = Convert.ToInt32(Session["Id"]);
+
+    string titulo_post = Session["Titulo_Post"].ToString().Trim();
+    string descripcion_post = Session["Descripcion_Post"].ToString().Trim();
+
+    @model IList<LatinCMS.Models.Comentario>
+
 }
 
-<head lang="en">
+<!DOCTYPE html>
+<html>
+<head lang="es-ar">
     <meta charset="UTF-8">
-    <title>Latin CMS</title>
-    <link rel="stylesheet" href="css/bootstrap.css" />
-    <link rel="stylesheet" href="css/style.css" />
+    <title>Latin CMS - Post</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="~/Content/home.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-default">
-        <ul class="nav navbar-nav">
-            <li><a href="/LatinCMS/admin.html">Administrar</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    Alejandro
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Usuario</a></li>
-                    <li><a href="#">Editar Perfil</a></li>
-                    <li><a href="/LatinCMS/login.html">Cerrar Sesion</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
     <div class="container">
-        <h1>Titulo</h1>
-        <h4>La descripcion del sitio va aqui</h4>
+        <div class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
+                    <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href='#'></a>@tipo_usuario</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @apodo_usuario
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", new { id = id_usuario })'>Editar Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Index", "Login")'>Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <br />
 
         <div class="post">
-            <h1>Titulo del Post</h1>
-            <p>
-                Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-                Texto del post. Texto del post. Texto del post. Texto del post. Texto del post. Texto del post.
-            </p>
-            <h5>13/05/2015 10:00 hs</h5>
-            <h6>Comentarios:</h6>
-            <textarea class="form-control"></textarea>
-            <button class="btn btn-primary">Publicar</button>
+            <h1 class="titulo-post">@titulo_post</h1>
+            <h4 class="descripcion-post">@descripcion_post</h4>
         </div>
-        <div class="comentarios-container">
+
+            <!--TODO: Traerme todos los POST y hacerlo general para todos
+               usar la configuracion para saber cuantos post por pagina!-->
+        
+        @foreach (var comentario in Model)
+        {
             <div class="comentario">
-                <h3>Usuario</h3>
-                <p>
-                    Texto del Comentario. Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                </p>
-                <h5>11/05/2015 22:00 hs</h5>
+                <h1 class="usuario-coment">@comentario.Post.Usuario.Apodo</h1>
+                <p class="descripcion-coment">@comentario.Descripcion</p>
+                <h5 class="fecha-coment">@comentario.Fecha</h5>
             </div>
-            <div class="comentario">
-                <h3>Usuario</h3>
-                <p>
-                    Texto del Comentario. Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                </p>
-                <h5>11/05/2015 22:00 hs</h5>
+        }
+
+
+        <footer>
+            <div id="lastrow" class="row">
+                <div class="e-banner-serverpoint text-center">
+                    <hr>
+                    <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
+                    <small>Latin CMS</small>
+                </div>
             </div>
-            <div class="comentario">
-                <h3>Usuario</h3>
-                <p>
-                    Texto del Comentario. Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                    Texto del Comentario.Texto del Comentario.Texto del Comentario.Texto del Comentario.
-                </p>
-                <h5>11/05/2015 22:00 hs</h5>
-            </div>
-        </div>
+        </footer>
+
     </div>
-    <script src="js/bootstrap.min.js" type="javascript"></script>
 </body>
 </html>

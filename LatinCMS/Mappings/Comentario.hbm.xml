@@ -7,7 +7,11 @@
     <property name="Descripcion">
       <column name="descripcion" sql-type="nvarchar" not-null="false" />
     </property>
+        <property name="Fecha">
+      <column name="fecha" sql-type="smalldatetime" not-null="false" />
+    </property>
     <many-to-one name="Post" column="post_id" />
     <many-to-one name="Estadocomen" column="ec_id" />
+    <many-to-one name="Usuario" column="user_id" />
   </class>
 </hibernate-mapping>

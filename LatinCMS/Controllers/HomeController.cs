@@ -52,9 +52,27 @@ namespace LatinCMS.Controllers
         {
             if (TempData["Apodo"] != null)
             {
-                ViewBag.Apodo = TempData["Apodo"];
-                ViewBag.TipoUsuario = TempData["Tipo_Usuario"];
-                ViewBag.Id = TempData["Id"];
+                try
+                {
+                    ConfigDAO utils = new ConfigDAO();
+                    Config registro_config = utils.GetAllConfig();
+
+                    Session["Apodo"] = TempData["Apodo"];
+                    Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
+                    Session["Id"] = TempData["Id"];
+                    Session["Titulo_Home"] = registro_config.Titulo;
+                    Session["Descripcion_Home"] = registro_config.Descripcion;
+                    Session["Cant_Post"] = registro_config.CantPost;
+
+                    PostDAO utilPost = new PostDAO();
+                    IList<Post> posts = utilPost.GetAllPosts();
+                    return View(posts);
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                }
+
             }
 
             return View();

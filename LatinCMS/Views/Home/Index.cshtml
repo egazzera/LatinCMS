@@ -1,5 +1,4 @@
 ﻿@{
-    Layout = null;
     string apodo_usuario = Session["Apodo"].ToString().Trim();
     string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
     int id_usuario = Convert.ToInt32(Session["Id"]);
@@ -19,12 +18,13 @@
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="~/Content/home.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-default">
-        <div class="container">
+    <div class="container">
+        <div class="navbar navbar-default">
             <div class="navbar-header">
                 <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
                     <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
@@ -32,7 +32,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href='@Url.Action("Index", "Login")'>Administrar (Solo Admin!)</a></li>
+                    <li><a href='#'></a>@tipo_usuario</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -49,25 +49,40 @@
                 </ul>
             </div>
         </div>
-    </div>
-
-    <div class="container">
+        
+        <br />
+        
         <h1 id="titulo-home">@titulo_home</h1>
         <h4 id="descripcion-home">@descripcion_home</h4>
 
-        <!--TODO: Traerme todo los POST y hacerlo general para todos
-                   usar la configuracion para saber cuantos post por pagina!-->
+        <div class="tree-posts">
+            <ul>
+                <li>
+                    2015
+                    <ul>
+                        <li>Mayo</li>
+                        <ul>
+                            <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
+                            <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
+                            <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
+                        </ul>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!--TODO: Traerme todos los POST y hacerlo general para todos
+               usar la configuracion para saber cuantos post por pagina!-->
 
         @foreach (var post in Model)
         {
             <div class="post">
-                <h1 class="titulo-post"><a href="/LatinCMS/post.html">@post.Titulo</a></h1>
+                <h1 class="titulo-post"><a href='@Url.Action("IrAPost", "Post", new { id = @post.Id, titulo = @post.Titulo, descripcion = @post.Descripcion })'>@post.Titulo</a></h1>
                 <p class="descripcion-post">@post.Descripcion</p>
                 <h5 class="fecha-post">@post.Fecha</h5>
             </div>
         }
 
-    </div>
 
     <footer>
         <div id="lastrow" class="row">
@@ -79,5 +94,6 @@
         </div>
     </footer>
 
+    </div>
 </body>
 </html>

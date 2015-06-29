@@ -1,34 +1,82 @@
 ﻿@{
-    ViewBag.Title = "Admin";
+    Layout = null;
+    string apodo_usuario = Session["Apodo"].ToString().Trim();
+    string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
+    int id_usuario = Convert.ToInt32(Session["Id"]);
+    string titulo_home = Session["Titulo_Home"].ToString().Trim();
+    string descripcion_home = Session["Descripcion_Home"].ToString().Trim();
+    int cant_post = Convert.ToInt32(Session["Cant_Post"]);
+
+    @model IList<LatinCMS.Models.Post>
+
 }
 
 <!DOCTYPE html>
-
 <html>
 <head lang="es-ar">
     <meta charset="UTF-8">
     <title>Latin CMS - Home</title>
-    <link rel="stylesheet" href="Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="~/Content/home.css" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
-    <div>
-        <br />
-        <h2>Admin</h2>
+    <div class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
+                    <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
+                </a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href='@Url.Action("Index", "Login")'>Administrar</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            @apodo_usuario
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", new { id = id_usuario })'>Editar Perfil</a></li>
+                            <li class="divider"></li>
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Index", "Login")'>Cerrar Sesion</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
-        <h1>Titulo Home</h1>
-        <br /><br />
-        <h2>POST</h2>
-        <br />
-        <h2>POST</h2>
-        <br />
-        <h2>POST</h2>
-        <br />
-        <h2>POST</h2>
-        <br />
-        <h1 style="color: green">Tipo de Usuario: @ViewBag.TipoUsuario</h1>
-        <h1 style="color: red">Usuario: @ViewBag.Apodo</h1>
+    <div class="container">
+        <h1 id="titulo-home">@titulo_home</h1>
+        <h4 id="descripcion-home">@descripcion_home</h4>
+
+        <!--TODO: Traerme todo los POST y hacerlo general para todos
+                   usar la configuracion para saber cuantos post por pagina!-->
+        @foreach (var post in Model)
+        {
+            <div class="post">
+                <h1 class="titulo-post"><a href="/LatinCMS/post.html">@post.Titulo</a></h1>
+                <p class="descripcion-post">@post.Descripcion</p>
+                <h5 class="fecha-post">@post.Fecha</h5>
+            </div>
+        }
 
     </div>
+
+    <footer>
+        <div id="lastrow" class="row">
+            <div class="e-banner-serverpoint text-center">
+                <hr>
+                <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
+                <small>Latin CMS</small>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>

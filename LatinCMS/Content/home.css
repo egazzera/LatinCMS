@@ -48,3 +48,28 @@
     width: 80%;
 }
 
+.usuario-coment {
+    color: #337ab7;
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    font-weight: 700;
+    font-family: "nyt-cheltenham",georgia,"times new roman",times,serif;
+    letter-spacing: .01em;
+    word-spacing: -0.1em;
+}
+
+.descripcion-coment {
+    color: #000;
+    font-weight: 700;
+    font-family: "nyt-cheltenham-sh",georgia,"times new roman",times,serif;
+    text-align: justify;
+}
+
+.fecha-coment {
+    line-height: 0.7rem;
+    font-weight: 400;
+    font-family: georgia,"times new roman",times,serif;
+    color: #999;
+    margin: 4px 0 1px;
+    text-align: left;
+}
