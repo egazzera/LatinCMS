@@ -78,6 +78,16 @@ namespace LatinCMS.Controllers
             return View();
         }
 
+        public IList<Post> GetTitulosByMesArbol(int mes)
+        {
+            PostDAO util = new PostDAO();
+
+            IList<Post> treePost = util.GetAllPostForTree(mes);
+
+            return treePost;
+
+        }
+
 
     }
 }

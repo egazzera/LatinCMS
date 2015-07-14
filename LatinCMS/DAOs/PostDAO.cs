@@ -45,6 +45,21 @@ namespace LatinCMS.DAOs
 
         }
 
+        public IList<Post> GetAllPostForTree(int mes) {
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var posts = session.CreateCriteria<Post>()
+                    .Add(Restrictions.Eq("TipoPost", 1))
+                    .Add(Expression.Eq(Projections.SqlFunction("month", NHibernateUtil.DateTime, Projections.Property("Fecha")), mes))
+                    .AddOrder(Order.Asc("Titulo"))
+                    .List<Post>();
+
+                return posts;
+            }
+
+        }
+
 
 
     }

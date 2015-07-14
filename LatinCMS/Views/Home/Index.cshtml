@@ -19,8 +19,11 @@
     <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="~/Content/home.css" />
     <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/themes/default/easyui.css">
+    <link rel="stylesheet" href="~/Content/themes/icon.css">
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.easyui.min-1.4.2.js"></script>
 </head>
 <body>
     <div class="container">
@@ -55,18 +58,20 @@
         <h1 id="titulo-home">@titulo_home</h1>
         <h4 id="descripcion-home">@descripcion_home</h4>
 
-        <div class="tree-posts">
-            <ul>
+        <div class="easyui-panel" style="padding:5px">
+            <ul class="easyui-tree">
                 <li>
-                    2015
-                    <ul>
-                        <li>Mayo</li>
+                    <span>2015</span>
                         <ul>
-                            <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
-                            <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
-                            <li><a href="/LatinCMS/post.html">Titulo del Post</a></li>
+                            <li data-options="state:'closed'">
+                                <span>Mayo</span>
+                                <ul>
+                                    <li><span><a href="/LatinCMS/post.html">Titulo del Post</a></span></li>
+                                    <li><span><a href="/LatinCMS/post.html">Titulo del Post</a></span></li>
+                                    <li><span><a href="/LatinCMS/post.html">Titulo del Post</a></span></li>
+                                </ul>
+                            </li>
                         </ul>
-                    </ul>
                 </li>
             </ul>
         </div>
@@ -74,14 +79,14 @@
         <!--TODO: Traerme todos los POST y hacerlo general para todos
                usar la configuracion para saber cuantos post por pagina!-->
 
-        @foreach (var post in Model)
-        {
-            <div class="post">
+        <div class="post">
+            @foreach (var post in Model)
+            {
                 <h1 class="titulo-post"><a href='@Url.Action("IrAPost", "Post", new { id = @post.Id, titulo = @post.Titulo, descripcion = @post.Descripcion })'>@post.Titulo</a></h1>
                 <p class="descripcion-post">@post.Descripcion</p>
                 <h5 class="fecha-post">@post.Fecha</h5>
-            </div>
-        }
+            }
+        </div>
 
 
     <footer>
@@ -95,5 +100,12 @@
     </footer>
 
     </div>
+
+    <script language="javascript" type="text/javascript">
+        var today = new Date()
+        var year = today.getFullYear()
+        document.write(year)
+    </script>
+
 </body>
 </html>
