@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace LatinCMS.Controllers
 {
@@ -78,13 +79,26 @@ namespace LatinCMS.Controllers
             return View();
         }
 
-        public IList<Post> GetTitulosByMesArbol(int mes)
+        public JsonResult GetTitulosByMesArbol(int mes, int tipo_post_id)
         {
             PostDAO util = new PostDAO();
+            GenericDAO<TipoPost> util_tipo_post = new GenericDAO<TipoPost>();
 
-            IList<Post> treePost = util.GetAllPostForTree(mes);
+            TipoPost tipo_post = util_tipo_post.GetById(tipo_post_id);
 
-            return treePost;
+            try
+            {
+                IList<Post> treePost = util.GetAllPostForTree(mes, tipo_post);
+
+                if(treePost.Count() == 0)
+                    return Json(mes);
+
+                return Json(treePost, JsonRequestBehavior.AllowGet); 
+            }
+            catch (Exception e)
+            {
+                return Json(new { errMsg = "Se produjo una excepción. El mensaje fue: " + e.Message });
+            }
 
         }
 

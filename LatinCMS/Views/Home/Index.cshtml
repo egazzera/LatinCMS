@@ -58,20 +58,73 @@
         <h1 id="titulo-home">@titulo_home</h1>
         <h4 id="descripcion-home">@descripcion_home</h4>
 
-        <div class="easyui-panel" style="padding:5px">
-            <ul class="easyui-tree">
+        <p id="errorJson" style="color: red"></p>
+
+        <div style="padding:5px">
+            <ul id="meses">
                 <li>
                     <span>2015</span>
-                        <ul>
-                            <li data-options="state:'closed'">
-                                <span>Mayo</span>
-                                <ul>
-                                    <li><span><a href="/LatinCMS/post.html">Titulo del Post</a></span></li>
-                                    <li><span><a href="/LatinCMS/post.html">Titulo del Post</a></span></li>
-                                    <li><span><a href="/LatinCMS/post.html">Titulo del Post</a></span></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <ul>
+                        <li>
+                            <span data-mes="1" class="mostrar"><a class="mesColor">Enero</a></span>
+                            <ul id="titulos1"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="2" class="mostrar"><a class="mesColor">Febrero</a></span>
+                            <ul id="titulos2"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="3" class="mostrar"><a class="mesColor">Marzo</a></span>
+                            <ul id="titulos3"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="4" class="mostrar"><a class="mesColor">Abril</a></span>
+                            <ul id="titulos4"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="5" class="mostrar"><a class="mesColor">Mayo</a></span>
+                            <ul id="titulos5"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="6" class="mostrar"><a class="mesColor">Junio</a></span>
+                            <ul id="titulos6"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="7" class="mostrar"><a class="mesColor">Julio</a></span>
+                            <ul id="titulos7"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="8" class="mostrar"><a class="mesColor">Agosto</a></span>
+                            <ul id="titulos8"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="9" class="mostrar"><a class="mesColor">Septiembre</a></span>
+                            <ul id="titulos9"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="10" class="mostrar"><a class="mesColor">Octubre</a></span>
+                            <ul id="titulos10"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="11" class="mostrar"><a class="mesColor">Noviembre</a></span>
+                            <ul id="titulos11"></ul>
+                        </li>
+
+                        <li>
+                            <span data-mes="12" class="mostrar"><a class="mesColor">Diciembre</a></span>
+                            <ul id="titulos12"></ul>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -101,10 +154,35 @@
 
     </div>
 
-    <script language="javascript" type="text/javascript">
-        var today = new Date()
-        var year = today.getFullYear()
-        document.write(year)
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#meses").on("click", ".mostrar", function(e){
+            e.preventDefault();
+
+            $.post('@Url.Action("GetTitulosByMesArbol", "Home")', {  mes: $(this).attr("data-mes"), tipo_post_id: 1})
+                .done(function (result) {
+
+                    //if result is numeric then VACIO
+
+
+                    for (i = 1; i < 12; i++)
+                        $("#titulos" + i).empty();
+
+                    for (var titulo in result) {
+                        //TODO: Agregar a href con id del post
+                        var numeros = result[titulo].Fecha.replace(/\D/g, '');
+                        var fecha = new Date(parseInt(numeros));
+                        $("#titulos" + (fecha.getMonth() + 1)).append("<li><span>" + result[titulo].Titulo + "</span></li>");
+                    }
+
+                }).fail(function(result){
+                    $("#titulos").append("<li><span>Vacio</span></li>");
+                    $("errorJson").alert(result.errMsg);
+                });
+            })
+
+        })
     </script>
 
 </body>
