@@ -163,21 +163,23 @@
             $.post('@Url.Action("GetTitulosByMesArbol", "Home")', {  mes: $(this).attr("data-mes"), tipo_post_id: 1})
                 .done(function (result) {
 
-                    //if result is numeric then VACIO
-
-
-                    for (i = 1; i < 12; i++)
+                    for (var i = 1; i <= 12; i++) {
                         $("#titulos" + i).empty();
+                    }
 
-                    for (var titulo in result) {
-                        //TODO: Agregar a href con id del post
-                        var numeros = result[titulo].Fecha.replace(/\D/g, '');
-                        var fecha = new Date(parseInt(numeros));
-                        $("#titulos" + (fecha.getMonth() + 1)).append("<li><span>" + result[titulo].Titulo + "</span></li>");
+                    //if result is numeric then VACIO
+                    if (!isNaN(result)) {
+                        $("#titulos" + result).append("<li><span>Vacio</span></li>");
+                    } else {
+                        for (var titulo in result) {
+                            //TODO: Agregar a href con id del post
+                            var numeros = result[titulo].Fecha.replace(/\D/g, '');
+                            var fecha = new Date(parseInt(numeros));
+                            $("#titulos" + (fecha.getMonth() + 1)).append("<li><span>" + "<a href='#'>" + result[titulo].Titulo + "</a></span></li>");
+                        }
                     }
 
                 }).fail(function(result){
-                    $("#titulos").append("<li><span>Vacio</span></li>");
                     $("errorJson").alert(result.errMsg);
                 });
             })
