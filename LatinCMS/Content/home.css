@@ -74,6 +74,33 @@
     text-align: left;
 }
 
-.mesColor:hover {
+a.mesColor:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a.tituloPostColor {
     color: olive;
+    text-decoration: none;
+    font-size: smaller;
+}
+
+li.tituloPostColor{
+    color: olive;
+    font-size: smaller;
+}
+
+.post_post{
+    background-color: #F9F8C1;
+    margin: 12px;
+    border: 5px;
+    margin-right: 140px;
+    padding: 8px;
+    width: 95%;
+}
+
+.comentario{
+    padding: 20px;
+    text-align: justify;
+    width: 95%;
 }

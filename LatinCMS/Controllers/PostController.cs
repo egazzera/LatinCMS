@@ -18,16 +18,20 @@ namespace LatinCMS.Controllers
             return View();
         }
 
-        public ActionResult IrAPost(int id, string titulo, string descripcion)
+        public ActionResult IrAPost(int id)
         {
+            PostDAO util = new PostDAO();
+            GenericDAO<Post> utilPost = new GenericDAO<Post>();
+            
             try
             {
-                PostDAO util = new PostDAO();
-
                 IList<Comentario> comentarios_post = util.GetAllComentsFromPostID(id);
 
-                Session["Titulo_Post"] = titulo;
-                Session["Descripcion_Post"] = descripcion;
+                Post post = utilPost.GetById(id);
+
+                Session["Titulo_Post"] = post.Titulo;
+                Session["Descripcion_Post"] = post.Descripcion;
+                Session["Fecha_Post"] = post.Fecha;
 
                 return View("Index", comentarios_post);
             }

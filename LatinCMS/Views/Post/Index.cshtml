@@ -2,6 +2,7 @@
     string apodo_usuario = Session["Apodo"].ToString().Trim();
     string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
     int id_usuario = Convert.ToInt32(Session["Id"]);
+    string fecha_post = Session["Fecha_Post"].ToString();
 
     string titulo_post = Session["Titulo_Post"].ToString().Trim();
     string descripcion_post = Session["Descripcion_Post"].ToString().Trim();
@@ -52,14 +53,12 @@
 
         <br />
 
-        <div class="post">
+        <div class="post_post">
             <h1 class="titulo-post">@titulo_post</h1>
             <h4 class="descripcion-post">@descripcion_post</h4>
+            <h5 class="fecha-post">@fecha_post</h5>
         </div>
 
-            <!--TODO: Traerme todos los POST y hacerlo general para todos
-               usar la configuracion para saber cuantos post por pagina!-->
-        
         @foreach (var comentario in Model)
         {
             <div class="comentario">

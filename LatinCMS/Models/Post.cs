@@ -7,7 +7,7 @@ using System.Web;
 namespace LatinCMS.Models
 {
 
-    public class Post
+    public class Post 
     {
         public Post() { }
         public virtual int Id { get; set; }

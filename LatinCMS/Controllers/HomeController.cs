@@ -3,6 +3,7 @@ using LatinCMS.Models;
 using NHibernate;
 using NHibernate.Cfg;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -93,7 +94,17 @@ namespace LatinCMS.Controllers
                 if(treePost.Count() == 0)
                     return Json(mes);
 
-                return Json(treePost, JsonRequestBehavior.AllowGet); 
+                List<PostURL> listaPostURL = new List<PostURL>();
+
+                for (var i = 0; i < treePost.Count(); i++)
+                {
+                    PostURL postUrl = new PostURL();
+                    postUrl.Post = treePost[i];
+                    postUrl.URL = Url.Action("IrAPost", "Post", new { id = treePost[i].Id });
+                    listaPostURL.Add(postUrl);
+                }
+
+                return Json(listaPostURL, JsonRequestBehavior.AllowGet); 
             }
             catch (Exception e)
             {
