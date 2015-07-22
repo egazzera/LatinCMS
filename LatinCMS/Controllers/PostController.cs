@@ -15,6 +15,11 @@ namespace LatinCMS.Controllers
 
         public ActionResult Index()
         {
+            if (TempData["Error"] != null)
+            {
+                ViewBag.Error = TempData["Error"];
+            }
+
             return View();
         }
 
@@ -32,6 +37,7 @@ namespace LatinCMS.Controllers
                 Session["Titulo_Post"] = post.Titulo;
                 Session["Descripcion_Post"] = post.Descripcion;
                 Session["Fecha_Post"] = post.Fecha;
+                Session["Post_Id"] = post.Id;
 
                 return View("Index", comentarios_post);
             }

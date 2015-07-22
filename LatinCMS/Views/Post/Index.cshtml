@@ -3,6 +3,7 @@
     string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
     int id_usuario = Convert.ToInt32(Session["Id"]);
     string fecha_post = Session["Fecha_Post"].ToString();
+    int post_id = Convert.ToInt32(Session["Post_Id"]);
 
     string titulo_post = Session["Titulo_Post"].ToString().Trim();
     string descripcion_post = Session["Descripcion_Post"].ToString().Trim();
@@ -52,12 +53,26 @@
         </div>
 
         <br />
+        <p style="color: red">@ViewBag.Error</p>
+        <form action='@Url.Action("NuevoComentatio", "Comentario", new { id_post = post_id, id_user = id_usuario })' method="POST" id="formulario" class="form-signin">
+            <div class="post_post">
+                <h1 class="titulo-post">@titulo_post</h1>
+                <h4 class="descripcion-post">@descripcion_post</h4>
+                <h5 class="fecha-post">@fecha_post</h5>
 
-        <div class="post_post">
-            <h1 class="titulo-post">@titulo_post</h1>
-            <h4 class="descripcion-post">@descripcion_post</h4>
-            <h5 class="fecha-post">@fecha_post</h5>
-        </div>
+                <div class="control-group">
+                    <label class="control-label">Comentarios:</label>
+                    <div class="controls">
+                        <input type="text" name="comentario" id="comentario" placeholder="Comentario" class="form-control" maxlength="200" required autofocus>
+                    </div>
+                    <br />
+                </div>
+               
+                <div class="control-group">
+                    <input type="submit" value="Publicar" class="btn btn-lg btn-primary">
+                </div>
+                </div>
+        </form>
 
         @foreach (var comentario in Model)
         {
@@ -79,6 +94,6 @@
             </div>
         </footer>
 
-    </div>
+</div>
 </body>
 </html>

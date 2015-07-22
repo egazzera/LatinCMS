@@ -44,11 +44,11 @@ namespace LatinCMS.Controllers
                 {
                     if(registro_usuario.Rol.Descripcion == "Suscriptor")
                     {
-                        TempData["Apodo"] = apodo;
-                        TempData["Tipo_Usuario"] = "Suscriptor";
-                        TempData["Id"] = registro_usuario.Id;
+                        //TempData["Apodo"] = apodo;
+                        //TempData["Tipo_Usuario"] = "Suscriptor";
+                        //TempData["Id"] = registro_usuario.Id;
                         session.Close();
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new { id_usuario = registro_usuario.Id });
                     }
 
                     if (registro_usuario.Rol.Descripcion == "Adminstrador")

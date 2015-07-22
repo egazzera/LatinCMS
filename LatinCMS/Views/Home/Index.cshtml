@@ -131,15 +131,17 @@
 
         <!--TODO: Traerme todos los POST y hacerlo general para todos
                usar la configuracion para saber cuantos post por pagina!-->
-
-        <div class="post">
+        <p style="color: green">@ViewBag.Save_Comen_Ok</p>
+        
             @foreach (var post in Model)
             {
-                <h1 class="titulo-post"><a href='@Url.Action("IrAPost", "Post", new { id = @post.Id, titulo = @post.Titulo, descripcion = @post.Descripcion })'>@post.Titulo</a></h1>
-                <p class="descripcion-post">@post.Descripcion</p>
-                <h5 class="fecha-post">@post.Fecha</h5>
+                <div class="post">
+                    <h1 class="titulo-post"><a href='@Url.Action("IrAPost", "Post", new { id = @post.Id, titulo = @post.Titulo, descripcion = @post.Descripcion })'>@post.Titulo</a></h1>
+                    <p class="descripcion-post">@post.Descripcion</p>
+                    <h5 class="fecha-post">@post.Fecha</h5>
+                </div>
+                <br />
             }
-        </div>
 
 
     <footer>
