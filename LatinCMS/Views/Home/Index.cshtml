@@ -1,11 +1,11 @@
 ﻿@{
     string apodo_usuario = Session["Apodo"].ToString().Trim();
     string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
-    int id_usuario = Convert.ToInt32(Session["Id"]);
+    int usuario_id = Convert.ToInt32(Session["Id"]);
     string titulo_home = Session["Titulo_Home"].ToString().Trim();
     string descripcion_home = Session["Descripcion_Home"].ToString().Trim();
     int cant_post = Convert.ToInt32(Session["Cant_Post"]);
-    
+
     @model IList<LatinCMS.Models.Post>
     
 }
@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="~/Content/home.css" />
     <link rel="stylesheet" href="~/Content/style.css" />
-    <link rel="stylesheet" href="~/Content/themes/default/easyui.css">
-    <link rel="stylesheet" href="~/Content/themes/icon.css">
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery.easyui.min-1.4.2.js"></script>
@@ -35,7 +33,12 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href='#'></a>@tipo_usuario</li>
+                    @if (tipo_usuario != null && tipo_usuario == "Administrador") { 
+                        <li><a href='@Url.Action("Admin", "Home", new { id_usuario = usuario_id })'>Administrar</a></li>
+                    }
+                    else { 
+                        <li><a href='#'>@tipo_usuario</a></li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -44,7 +47,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", new { id = id_usuario })'>Editar Perfil</a></li>
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", new { id = usuario_id })'>Editar Perfil</a></li>
                             <li class="divider"></li>
                             <li><a role="menuitem" tabindex="-1" href='@Url.Action("Index", "Login")'>Cerrar Sesion</a></li>
                         </ul>
@@ -147,6 +150,8 @@
                 </td>
         </tr>
     </table>
+
+
         <!--TODO: usar la configuracion para saber cuantos post por pagina!-->
 
 
@@ -182,7 +187,6 @@
                         $("#titulos" + result).append("<li class='tituloPostColor'><span>Vacio</span></li>");
                     } else {
                         for (var titulo in result) {
-                            //TODO: Agregar a href con id del post IrAPost
                             var numeros = result[titulo].Post.Fecha.replace(/\D/g, '');
                             var fecha = new Date(parseInt(numeros));
                             $("#titulos" + (fecha.getMonth() + 1)).append("<li><span>" + "<a href='" + result[titulo].URL + "' class='tituloPostColor'>" + result[titulo].Post.Titulo + "</a></span></li>");

@@ -1,13 +1,7 @@
 ﻿@{
-    Layout = null;
     string apodo_usuario = Session["Apodo"].ToString().Trim();
     string tipo_usuario = Session["Tipo_Usuario"].ToString().Trim();
-    int id_usuario = Convert.ToInt32(Session["Id"]);
-    string titulo_home = Session["Titulo_Home"].ToString().Trim();
-    string descripcion_home = Session["Descripcion_Home"].ToString().Trim();
-    int cant_post = Convert.ToInt32(Session["Cant_Post"]);
-
-    @model IList<LatinCMS.Models.Post>
+    int usuario_id = Convert.ToInt32(Session["Id"]);
 
 }
 
@@ -15,16 +9,18 @@
 <html>
 <head lang="es-ar">
     <meta charset="UTF-8">
-    <title>Latin CMS - Home</title>
+    <title>Latin CMS - Administracion</title>
     <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
     <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="~/Content/home.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-default">
-        <div class="container">
+    <div class="container">
+        <div class="navbar navbar-default">
             <div class="navbar-header">
                 <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
                     <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
@@ -32,7 +28,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href='@Url.Action("Index", "Login")'>Administrar</a></li>
+                    <li><a href='@Url.Action("Index", "Home", new { id_usuario = usuario_id })'>Sitio</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
@@ -41,7 +37,7 @@
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", new { id = id_usuario })'>Editar Perfil</a></li>
+                            <li><a role="menuitem" tabindex="-1" href='@Url.Action("Edit", "Usuario", new { id = usuario_id })'>Editar Perfil</a></li>
                             <li class="divider"></li>
                             <li><a role="menuitem" tabindex="-1" href='@Url.Action("Index", "Login")'>Cerrar Sesion</a></li>
                         </ul>
@@ -49,34 +45,76 @@
                 </ul>
             </div>
         </div>
-    </div>
 
-    <div class="container">
-        <h1 id="titulo-home">@titulo_home</h1>
-        <h4 id="descripcion-home">@descripcion_home</h4>
+        <br />
+        <br />
 
-        <!--TODO: Traerme todo los POST y hacerlo general para todos
-                   usar la configuracion para saber cuantos post por pagina!-->
-        @foreach (var post in Model)
-        {
-            <div class="post">
-                <h1 class="titulo-post"><a href="/LatinCMS/post.html">@post.Titulo</a></h1>
-                <p class="descripcion-post">@post.Descripcion</p>
-                <h5 class="fecha-post">@post.Fecha</h5>
-            </div>
-        }
-
-    </div>
-
-    <footer>
-        <div id="lastrow" class="row">
-            <div class="e-banner-serverpoint text-center">
-                <hr>
-                <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
-                <small>Latin CMS</small>
-            </div>
+        <div id='cssmenu' class="sidebar">
+            <ul>
+                <li class='has-sub'>
+                    <a href='#'><span>Posts</span></a>
+                    <ul>
+                        <li><a href='@Url.Action("AllPost", "Post")'><span>Todos los Posts</span></a></li>
+                        <li class='last'><a href='@Url.Action("NewPost", "Post", new { id_usuario = usuario_id })'><span>Añadir Nuevo</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href='#'><span>Paginas</span></a>
+                    <ul>
+                        <li><a href='/LatinCMS/listPages.html'><span>Todas las Paginas</span></a></li>
+                        <li class='last'><a href='/LatinCMS/newPage.html'><span>Añadir Nueva</span></a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href='#'><span>Usuarios</span></a>
+                    <ul>
+                        <li><a href='/LatinCMS/listUsers.html'><span>Todos los Usuarios</span></a></li>
+                        <li class='last'><a href='/LatinCMS/newUser.html'><span>Añadir Nuevo</span></a></li>
+                    </ul>
+                </li>
+                <li><a href='#'><span>Apariencia</span></a></li>
+                <li>
+                    <a href='#'><span>Ajustes</span></a>
+                    <ul>
+                        <li class='last'><a href='/LatinCMS/ajustes.html'><span>Ajustes Generales</span></a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </footer>
 
-</body>
+        <h4 style="text-indent: 4em">Administración de LatinCMS</h4>
+
+        <table id="example" class="display" cellspacing="0" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Autor</th>
+                    <th>Comentarios</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+        </table>
+
+            <footer>
+                <div id="lastrow" class="row">
+                    <div class="e-banner-serverpoint text-center">
+                        <hr>
+                        <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
+                        <small>Latin CMS</small>
+                    </div>
+                </div>
+            </footer>
+</div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#example').DataTable();
+
+        } );
+    </script>
+
+    </body>
 </html>

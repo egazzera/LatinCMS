@@ -32,7 +32,7 @@ namespace LatinCMS.Controllers
 
                     Usuario usuario = util_user.GetById(id_usuario);
 
-                    Session["Apodo"] = usuario.Apodo;
+                    Session["Apodo"] = usuario.Nombre;
                     Session["Tipo_Usuario"] = usuario.Rol.Descripcion;
                     Session["Id"] = id_usuario;
                     Session["Titulo_Home"] = registro_config.Titulo;
@@ -59,25 +59,21 @@ namespace LatinCMS.Controllers
             return View();
         }
 
-        public ActionResult Admin()
+        public ActionResult Admin(int id_usuario)
         {
-            if (TempData["Apodo"] != null)
+            if (id_usuario > 0)
             {
                 try
                 {
-                    ConfigDAO utils = new ConfigDAO();
-                    Config registro_config = utils.GetAllConfig();
+                    GenericDAO<Usuario> util_user = new GenericDAO<Usuario>();
 
-                    Session["Apodo"] = TempData["Apodo"];
-                    Session["Tipo_Usuario"] = TempData["Tipo_Usuario"];
-                    Session["Id"] = TempData["Id"];
-                    Session["Titulo_Home"] = registro_config.Titulo;
-                    Session["Descripcion_Home"] = registro_config.Descripcion;
-                    Session["Cant_Post"] = registro_config.CantPost;
+                    Usuario usuario = util_user.GetById(id_usuario);
 
-                    PostDAO utilPost = new PostDAO();
-                    IList<Post> posts = utilPost.GetAllPosts();
-                    return View(posts);
+                    Session["Apodo"] = usuario.Nombre;
+                    Session["Tipo_Usuario"] = usuario.Rol.Descripcion;
+                    Session["Id"] = id_usuario;
+
+                    return View();
                 }
                 catch (Exception e)
                 {
@@ -85,9 +81,16 @@ namespace LatinCMS.Controllers
                 }
 
             }
+            else
+            {
+                TempData["Error"] = "Se produjo un error. El ID de Usuario: " + id_usuario + " no existe.";
+                return RedirectToAction("Index", "Signup");
+            }
+
 
             return View();
         }
+
 
         public JsonResult GetTitulosByMesArbol(int mes, int tipo_post_id)
         {

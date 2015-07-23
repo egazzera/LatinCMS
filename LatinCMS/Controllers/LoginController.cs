@@ -42,22 +42,10 @@ namespace LatinCMS.Controllers
                 }
                 else
                 {
-                    if(registro_usuario.Rol.Descripcion == "Suscriptor")
+                    if(registro_usuario.Rol.Descripcion != null)
                     {
-                        //TempData["Apodo"] = apodo;
-                        //TempData["Tipo_Usuario"] = "Suscriptor";
-                        //TempData["Id"] = registro_usuario.Id;
                         session.Close();
                         return RedirectToAction("Index", "Home", new { id_usuario = registro_usuario.Id });
-                    }
-
-                    if (registro_usuario.Rol.Descripcion == "Adminstrador")
-                    { 
-                        TempData["Apodo"] = apodo;
-                        TempData["Tipo_Usuario"] = "Administrador";
-                        TempData["Id"] = registro_usuario.Id;
-                        session.Close();
-                        return RedirectToAction("Admin", "Home");
                     }
 
                     ViewBag.Error = "Se produjo un error inesperado en el Login, llame al 911.";
