@@ -60,88 +60,95 @@
 
         <p id="errorJson" style="color: red"></p>
 
-        <div style="padding:5px">
-            <ul id="meses">
-                <li>
-                    <span>2015</span>
-                    <ul>
-                        <li>
-                            <span data-mes="1" class="mostrar"><a class="mesColor">Enero</a></span>
-                            <ul id="titulos1"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="2" class="mostrar"><a class="mesColor">Febrero</a></span>
-                            <ul id="titulos2"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="3" class="mostrar"><a class="mesColor">Marzo</a></span>
-                            <ul id="titulos3"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="4" class="mostrar"><a class="mesColor">Abril</a></span>
-                            <ul id="titulos4"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="5" class="mostrar"><a class="mesColor">Mayo</a></span>
-                            <ul id="titulos5"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="6" class="mostrar"><a class="mesColor">Junio</a></span>
-                            <ul id="titulos6"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="7" class="mostrar"><a class="mesColor">Julio</a></span>
-                            <ul id="titulos7"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="8" class="mostrar"><a class="mesColor">Agosto</a></span>
-                            <ul id="titulos8"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="9" class="mostrar"><a class="mesColor">Septiembre</a></span>
-                            <ul id="titulos9"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="10" class="mostrar"><a class="mesColor">Octubre</a></span>
-                            <ul id="titulos10"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="11" class="mostrar"><a class="mesColor">Noviembre</a></span>
-                            <ul id="titulos11"></ul>
-                        </li>
-
-                        <li>
-                            <span data-mes="12" class="mostrar"><a class="mesColor">Diciembre</a></span>
-                            <ul id="titulos12"></ul>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-
-        <!--TODO: Traerme todos los POST y hacerlo general para todos
-               usar la configuracion para saber cuantos post por pagina!-->
         <p style="color: green">@ViewBag.Save_Comen_Ok</p>
-        
-            @foreach (var post in Model)
-            {
-                <div class="post">
-                    <h1 class="titulo-post"><a href='@Url.Action("IrAPost", "Post", new { id = @post.Id, titulo = @post.Titulo, descripcion = @post.Descripcion })'>@post.Titulo</a></h1>
-                    <p class="descripcion-post">@post.Descripcion</p>
-                    <h5 class="fecha-post">@post.Fecha</h5>
-                </div>
-                <br />
-            }
+
+        <table>
+            <tr>
+                <td>
+                    @foreach (var post in Model)
+                    {
+                        <div class="post">
+                            <h1 class="titulo-post"><a href='@Url.Action("IrAPost", "Post", new { id = @post.Id, titulo = @post.Titulo, descripcion = @post.Descripcion })'>@post.Titulo</a></h1>
+                            <p class="descripcion-post">@post.Descripcion</p>
+                            <h5 class="fecha-post">@post.Fecha</h5>
+                        </div>
+                        <br />
+                    }
+                </td>
+                <td>
+                    <div style="padding:5px">
+                        <ul id="meses">
+                            <li>
+                                <span>2015</span>
+                                <ul>
+                                    <li>
+                                        <span data-mes="1" class="mostrar"><a class="mesColor">Enero</a></span>
+                                        <ul id="titulos1"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="2" class="mostrar"><a class="mesColor">Febrero</a></span>
+                                        <ul id="titulos2"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="3" class="mostrar"><a class="mesColor">Marzo</a></span>
+                                        <ul id="titulos3"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="4" class="mostrar"><a class="mesColor">Abril</a></span>
+                                        <ul id="titulos4"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="5" class="mostrar"><a class="mesColor">Mayo</a></span>
+                                        <ul id="titulos5"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="6" class="mostrar"><a class="mesColor">Junio</a></span>
+                                        <ul id="titulos6"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="7" class="mostrar"><a class="mesColor">Julio</a></span>
+                                        <ul id="titulos7"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="8" class="mostrar"><a class="mesColor">Agosto</a></span>
+                                        <ul id="titulos8"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="9" class="mostrar"><a class="mesColor">Septiembre</a></span>
+                                        <ul id="titulos9"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="10" class="mostrar"><a class="mesColor">Octubre</a></span>
+                                        <ul id="titulos10"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="11" class="mostrar"><a class="mesColor">Noviembre</a></span>
+                                        <ul id="titulos11"></ul>
+                                    </li>
+
+                                    <li>
+                                        <span data-mes="12" class="mostrar"><a class="mesColor">Diciembre</a></span>
+                                        <ul id="titulos12"></ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+        </tr>
+    </table>
+        <!--TODO: usar la configuracion para saber cuantos post por pagina!-->
+
 
 
     <footer>
