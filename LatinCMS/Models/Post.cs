@@ -16,5 +16,6 @@ namespace LatinCMS.Models
         public virtual DateTime? Fecha { get; set; }
         public virtual string Descripcion { get; set; }
         public virtual string Titulo { get; set; }
+        public virtual bool? Eliminado { get; set; }
     }
 }

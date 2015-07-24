@@ -47,6 +47,23 @@ namespace LatinCMS.Controllers
         }
 
 
+        public JsonResult AllPost()
+        {
+            PostDAO util = new PostDAO();
+
+            try
+            {
+                IList<PostComen> TablaPostComen = util.GetAllPostTabla();
+                return Json(TablaPostComen, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { errMsg = "Se produjo una excepción. El mensaje fue: " + e.Message });
+            }
+
+        }
+
+
 
     }
 }

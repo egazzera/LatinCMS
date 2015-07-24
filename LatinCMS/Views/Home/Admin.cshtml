@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
     <link rel="stylesheet" href="~/Content/home.css" />
     <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
@@ -54,7 +55,7 @@
                 <li class='has-sub'>
                     <a href='#'><span>Posts</span></a>
                     <ul>
-                        <li><a href='@Url.Action("AllPost", "Post")'><span>Todos los Posts</span></a></li>
+                        <li id="AllPost"><a href="#"><span>Todos los Posts</span></a></li>
                         <li class='last'><a href='@Url.Action("NewPost", "Post", new { id_usuario = usuario_id })'><span>Añadir Nuevo</span></a></li>
                     </ul>
                 </li>
@@ -83,35 +84,57 @@
         </div>
 
         <h4 style="text-indent: 4em">Administración de LatinCMS</h4>
+        
+        <div class="container" style="float:right; width: 80%">
+            <a class="btn btn-primary" href="/LatinCMS/newPost.html">Añadir Nuevo</a><br /><br />
 
-        <table id="example" class="display" cellspacing="0" style="width: 100%">
-            <thead>
-                <tr>
-                    <th>Titulo</th>
-                    <th>Autor</th>
-                    <th>Comentarios</th>
-                    <th>Fecha</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-        </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Titulo</th>
+                        <th>Autor</th>
+                        <th>Comentarios</th>
+                        <th>Fecha</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="mostrarAllPostTabla"></tbody>
+            </table>
 
-            <footer>
-                <div id="lastrow" class="row">
-                    <div class="e-banner-serverpoint text-center">
-                        <hr>
-                        <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
-                        <small>Latin CMS</small>
-                    </div>
-                </div>
-            </footer>
+        </div>
 </div>
 
 
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $('#example').DataTable();
+            $("#AllPost").on("click", function (e) {
+                e.preventDefault();
+
+                $.post('@Url.Action("AllPost", "Post")')
+                    .done(function (result) {
+
+                        $("#mostrarAllPostTabla").empty();
+
+                        for (var item in result) {
+                            //formateo la fecha
+                            var numeros = result[item].Post.Fecha.replace(/\D/g, '');
+                            var fecha = new Date(parseInt(numeros));
+
+                            $("#mostrarAllPostTabla").append("<tr><td>" + result[item].Post.Titulo + "</td><td>"
+                                                            + result[item].Post.Usuario.Apodo + "</td><td>"
+                                                            + result[item].Contador + "</td><td>"
+                                                            + fecha.getDate() + "/" + fecha.getMonth() + "/" + fecha.getFullYear() + "</td><td>"
+                                                            + "<a href='/LatinCMS/editPost.html'><i class='fa fa-pencil'></i></a>"
+                                                            + "<a href='#'><i class='fa fa-times'></i></a>"
+                                                            + "<a href='/LatinCMS/post.html'><i class='fa fa-file-o'></i></a></td>"
+                                                            );
+                        }
+
+                    }).fail(function (result) {
+                        $("errorJson").alert(result.errMsg);
+                    });
+            })
 
         } );
     </script>

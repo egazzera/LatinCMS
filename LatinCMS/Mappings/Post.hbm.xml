@@ -13,6 +13,9 @@
     <property name="Titulo">
       <column name="titulo" sql-type="nvarchar" not-null="false" />
     </property>
+    <property name="Eliminado">
+      <column name="eliminado" sql-type="bit" not-null="false" />
+    </property>
     <many-to-one name="Usuario" column="usuario_id" />
     <many-to-one name="TipoPost" column="tipo_post_id" />
   </class>

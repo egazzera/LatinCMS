@@ -21,7 +21,8 @@ namespace LatinCMS.DAOs
                     .Add(Restrictions.Eq("Descripcion", "Post"))
                     .AddOrder(Order.Desc("p.Fecha"))
                     .List<Post>();
-                
+
+                session.Close();
                 return posts;
             }
 
@@ -40,6 +41,7 @@ namespace LatinCMS.DAOs
                     .AddOrder(Order.Desc("c.Fecha"))
                     .List<Comentario>();
 
+                session.Close();
                 return comentarios;
             }
 
@@ -55,11 +57,42 @@ namespace LatinCMS.DAOs
                     .AddOrder(Order.Asc("Titulo"))
                     .List<Post>();
 
+                session.Close();
                 return posts;
             }
 
         }
 
+        public IList<PostComen> GetAllPostTabla() {
+
+            using (ISession session = NHibernateHelper.OpenSession()) 
+            {
+                var posts = session.CreateCriteria<Post>()
+                    .Add(Restrictions.Eq("Eliminado", false))
+                    .List<Post>();
+
+                List<PostComen> ListaPostComen = new List<PostComen>();
+
+                foreach (var post in posts)
+                {
+                    int cant = (int) session.CreateCriteria<Comentario>()
+                        .Add(Restrictions.Eq("Post", post))
+                        .SetProjection(Projections.RowCount())
+                        .UniqueResult(); 
+                    
+                    PostComen postComen = new PostComen();
+                    postComen.Post = post;
+                    postComen.Contador = cant;
+
+                    ListaPostComen.Add(postComen);
+                }
+
+                session.Close();
+                return ListaPostComen;
+            }
+
+            
+        } 
 
 
     }
