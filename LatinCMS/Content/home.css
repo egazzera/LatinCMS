@@ -105,8 +105,17 @@ li.tituloPostColor{
     width: 95%;
 }
 
+#ocultarTablaAllPost {
+    float: right; 
+    width: 80%;
+    display: none;
+}
 
-
+#mostrarCamposNewPost{
+    float: right; 
+    width: 80%;
+    display: none;
+}
 
 
 /* Custom Stuff */

@@ -120,6 +120,7 @@
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="DAOs\TipoPostDAO.cs" />
     <Compile Include="DAOs\EstadoComentarioDAO.cs" />
     <Compile Include="DAOs\PostDAO.cs" />
     <Compile Include="DAOs\ConfigDAO.cs" />
@@ -505,6 +506,7 @@
     <EmbeddedResource Include="Mappings\Rol.hbm.xml" />
     <EmbeddedResource Include="Mappings\TipoPost.hbm.xml" />
     <EmbeddedResource Include="Mappings\Usuario.hbm.xml" />
+    <Content Include="Images\Earth.GIF" />
     <Content Include="Images\logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

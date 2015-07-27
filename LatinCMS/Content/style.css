@@ -25,3 +25,10 @@ body, html{
     box-sizing: border-box;
     position: relative;
 }
+
+#loading {
+    width: auto;
+    background-repeat: no-repeat;
+    background-image: url("../Images/Earth.GIF");
+    margin-left: 50%;
+}

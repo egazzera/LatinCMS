@@ -69,6 +69,7 @@ namespace LatinCMS.DAOs
             {
                 var posts = session.CreateCriteria<Post>()
                     .Add(Restrictions.Eq("Eliminado", false))
+                    .AddOrder(Order.Desc("Fecha"))
                     .List<Post>();
 
                 List<PostComen> ListaPostComen = new List<PostComen>();

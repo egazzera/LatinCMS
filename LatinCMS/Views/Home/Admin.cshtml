@@ -49,14 +49,15 @@
 
         <br />
         <br />
-
+        
+        @*Menu Izquierdo*@
         <div id='cssmenu' class="sidebar">
             <ul>
                 <li class='has-sub'>
                     <a href='#'><span>Posts</span></a>
                     <ul>
                         <li id="AllPost"><a href="#"><span>Todos los Posts</span></a></li>
-                        <li class='last'><a href='@Url.Action("NewPost", "Post", new { id_usuario = usuario_id })'><span>Añadir Nuevo</span></a></li>
+                        <li class='last' id="NewPostMenu"><a href='#'><span>Añadir Nuevo</span></a></li>
                     </ul>
                 </li>
                 <li>
@@ -85,13 +86,17 @@
 
         <h4 style="text-indent: 4em">Administración de LatinCMS</h4>
         
-        <div class="container" style="float:right; width: 80%">
-            <a class="btn btn-primary" href="/LatinCMS/newPost.html">Añadir Nuevo</a><br /><br />
-
+        <p style="color: green; text-indent: 4em">@ViewBag.SaveOK</p>
+        <p style="color: red; text-indent: 4em">@ViewBag.Error</p>   
+       
+        @*Todos los post tabla*@
+         <div class="container" id="ocultarTablaAllPost">
+             <a class="btn btn-primary" id="NewPostBoton" href='#'>Añadir Nuevo</a><br /><br />
+           
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Titulo</th>
+                        <th>Título</th>
                         <th>Autor</th>
                         <th>Comentarios</th>
                         <th>Fecha</th>
@@ -100,8 +105,38 @@
                 </thead>
                 <tbody id="mostrarAllPostTabla"></tbody>
             </table>
-
+            
         </div>
+        
+        <div class="container" id="loading" style="display: none;"></div>
+        
+        @*New Post*@
+        <div class="container" id="mostrarCamposNewPost">
+            <fieldset class="login">
+                <form action='@Url.Action("NewPost", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
+                    <h2 class="form-signin-heading">Añadir Nuevo Post</h2>
+                    <div class="control-group">
+                        <label class="control-label">Título:</label>
+                        <div class="controls">
+                            <input type="text" name="titulo" id="titulo" placeholder="Titulo" class="form-control" maxlength="100" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Descripción:</label>
+                        <div class="controls">
+                            <textarea type="text" name="descripcion" id="descripcion" placeholder="Descripcion" class="form-control" rows="10" maxlength="700" required autofocus></textarea>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <input type="submit" value="Publicar" class="btn btn-lg btn-primary">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
+
 </div>
 
 
@@ -110,24 +145,28 @@
 
             $("#AllPost").on("click", function (e) {
                 e.preventDefault();
+                $("#mostrarCamposNewPost").hide();
+                $('#loading').show();
 
                 $.post('@Url.Action("AllPost", "Post")')
                     .done(function (result) {
 
+                        $('#loading').hide();
                         $("#mostrarAllPostTabla").empty();
-
+                        $("#ocultarTablaAllPost").show();
+                        
                         for (var item in result) {
-                            //formateo la fecha
+
                             var numeros = result[item].Post.Fecha.replace(/\D/g, '');
                             var fecha = new Date(parseInt(numeros));
 
-                            $("#mostrarAllPostTabla").append("<tr><td>" + result[item].Post.Titulo + "</td><td>"
-                                                            + result[item].Post.Usuario.Apodo + "</td><td>"
-                                                            + result[item].Contador + "</td><td>"
-                                                            + fecha.getDate() + "/" + fecha.getMonth() + "/" + fecha.getFullYear() + "</td><td>"
-                                                            + "<a href='/LatinCMS/editPost.html'><i class='fa fa-pencil'></i></a>"
-                                                            + "<a href='#'><i class='fa fa-times'></i></a>"
-                                                            + "<a href='/LatinCMS/post.html'><i class='fa fa-file-o'></i></a></td>"
+                            $("#mostrarAllPostTabla").append("<tr><td style='text-align:justify'>" + result[item].Post.Titulo + "</td><td style='text-align:center'>"
+                                                            + result[item].Post.Usuario.Apodo + "</td><td style='text-align:center'>"
+                                                            + result[item].Contador + "</td><td style='text-align:center'>"
+                                                            + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
+                                                            + "<a href='/LatinCMS/editPost.html'><i class='fa fa-pencil'></i>  </a>"
+                                                            + "<a href='#'><i class='fa fa-times'></i>  </a>"
+                                                            + "<a href='/LatinCMS/post.html'><i class='fa fa-file-o'></i>  </a></td>"
                                                             );
                         }
 
@@ -135,6 +174,22 @@
                         $("errorJson").alert(result.errMsg);
                     });
             })
+
+
+            $("#NewPostMenu").on("click", function (e) {
+                e.preventDefault();
+                $("#ocultarTablaAllPost").hide();
+                $("#mostrarCamposNewPost").show();
+            })
+
+            $("#NewPostBoton").on("click", function (e) {
+                e.preventDefault();
+                $("#ocultarTablaAllPost").hide();
+                $("#mostrarCamposNewPost").show();
+            })
+
+            
+
 
         } );
     </script>
