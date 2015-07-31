@@ -61,8 +61,8 @@ namespace LatinCMS.Controllers
 
         public ActionResult Admin(int id_usuario)
         {
-            if (TempData["Save_NewPost_OK"] != null)
-                ViewBag.SaveOK = TempData["Save_NewPost_OK"];
+            if (TempData["SaveOK"] != null)
+                ViewBag.SaveOK = TempData["SaveOK"];
 
             if (TempData["Error"] != null)
                 ViewBag.Error = TempData["Error"];

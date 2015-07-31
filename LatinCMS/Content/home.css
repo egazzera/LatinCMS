@@ -118,6 +118,36 @@ li.tituloPostColor{
 }
 
 
+#mostrarCamposEditPost{
+    float: right; 
+    width: 80%;
+    display: none;
+}
+
+
+#ocultarTablaAllPage {
+    float: right; 
+    width: 80%;
+    display: none;
+}
+
+#mostrarCamposNewPage{
+    float: right; 
+    width: 80%;
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* Custom Stuff */
 
 #cssmenu {

@@ -51,10 +51,11 @@ namespace LatinCMS.Controllers
         public JsonResult AllPost()
         {
             PostDAO util = new PostDAO();
+            TipoPostDAO util_tipo_post = new TipoPostDAO();
 
             try
             {
-                IList<PostComen> TablaPostComen = util.GetAllPostTabla();
+                IList<PostComen> TablaPostComen = util.GetAllPostTabla(util_tipo_post.GetTipoPostByDescripcion("Post"));
                 return Json(TablaPostComen, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
@@ -95,10 +96,122 @@ namespace LatinCMS.Controllers
                     return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario }); 
                 }
             }
-
             
         }
 
+
+        public JsonResult AllPages()
+        {
+            PostDAO util = new PostDAO();
+            TipoPostDAO util_tipo_post = new TipoPostDAO();
+
+            try
+            {
+                IList<PostComen> TablaPostComen = util.GetAllPostTabla(util_tipo_post.GetTipoPostByDescripcion("Pagina"));
+                return Json(TablaPostComen, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json(new { errMsg = "Se produjo una excepción. El mensaje fue: " + e.Message });
+            }
+
+        }
+
+
+        public ActionResult NewPage(int id_usuario)
+        {
+            Post page = new Post();
+            GenericDAO<Usuario> util_usuario = new GenericDAO<Usuario>();
+            TipoPostDAO util_tipo_post = new TipoPostDAO();
+
+            page.Usuario = util_usuario.GetById(id_usuario);
+            page.TipoPost = util_tipo_post.GetTipoPostByDescripcion("Pagina");
+            page.Fecha = DateTime.Now;
+            page.Titulo = Request["titulo"];
+            page.Descripcion = Request["descripcion"];
+            page.Eliminado = false;
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                try
+                {
+                    session.SaveOrUpdate(page);
+                    transaction.Commit();
+                    session.Close();
+                    TempData["SaveOK"] = "Se guardo correctamente la nueva pagina.";
+                    return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario });
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    TempData["Error"] = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario });
+                }
+            }
+
+        }
+
+
+
+        public JsonResult EditPost(int id_post)
+        {
+            try
+            {
+                GenericDAO<Post> util = new GenericDAO<Post>();
+
+                Post registro_post = util.GetById(id_post);
+
+                return Json(registro_post, JsonRequestBehavior.AllowGet);
+            }
+            catch(Exception e){
+                return Json(new { errMsg = "Se produjo una excepción. El mensaje fue: " + e.Message });
+            }
+        }
+
+
+        public ActionResult SaveEditPost()
+        {
+            Post postEdit = new Post();
+            GenericDAO<Post> util = new GenericDAO<Post>();
+
+            postEdit.Id = Convert.ToInt32(Request["id_post"]);
+            
+            Post reg_original = util.GetById(postEdit.Id);
+
+            postEdit.Usuario = reg_original.Usuario;
+            postEdit.TipoPost = reg_original.TipoPost;
+            postEdit.Fecha = reg_original.Fecha;
+            postEdit.Titulo = Request["titulo"];
+            postEdit.Descripcion = Request["descripcion"];
+            postEdit.Eliminado = reg_original.Eliminado;
+
+            int usuario_id = Convert.ToInt32(Request["id_usuario"]);
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            using (ITransaction transaction = session.BeginTransaction())
+            {
+                try
+                {
+                    session.SaveOrUpdate(postEdit);
+                    transaction.Commit();
+                    session.Close();
+                    TempData["SaveOK"] = "Se guardo correctamente la modificación al post.";
+                }
+                catch (Exception e)
+                {
+                    transaction.Rollback();
+                    TempData["Error"] = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    return RedirectToAction("Admin", "Home", new { id_usuario = usuario_id }); 
+                }
+            }
+
+            TempData["Apodo"] = Request["apodo"];
+            TempData["Tipo_Usuario"] = "Suscriptor";
+
+            return RedirectToAction("Admin", "Home", new { id_usuario = usuario_id }); 
+
+        }
 
 
     }

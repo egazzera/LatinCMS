@@ -63,12 +63,13 @@ namespace LatinCMS.DAOs
 
         }
 
-        public IList<PostComen> GetAllPostTabla() {
+        public IList<PostComen> GetAllPostTabla(TipoPost tipo_post) {
 
             using (ISession session = NHibernateHelper.OpenSession()) 
             {
                 var posts = session.CreateCriteria<Post>()
                     .Add(Restrictions.Eq("Eliminado", false))
+                    .Add(Restrictions.Eq("TipoPost", tipo_post))
                     .AddOrder(Order.Desc("Fecha"))
                     .List<Post>();
 
