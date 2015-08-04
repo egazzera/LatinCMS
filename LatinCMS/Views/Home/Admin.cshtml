@@ -272,32 +272,13 @@
                                                         + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
                                                         + "<a href='#' title='Editar' class='EditPostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
                                                         + "<a href='#' title='Eliminar' class='DeletePostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
-                                                        + "<a href='#' title='Ver' class='VerPostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td>"
+                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td>"
                                                         );
                     }
 
                 }).fail(function (result) {
                     $("errorJson").alert(result.errMsg);
                 });
-        })
-
-
-        $("#NewPostMenu").on("click", function (e) {
-            e.preventDefault();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposNewPost").show();
-        })
-
-        $("#NewPostBoton").on("click", function (e) {
-            e.preventDefault();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposNewPost").show();
         })
 
 
@@ -319,7 +300,6 @@
                     $("#descripcionEdit").val(result.Descripcion);
                     $("#idPostEdit").val(result.Id);
                     $("#idUsuarioPostEdit").val(result.Usuario.Id);
-                    
 
                 }).fail(function (result) {
                     alert("No se pudo editar el post Id: " + $(this).attr("data-id"));
@@ -354,12 +334,27 @@
 
         });
 
+        $("#NewPostMenu").on("click", function (e) {
+            e.preventDefault();
+            $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllPost").hide();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposNewPost").show();
+        })
+
+        $("#NewPostBoton").on("click", function (e) {
+            e.preventDefault();
+            $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllPost").hide();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposNewPost").show();
+        })
 
 
 
-
-
-
+        
 
         $("#AllPages").on("click", function (e) {
             e.preventDefault();
@@ -393,6 +388,8 @@
                     $("errorJson").alert(result.errMsg);
                 });
         })
+
+
 
         $("#NewPageMenu").on("click", function (e) {
             e.preventDefault();

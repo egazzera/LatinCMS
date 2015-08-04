@@ -74,11 +74,16 @@ namespace LatinCMS.DAOs
                     .List<Post>();
 
                 List<PostComen> ListaPostComen = new List<PostComen>();
+                
+                var estado_comen =  session.CreateCriteria<EstadoComen>()
+                    .Add(Restrictions.Eq("Descripcion", "Aprobado"))
+                    .UniqueResult();
 
                 foreach (var post in posts)
                 {
                     int cant = (int) session.CreateCriteria<Comentario>()
                         .Add(Restrictions.Eq("Post", post))
+                        .Add(Restrictions.Eq("Estadocomen", estado_comen))
                         .SetProjection(Projections.RowCount())
                         .UniqueResult(); 
                     

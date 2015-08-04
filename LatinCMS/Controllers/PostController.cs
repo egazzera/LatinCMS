@@ -56,6 +56,11 @@ namespace LatinCMS.Controllers
             try
             {
                 IList<PostComen> TablaPostComen = util.GetAllPostTabla(util_tipo_post.GetTipoPostByDescripcion("Post"));
+                
+                foreach(var item in TablaPostComen){
+                    item.URLVer = Url.Action("IrAPost", "Post", new { id = item.Post.Id }); 
+                }
+                
                 return Json(TablaPostComen, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)

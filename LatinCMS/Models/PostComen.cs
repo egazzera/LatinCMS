@@ -10,6 +10,7 @@ namespace LatinCMS.Models
     {
         public virtual Post Post { get; set; }
         public virtual int Contador { get; set; }
+        public virtual string URLVer { get; set; }
 
     }
 }
