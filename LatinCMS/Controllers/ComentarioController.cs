@@ -47,7 +47,7 @@ namespace LatinCMS.Controllers
                 catch (Exception e)
                 {
                     transaction.Rollback();
-                    TempData["Error"] = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    TempData["Error"] = "Se produjo una excepción en /Comentario/NuevoComentatio. El mensaje fue: " + e.Message;
                     return RedirectToAction("Index", "Post"); //Post con info del error
                 }
             }

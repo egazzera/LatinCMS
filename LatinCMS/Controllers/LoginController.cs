@@ -55,7 +55,7 @@ namespace LatinCMS.Controllers
             }
             catch(Exception e)
             {
-                ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                ViewBag.Error = "Se produjo una excepción en /Login/Index. El mensaje fue: " + e.Message;
                 session.Close();
                 return View("Index");
             }

@@ -39,7 +39,7 @@ namespace LatinCMS.Controllers
                 return View("Edit", registro_usuario);
             }
             catch(Exception e){
-                ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                ViewBag.Error = "Se produjo una excepción en /Usuario/Edit. El mensaje fue: " + e.Message;
                 return View("Edit");
             }
         }
@@ -70,7 +70,7 @@ namespace LatinCMS.Controllers
                 catch (Exception e)
                 {
                     transaction.Rollback();
-                    TempData["Error"] = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    TempData["Error"] = "Se produjo una excepción en /Usuario/GuardarUsuario. El mensaje fue: " + e.Message;
                     return RedirectToAction("Edit", "Usuario"); //Edicion
                 }
             }

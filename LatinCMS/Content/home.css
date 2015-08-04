@@ -137,6 +137,11 @@ li.tituloPostColor{
     display: none;
 }
 
+#mostrarCamposEditPage{
+    float: right; 
+    width: 80%;
+    display: none;
+}
 
 
 

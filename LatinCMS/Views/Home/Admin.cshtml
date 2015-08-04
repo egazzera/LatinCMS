@@ -234,6 +234,55 @@
             </fieldset>
         </div>
 
+        @*Edit Page*@
+        <div class="container" id="mostrarCamposEditPage">
+            <fieldset class="login">
+                <form action='@Url.Action("SaveEditPage", "Post")' method="POST" id="formulario" class="form-signin">
+                    <h2 class="form-signin-heading">Editar Pagina</h2>
+                    <div class="control-group">
+                        <label class="control-label">Título:</label>
+                        <div class="controls">
+                            <input type="text" name="titulo" id="tituloEditPage" class="form-control" maxlength="100" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Descripción:</label>
+                        <div class="controls">
+                            <textarea type="text" name="descripcion" id="descripcionEditPage" class="form-control" rows="10" maxlength="700" required autofocus></textarea>
+                        </div>
+                        <br />
+                    </div>
+                    <input type="hidden" name="id_page" id="idPageEdit">
+                    <input type="hidden" name="id_usuario" id="idUsuarioPageEdit">
+                    <div class="control-group">
+                        <input type="submit" value="Actualizar" class="btn btn-lg btn-primary">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
+        @*Delete Page*@
+        <div class="modal fade" id="popupDeletePage">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action='@Url.Action("DeletePage", "Post")' method="POST" id="formulario" class="form-signin">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Confirma que quiere eliminar la Pagina? </h4>
+                        </div>
+                        <div class="modal-body">
+                            <p id="tituloDeletePage"></p>
+                            <input type="hidden" name="id_post" id="idPageDelete">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                            <input type="submit" value="Borrar" class="btn btn-danger">
+                        </div>
+                    </form>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
 
 
 
@@ -248,6 +297,7 @@
     <script type="text/javascript">
     $(document).ready(function () {
 
+        //POST
         $("#AllPost").on("click", function (e) {
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
@@ -294,6 +344,7 @@
                     $("#ocultarTablaAllPost").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposEditPage").hide();
                     $("#mostrarCamposEditPost").show();
 
                     $("#tituloEdit").val(result.Titulo);
@@ -321,6 +372,7 @@
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").hide();
                     $("#mostrarPopUpDelete").show();
 
                     $('#popupDelete').modal('show');
@@ -340,6 +392,7 @@
             $("#ocultarTablaAllPost").hide();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposNewPost").show();
         })
 
@@ -349,24 +402,26 @@
             $("#ocultarTablaAllPost").hide();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposNewPost").show();
         })
 
 
 
-        
-
+        //Page
         $("#AllPages").on("click", function (e) {
             e.preventDefault();
-            $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
             $('#loading').show();
 
-            $.post('@Url.Action("AllPages", "Post")')
+            $.post('@Url.Action("AllPage", "Post")')
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mostrarAllPostTabla").empty();
                     $("#mostrarAllPageTabla").empty();
+                    $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllPage").show();
 
                     for (var item in result) {
@@ -378,9 +433,9 @@
                                                         + result[item].Post.Usuario.Apodo + "</td><td style='text-align:center'>"
                                                         + result[item].Contador + "</td><td style='text-align:center'>"
                                                         + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
-                                                        + "<a href='/LatinCMS/editPost.html' title='Editar'><i class='fa fa-pencil'></i>  </a>"
-                                                        + "<a href='#'><i class='fa fa-times' title='Eliminar'></i>  </a>"
-                                                        + "<a href='/LatinCMS/post.html' title='Ver'><i class='fa fa-file-o'></i>  </a></td>"
+                                                        + "<a href='#' title='Editar' class='EditPageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
+                                                        + "<a href='#' title='Eliminar' class='DeletePageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
+                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td>"
                                                         );
                     }
 
@@ -390,23 +445,82 @@
         })
 
 
+        $("#mostrarAllPageTabla").on("click", ".EditPageBoton", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            $.post('@Url.Action("EditPage", "Post")', { id_post: $(this).attr("data-id") })
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").show();
+
+                    $("#tituloEditPage").val(result.Titulo);
+                    $("#descripcionEditPage").val(result.Descripcion);
+                    $("#idPageEdit").val(result.Id);
+                    $("#idUsuarioPageEdit").val(result.Usuario.Id);
+
+                }).fail(function (result) {
+                    alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
+                });
+
+        });
+
+
+        $("#mostrarAllPageTabla").on("click", ".DeletePageBoton", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            $.post('@Url.Action("DeletePopUpPage", "Post")', { id_post: $(this).attr("data-id") })
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarPopUpDelete").hide();
+                    $("#mostrarPopUpDeletePage").show();
+
+                    $('#popupDeletePage').modal('show');
+
+                    $("#tituloDeletePage").text(result.Titulo);
+                    $("#idPageDelete").val(result.Id);
+
+                }).fail(function (result) {
+                    alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
+                });
+
+        });
 
         $("#NewPageMenu").on("click", function (e) {
             e.preventDefault();
-            $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllPost").hide();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewPage").show();
         })
 
         $("#NewPageBoton").on("click", function (e) {
             e.preventDefault();
-            $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllPost").hide();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewPage").show();
         })
-
 
 
 

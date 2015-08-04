@@ -17,9 +17,10 @@ namespace LatinCMS.DAOs
             using (ISession session = NHibernateHelper.OpenSession())
             {
                 var posts = session.CreateCriteria<Post>("p")
+                    .Add(Restrictions.Eq("p.Eliminado", false))
+                    .AddOrder(Order.Desc("p.Fecha"))
                     .CreateCriteria("p.TipoPost", JoinType.InnerJoin)
                     .Add(Restrictions.Eq("Descripcion", "Post"))
-                    .AddOrder(Order.Desc("p.Fecha"))
                     .List<Post>();
 
                 session.Close();

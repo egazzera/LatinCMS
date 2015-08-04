@@ -45,7 +45,8 @@ namespace LatinCMS.Controllers
                     return View(posts);
                 }
                 catch (Exception e) {
-                    ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    ViewBag.Error = "Se produjo una excepción en /Home/Index. El mensaje fue: " + e.Message;
+                    return View();
                 }
 
             }
@@ -55,8 +56,6 @@ namespace LatinCMS.Controllers
                 return RedirectToAction("Index", "Signup"); 
             }
 
-
-            return View();
         }
 
         public ActionResult Admin(int id_usuario)
@@ -83,7 +82,8 @@ namespace LatinCMS.Controllers
                 }
                 catch (Exception e)
                 {
-                    ViewBag.Error = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    ViewBag.Error = "Se produjo una excepción en /Home/Admin. El mensaje fue: " + e.Message;
+                    return View();
                 }
 
             }
@@ -93,8 +93,6 @@ namespace LatinCMS.Controllers
                 return RedirectToAction("Index", "Signup");
             }
 
-
-            return View();
         }
 
 
@@ -126,7 +124,7 @@ namespace LatinCMS.Controllers
             }
             catch (Exception e)
             {
-                return Json(new { errMsg = "Se produjo una excepción. El mensaje fue: " + e.Message });
+                return Json(new { errMsg = "Se produjo una excepción en /Home/GetTitulosByMesArbol. El mensaje fue: " + e.Message });
             }
 
         }

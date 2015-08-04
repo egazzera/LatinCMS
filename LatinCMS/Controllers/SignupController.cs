@@ -49,7 +49,7 @@ namespace LatinCMS.Controllers
                 catch (Exception e)
                 {
                     transaction.Rollback();
-                    TempData["Error"] = "Se produjo una excepción. El mensaje fue: " + e.Message;
+                    TempData["Error"] = "Se produjo una excepción en /Signup/NuevoUsuario. El mensaje fue: " + e.Message;
                     return RedirectToAction("Index", "Signup"); //Registracion
                 }
             }
