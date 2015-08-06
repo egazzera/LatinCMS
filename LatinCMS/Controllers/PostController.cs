@@ -125,7 +125,7 @@ namespace LatinCMS.Controllers
         }
 
 
-        public ActionResult SaveEditPost()
+        public ActionResult SaveEditPost(int id_usuario)
         {
             Post postEdit = new Post();
             GenericDAO<Post> util = new GenericDAO<Post>();
@@ -141,7 +141,7 @@ namespace LatinCMS.Controllers
             postEdit.Descripcion = Request["descripcion"];
             postEdit.Eliminado = reg_original.Eliminado;
 
-            int usuario_id = Convert.ToInt32(Request["id_usuario"]);
+            int usuario_id = id_usuario;
 
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
@@ -188,8 +188,8 @@ namespace LatinCMS.Controllers
         }
 
 
-        public ActionResult DeletePost() {
-
+        public ActionResult DeletePost(int id_usuario)
+        {
             Post postDelete = new Post();
             GenericDAO<Post> util = new GenericDAO<Post>();
 
@@ -220,14 +220,14 @@ namespace LatinCMS.Controllers
                     transaction.Rollback();
                     TempData["SaveOK"] = null;
                     TempData["Error"] = "Se produjo una excepción en /Post/DeletePost. El mensaje fue: " + e.Message;
-                    return RedirectToAction("Admin", "Home", new { id_usuario = postDelete.Id });
+                    return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario });
                 }
             }
 
             TempData["Apodo"] = reg_original.Usuario.Nombre;
             TempData["Tipo_Usuario"] = reg_original.Usuario.Rol.Descripcion;
 
-            return RedirectToAction("Admin", "Home", new { id_usuario = postDelete.Id }); 
+            return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario }); 
         
         }
 
@@ -338,7 +338,7 @@ namespace LatinCMS.Controllers
         }
 
 
-        public ActionResult SaveEditPage()
+        public ActionResult SaveEditPage(int id_usuario)
         {
             Post postEdit = new Post();
             GenericDAO<Post> util = new GenericDAO<Post>();
@@ -354,7 +354,7 @@ namespace LatinCMS.Controllers
             postEdit.Descripcion = Request["descripcion"];
             postEdit.Eliminado = reg_original.Eliminado;
 
-            int usuario_id = Convert.ToInt32(Request["id_usuario"]);
+            int usuario_id = id_usuario;
 
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
@@ -401,7 +401,7 @@ namespace LatinCMS.Controllers
         }
 
 
-        public ActionResult DeletePage()
+        public ActionResult DeletePage(int id_usuario)
         {
             Post postDelete = new Post();
             GenericDAO<Post> util = new GenericDAO<Post>();
@@ -431,14 +431,14 @@ namespace LatinCMS.Controllers
                 {
                     transaction.Rollback();
                     TempData["Error"] = "Se produjo una excepción en /Post/DeletePage. El mensaje fue: " + e.Message;
-                    return RedirectToAction("Admin", "Home", new { id_usuario = postDelete.Id });
+                    return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario });
                 }
             }
 
             TempData["Apodo"] = reg_original.Usuario.Nombre;
             TempData["Tipo_Usuario"] = reg_original.Usuario.Rol.Descripcion;
 
-            return RedirectToAction("Admin", "Home", new { id_usuario = postDelete.Id });
+            return RedirectToAction("Admin", "Home", new { id_usuario = id_usuario });
 
         }
 

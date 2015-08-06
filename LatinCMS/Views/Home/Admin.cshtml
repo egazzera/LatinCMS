@@ -140,7 +140,7 @@
         @*Edit Post*@
         <div class="container" id="mostrarCamposEditPost">
             <fieldset class="login">
-                <form action='@Url.Action("SaveEditPost", "Post")' method="POST" id="formulario" class="form-signin">
+                <form action='@Url.Action("SaveEditPost", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Editar Post</h2>
                     <div class="control-group">
                         <label class="control-label">Título:</label>
@@ -157,7 +157,6 @@
                         <br />
                     </div>
                     <input type="hidden" name="id_post" id="idPostEdit">
-                    <input type="hidden" name="id_usuario" id="idUsuarioPostEdit">
                     <div class="control-group">
                         <input type="submit" value="Actualizar" class="btn btn-lg btn-primary">
                     </div>
@@ -169,7 +168,7 @@
         <div class="modal fade" id="popupDelete">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action='@Url.Action("DeletePost", "Post")' method="POST" id="formulario" class="form-signin">
+                    <form action='@Url.Action("DeletePost", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Confirma que quiere eliminar el Post? </h4>
@@ -237,7 +236,7 @@
         @*Edit Page*@
         <div class="container" id="mostrarCamposEditPage">
             <fieldset class="login">
-                <form action='@Url.Action("SaveEditPage", "Post")' method="POST" id="formulario" class="form-signin">
+                <form action='@Url.Action("SaveEditPage", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Editar Pagina</h2>
                     <div class="control-group">
                         <label class="control-label">Título:</label>
@@ -254,7 +253,6 @@
                         <br />
                     </div>
                     <input type="hidden" name="id_page" id="idPageEdit">
-                    <input type="hidden" name="id_usuario" id="idUsuarioPageEdit">
                     <div class="control-group">
                         <input type="submit" value="Actualizar" class="btn btn-lg btn-primary">
                     </div>
@@ -266,7 +264,7 @@
         <div class="modal fade" id="popupDeletePage">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <form action='@Url.Action("DeletePage", "Post")' method="POST" id="formulario" class="form-signin">
+                    <form action='@Url.Action("DeletePage", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Confirma que quiere eliminar la Pagina? </h4>
@@ -350,7 +348,6 @@
                     $("#tituloEdit").val(result.Titulo);
                     $("#descripcionEdit").val(result.Descripcion);
                     $("#idPostEdit").val(result.Id);
-                    $("#idUsuarioPostEdit").val(result.Usuario.Id);
 
                 }).fail(function (result) {
                     alert("No se pudo editar el post Id: " + $(this).attr("data-id"));
@@ -463,7 +460,6 @@
                     $("#tituloEditPage").val(result.Titulo);
                     $("#descripcionEditPage").val(result.Descripcion);
                     $("#idPageEdit").val(result.Id);
-                    $("#idUsuarioPageEdit").val(result.Usuario.Id);
 
                 }).fail(function (result) {
                     alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
