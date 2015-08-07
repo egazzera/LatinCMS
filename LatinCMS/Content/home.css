@@ -143,7 +143,11 @@ li.tituloPostColor{
     display: none;
 }
 
-
+#ocultarTablaAllComentarios {
+    float: right; 
+    width: 80%;
+    display: none;
+}
 
 
 

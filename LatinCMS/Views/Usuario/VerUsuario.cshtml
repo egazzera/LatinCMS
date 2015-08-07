@@ -1,0 +1,51 @@
+﻿@{
+    @model LatinCMS.Models.Usuario
+}
+
+<html>
+<head lang="es-ar">
+    <meta charset="UTF-8">
+    <title>Latin CMS - Ver Usuario</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+</head>
+<body>
+    <div class="container" style="width: 400px;margin-top: 50px">
+        <fieldset class="login">
+            <legend>Usuario</legend>
+                <p style="color: red">@ViewBag.Error</p>
+                <h2 class="form-signin-heading">Ver Usuario</h2>
+
+                <div class="control-group">
+                    <label class="control-label">Usuario:</label>
+                    <div class="controls">
+                        <p class="form-control">@Model.Apodo</p>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Nombre:</label>
+                    <div class="controls">
+                        <p class="form-control">@Model.Nombre</p>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Apellido:</label>
+                    <div class="controls">
+                        <p class="form-control">@Model.Apellido</p>
+                    </div>
+                    <br />
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Email:</label>
+                    <div class="controls">
+                        <p class="form-control">@Model.Email</p>
+                    </div>
+                    <br />
+                </div>
+        </fieldset>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js" type="javascript"></script>
+</body>
+</html>
+

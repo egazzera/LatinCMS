@@ -68,6 +68,9 @@
                     </ul>
                 </li>
                 <li>
+                    <a href='#' id="AllComentarios"><span>Comentarios</span></a>
+                </li>
+                <li>
                     <a href='#'><span>Usuarios</span></a>
                     <ul>
                         <li><a href='/LatinCMS/listUsers.html'><span>Todos los Usuarios</span></a></li>
@@ -108,7 +111,8 @@
             
         </div>
         
-        <div class="container" id="loading" style="display: none;"></div>
+        <div class="container" id="loading" style="display: none"></div>
+        <p id="mensajeJsonOk" style="display:none; color:green"></p>
         
         @*New Post*@
         <div class="container" id="mostrarCamposNewPost">
@@ -284,6 +288,27 @@
 
 
 
+        @*Todos los comentarios tabla*@
+        <div class="container" id="ocultarTablaAllComentarios">
+            <h2 class="form-signin-heading">Comentarios</h2>
+            <a id="TodosComenBoton" href='#'>Todos |</a>
+            <a id="PendientesComenBoton" href='#'> Pendientes |</a>
+            <a id="AprobadosComenBoton" href='#'> Aprobados</a>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Comentario</th>
+                        <th>En respuesta a</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="mostrarAllComentariosTabla"></tbody>
+            </table>
+
+        </div>
 
 
 
@@ -320,7 +345,7 @@
                                                         + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
                                                         + "<a href='#' title='Editar' class='EditPostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
                                                         + "<a href='#' title='Eliminar' class='DeletePostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
-                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td>"
+                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td></tr>"
                                                         );
                     }
 
@@ -432,7 +457,7 @@
                                                         + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
                                                         + "<a href='#' title='Editar' class='EditPageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
                                                         + "<a href='#' title='Eliminar' class='DeletePageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
-                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td>"
+                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td></tr>"
                                                         );
                     }
 
@@ -516,6 +541,205 @@
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewPage").show();
+        })
+
+
+
+        //COMENTARIOS
+        $("#AllComentarios").on("click", function (e) {
+            e.preventDefault();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
+            $('#loading').show();
+
+            $.post('@Url.Action("AllComentarios", "Comentario")')
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mostrarAllPostTabla").empty();
+                    $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllComentariosTabla").empty();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllComentarios").show();
+
+                    for (var item in result) {
+
+                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                        + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
+                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                        );
+                    }
+
+                }).fail(function (result) {
+                    $("errorJson").alert(result.errMsg);
+                });
+        })
+
+
+        $("#mostrarAllComentariosTabla").on("click", ".AprobarComenBoton", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            if (confirm("Realmente quiere aprobar el comentario?") == true) {
+
+                $.post('@Url.Action("AprobarComen", "Comentario")', { id_comen: $(this).attr("data-id") })
+                    .done(function (result) {
+
+                        $('#loading').hide();
+                        $("#ocultarTablaAllPage").hide();
+                        $("#ocultarTablaAllPost").hide();
+                        $("#mostrarCamposNewPage").hide();
+                        $("#mostrarCamposNewPost").hide();
+                        $("#mostrarCamposEditPage").hide();
+                        $("#mostrarCamposEditPost").hide();
+                        $("#ocultarTablaAllComentarios").hide();
+                        $("#mensajeJsonOk").text(result);
+
+                    }).fail(function (result) {
+                        alert("No se pudo aprobar el comentario Id: " + $(this).attr("data-id"));
+                    });
+
+            }
+
+            $('#loading').hide();
+
+
+        });
+
+
+        $("#mostrarAllComentariosTabla").on("click", ".DeleteComenBoton", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            if (confirm("Realmente quiere eliminar el comentario?") == true) {
+
+                $.post('@Url.Action("EliminarComen", "Comentario")', { id_comen: $(this).attr("data-id") })
+                    .done(function (result) {
+
+                        $('#loading').hide();
+                        $("#ocultarTablaAllPage").hide();
+                        $("#ocultarTablaAllPost").hide();
+                        $("#mostrarCamposNewPage").hide();
+                        $("#mostrarCamposNewPost").hide();
+                        $("#mostrarCamposEditPage").hide();
+                        $("#mostrarCamposEditPost").hide();
+                        $("#ocultarTablaAllComentarios").hide();
+                        $("#mensajeJsonOk").text(result);
+
+                    }).fail(function (result) {
+                        alert("No se pudo eliminar el comentario Id: " + $(this).attr("data-id"));
+                    });
+
+            }
+
+            $('#loading').hide();
+
+
+        });
+
+        
+        $("#TodosComenBoton").on("click", function (e) {
+            e.preventDefault();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
+            $('#loading').show();
+
+            $.post('@Url.Action("AllComentarios", "Comentario")')
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mostrarAllPostTabla").empty();
+                    $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllComentariosTabla").empty();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllComentarios").show();
+
+                    for (var item in result) {
+
+                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                        + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
+                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                        );
+                    }
+
+                }).fail(function (result) {
+                    $("errorJson").alert(result.errMsg);
+                });
+        })
+
+
+        $("#PendientesComenBoton").on("click", function (e) {
+            e.preventDefault();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
+            $('#loading').show();
+
+            $.post('@Url.Action("AllComentariosPendientes", "Comentario")')
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mostrarAllPostTabla").empty();
+                    $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllComentariosTabla").empty();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllComentarios").show();
+
+                    for (var item in result) {
+
+                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                        + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
+                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                        );
+                    }
+
+                }).fail(function (result) {
+                    $("errorJson").alert(result.errMsg);
+                });
+        })
+
+
+        $("#AprobadosComenBoton").on("click", function (e) {
+            e.preventDefault();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
+            $('#loading').show();
+
+            $.post('@Url.Action("AllComentariosAprobados", "Comentario")')
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mostrarAllPostTabla").empty();
+                    $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllComentariosTabla").empty();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllComentarios").show();
+
+                    for (var item in result) {
+
+                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                        );
+                    }
+
+                }).fail(function (result) {
+                    $("errorJson").alert(result.errMsg);
+                });
         })
 
 

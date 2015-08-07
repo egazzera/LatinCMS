@@ -83,6 +83,25 @@ namespace LatinCMS.Controllers
         }
 
 
+        public ActionResult VerUsuario(int id_usuario)
+        {
+            try
+            {
+                GenericDAO<Usuario> util = new GenericDAO<Usuario>();
+
+                Usuario registro_usuario = util.GetById(id_usuario);
+
+                return View("VerUsuario", registro_usuario);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Error = "Se produjo una excepción en /Usuario/VerUsuario. El mensaje fue: " + e.Message;
+                return View("VerUsuario");
+            }
+        }
+
+
+
 
     }
 }

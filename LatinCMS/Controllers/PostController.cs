@@ -72,6 +72,7 @@ namespace LatinCMS.Controllers
 
         }
 
+
         public ActionResult NewPost(int id_usuario)
         {
             Post post = new Post();
