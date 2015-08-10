@@ -133,6 +133,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\BasePersistableEntity.cs" />
+    <Compile Include="Models\UsuarioPost.cs" />
     <Compile Include="Models\ComentarioURL.cs" />
     <Compile Include="Models\Comentario.cs" />
     <Compile Include="Models\Config.cs" />

@@ -25,6 +25,39 @@ namespace LatinCMS.DAOs
 
         }
 
+        public IList<UsuarioPost> GetAllUserTabla(TipoPost tipo_post)
+        {
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                var usuarios = session.CreateCriteria<Usuario>()
+                    .List<Usuario>();
+
+                List<UsuarioPost> ListaUserPost = new List<UsuarioPost>();
+
+                foreach (var user in usuarios)
+                {
+                    int cant = (int)session.CreateCriteria<Post>()
+                        .Add(Restrictions.Eq("Eliminado", false))
+                        .Add(Restrictions.Eq("TipoPost", tipo_post))
+                        .Add(Restrictions.Eq("Usuario", user))
+                        .SetProjection(Projections.RowCount())
+                        .UniqueResult();
+
+                    UsuarioPost postComen = new UsuarioPost();
+                    postComen.Usuario = user;
+                    postComen.Contador = cant;
+
+                    ListaUserPost.Add(postComen);
+                }
+
+                session.Close();
+                return ListaUserPost;
+            }
+            
+        } 
+
+
 
 
 

@@ -73,8 +73,8 @@
                 <li>
                     <a href='#'><span>Usuarios</span></a>
                     <ul>
-                        <li><a href='/LatinCMS/listUsers.html'><span>Todos los Usuarios</span></a></li>
-                        <li class='last'><a href='/LatinCMS/newUser.html'><span>Añadir Nuevo</span></a></li>
+                        <li id="AllUser"><a href='#'><span>Todos los Usuarios</span></a></li>
+                        <li class='last' id="NewUserMenu"><a href='#'><span>Añadir Nuevo</span></a></li>
                     </ul>
                 </li>
                 <li><a href='#'><span>Apariencia</span></a></li>
@@ -312,6 +312,155 @@
 
 
 
+        @*Todos los Usuarios tabla*@
+        <div class="container" id="ocultarTablaAllUser">
+            <a class="btn btn-primary" id="NewUserBoton" href='#'>Añadir Nuevo</a><br /><br />
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nombre Usuario</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Perfil</th>
+                        <th>Post</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="mostrarAllUserTabla"></tbody>
+            </table>
+
+        </div>
+
+        @*New Usuario*@
+        <div class="container" id="mostrarCamposNewUser">
+            <fieldset class="login">
+                <form action='@Url.Action("NewUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin" style="width: 50%">
+                    <h2 class="form-signin-heading">Añadir Nuevo Usuario</h2>
+                    <div class="control-group">
+                        <label class="control-label">Nombre Usuario:</label>
+                        <div class="controls">
+                            <input type="text" name="apodo" id="apodo" placeholder="Usuario" class="form-control" maxlength="50" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Nombre:</label>
+                        <div class="controls">
+                            <input type="text" name="nombre" id="nombre" placeholder="Nombre" class="form-control" maxlength="50" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Apellido:</label>
+                        <div class="controls">
+                            <input type="text" name="apellido" id="apellido" placeholder="Apellido" class="form-control" maxlength="50" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email:</label>
+                        <div class="controls">
+                            <input type="email" name="email" id="email" placeholder="Email" class="form-control" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Contraseña:</label>
+                        <div class="controls">
+                            <input type="password" id="password" placeholder="Contraseña" class="form-control" maxlength="10" required autofocus name="pwd1" onchange="form.pwd2.pattern = this.value;">
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Confirmar Contraseña:</label>
+                        <div class="controls">
+                            <input type="password" placeholder="Contraseña" class="form-control" maxlength="10" required autofocus name="pwd2">
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Perfil:</label>
+                        <div class="controls">
+                            <select name="rol" class="form-control">
+                                <option value="Suscriptor" selected>Suscriptor</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <input type="submit" value="Añadir Nuevo Usuario" class="btn btn-lg btn-primary">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
+
+        @*Edit Usuario*@
+        <div class="container" id="mostrarCamposEditUser">
+            <fieldset class="login">
+                <form action='@Url.Action("SaveEditUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin" style="width: 50%">
+                    <h2 class="form-signin-heading">Editar Usuario</h2>
+                    <div class="control-group">
+                        <label class="control-label">Nombre Usuario:</label>
+                        <div class="controls">
+                            <input type="text" name="apodo" id="apodoEdit" class="form-control" maxlength="50" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Nombre:</label>
+                        <div class="controls">
+                            <input type="text" name="nombre" id="nombreEdit" class="form-control" maxlength="50" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Apellido:</label>
+                        <div class="controls">
+                            <input type="text" name="apellido" id="apellidoEdit" class="form-control" maxlength="50" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Email:</label>
+                        <div class="controls">
+                            <input type="email" name="email" id="emailEdit" class="form-control" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Contraseña:</label>
+                        <div class="controls">
+                            <input type="password" id="passwordEdit" class="form-control" maxlength="10" required autofocus name="pwd1" onchange="form.pwd2.pattern = this.value;">
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Confirmar Contraseña:</label>
+                        <div class="controls">
+                            <input type="password" id="passwordEdit" class="form-control" maxlength="10" required autofocus name="pwd2">
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Perfil:</label>
+                        <div class="controls">
+                            <select name="rol" class="form-control">
+                                <option value="Suscriptor">Suscriptor</option>
+                                <option value="Administrador">Administrador</option>
+                            </select>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <input type="submit" value="Actualizar" class="btn btn-lg btn-primary">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
 
 
 </div>
@@ -325,6 +474,7 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mensajeJsonOk").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllPost", "Post")')
@@ -363,11 +513,13 @@
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditEdit").hide();
                     $("#mostrarCamposEditPost").show();
 
                     $("#tituloEdit").val(result.Titulo);
@@ -389,12 +541,14 @@
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditEdit").hide();
                     $("#mostrarPopUpDelete").show();
 
                     $('#popupDelete').modal('show');
@@ -410,21 +564,31 @@
 
         $("#NewPostMenu").on("click", function (e) {
             e.preventDefault();
+
+            $("#mensajeJsonOk").hide();
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
+            $("#ocultarTablaAllUser").hide();
             $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
+            $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").show();
         })
 
         $("#NewPostBoton").on("click", function (e) {
             e.preventDefault();
+
+            $("#mensajeJsonOk").hide();
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
+            $("#ocultarTablaAllUser").hide();
             $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
+            $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").show();
         })
 
@@ -435,15 +599,19 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllPage", "Post")')
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
                     $("#mostrarAllPostTabla").empty();
                     $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllUserTabla").empty();
                     $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#ocultarTablaAllPage").show();
 
                     for (var item in result) {
@@ -475,11 +643,15 @@
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditEdit").hide();
                     $("#mostrarCamposEditPage").show();
 
                     $("#tituloEditPage").val(result.Titulo);
@@ -501,12 +673,16 @@
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditUser").hide();
                     $("#mostrarPopUpDelete").hide();
                     $("#mostrarPopUpDeletePage").show();
 
@@ -523,23 +699,31 @@
 
         $("#NewPageMenu").on("click", function (e) {
             e.preventDefault();
+
+            $("#mensajeJsonOk").hide();
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
-            $("#mostrarCamposNewPage").hide();
+            $("#ocultarTablaAllUser").hide();
+            $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPage").show();
         })
 
         $("#NewPageBoton").on("click", function (e) {
             e.preventDefault();
+
+            $("#mensajeJsonOk").hide();
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
-            $("#mostrarCamposNewPage").hide();
+            $("#ocultarTablaAllUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
+            $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposNewPage").show();
         })
 
@@ -550,17 +734,22 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentarios", "Comentario")')
                 .done(function (result) {
 
                     $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
                     $("#mostrarAllPostTabla").empty();
                     $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllUserTabla").empty();
                     $("#mostrarAllComentariosTabla").empty();
+                    $("#mostrarCamposEditPost").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#ocultarTablaAllComentarios").show();
 
                     for (var item in result) {
@@ -590,13 +779,18 @@
                     .done(function (result) {
 
                         $('#loading').hide();
+                        $("#mensajeJsonOk").hide();
                         $("#ocultarTablaAllPage").hide();
                         $("#ocultarTablaAllPost").hide();
                         $("#mostrarCamposNewPage").hide();
                         $("#mostrarCamposNewPost").hide();
+                        $("#mostrarCamposNewUser").hide();
                         $("#mostrarCamposEditPage").hide();
                         $("#mostrarCamposEditPost").hide();
+                        $("#mostrarCamposEditUser").hide();
                         $("#ocultarTablaAllComentarios").hide();
+
+                        $("#mensajeJsonOk").show();
                         $("#mensajeJsonOk").text(result);
 
                     }).fail(function (result) {
@@ -621,13 +815,18 @@
                     .done(function (result) {
 
                         $('#loading').hide();
+                        $("#mensajeJsonOk").hide();
                         $("#ocultarTablaAllPage").hide();
                         $("#ocultarTablaAllPost").hide();
                         $("#mostrarCamposNewPage").hide();
                         $("#mostrarCamposNewPost").hide();
+                        $("#mostrarCamposNewUser").hide();
                         $("#mostrarCamposEditPage").hide();
                         $("#mostrarCamposEditPost").hide();
+                        $("#mostrarCamposEditEdit").hide();
                         $("#ocultarTablaAllComentarios").hide();
+
+                        $("#mensajeJsonOk").show();
                         $("#mensajeJsonOk").text(result);
 
                     }).fail(function (result) {
@@ -646,6 +845,7 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentarios", "Comentario")')
@@ -657,6 +857,7 @@
                     $("#mostrarAllComentariosTabla").empty();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#ocultarTablaAllComentarios").show();
 
                     for (var item in result) {
@@ -680,6 +881,7 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentariosPendientes", "Comentario")')
@@ -691,6 +893,7 @@
                     $("#mostrarAllComentariosTabla").empty();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#ocultarTablaAllComentarios").show();
 
                     for (var item in result) {
@@ -714,6 +917,7 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentariosAprobados", "Comentario")')
@@ -740,6 +944,144 @@
                 }).fail(function (result) {
                     $("errorJson").alert(result.errMsg);
                 });
+        })
+
+
+
+        //USUARIO
+        $("#AllUser").on("click", function (e) {
+            e.preventDefault();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposEditUser").hide();
+            $("#mensajeJsonOk").hide();
+            $('#loading').show();
+
+            $.post('@Url.Action("AllUser", "Usuario")')
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mostrarAllUserTabla").empty();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllUser").show();
+
+                    for (var item in result) {
+
+                        $("#mostrarAllUserTabla").append("<tr><td style='text-align:left'>" + result[item].Usuario.Apodo + "</td><td style='text-align:left'>"
+                                                        + result[item].Usuario.Nombre + " " + result[item].Usuario.Apellido + "</td><td style='text-align:left'>"
+                                                        + result[item].Usuario.Email + "</td><td style='text-align:left'>"
+                                                        + result[item].Usuario.Rol.Descripcion + "</td><td style='text-align:center'>"
+                                                        + result[item].Contador + "</td><td style='text-align:center'>"
+                                                        + "<a href='#' title='Editar' class='EditUsertBoton' " + "data-id='" + result[item].Usuario.Id + "'><i class='fa fa-pencil'></i>  </a>"
+                                                        + "<a href='#' title='Eliminar' class='DeleteUserBoton' " + "data-id='" + result[item].Usuario.Id + "'><i class='fa fa-times'></i>  </a></td></tr>"
+                                                        );
+                    }
+
+                }).fail(function (result) {
+                    $("errorJson").alert(result.errMsg);
+                });
+        })
+
+
+        $("#mostrarAllUserTabla").on("click", ".EditUsertBoton", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            $.post('@Url.Action("EditUser", "Usuario")', { id_user: $(this).attr("data-id") })
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditUser").show();
+
+                    $("#apodoEdit").val(result.Apodo);
+                    $("#nombreEdit").val(result.Nombre);
+                    $("#apellidoEdit").val(result.Apellido);
+                    $("#emailEdit").val(result.Email);
+                    $("#passwordEdit").val(result.Password);
+                    $("#rolEdit").select(result.Rol.Descripcion);
+
+                    $("#mensajeJsonOk").show();
+                    $("#mensajeJsonOk").text(result);
+
+                }).fail(function (result) {
+                    alert("No se pudo editar el usuario Id: " + $(this).attr("data-id"));
+                });
+
+        });
+
+
+        $("#mostrarAllUserTabla").on("click", ".DeleteUserBoton", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            if (confirm("Realmente quiere eliminar al usuario?") == true) {
+
+                $.post('@Url.Action("DeleteUser", "Usuario")', { id_user: $(this).attr("data-id") })
+                    .done(function (result) {
+
+                        $('#loading').hide();
+                        $("#mensajeJsonOk").hide();
+                        $("#ocultarTablaAllPage").hide();
+                        $("#ocultarTablaAllPost").hide();
+                        $("#mostrarCamposNewPage").hide();
+                        $("#mostrarCamposNewPost").hide();
+                        $("#mostrarCamposNewUser").hide();
+                        $("#mostrarCamposEditPage").hide();
+                        $("#mostrarCamposEditPost").hide();
+                        $("#mostrarCamposEditUser").hide();
+                        $("#ocultarTablaAllComentarios").hide();
+
+                        $("#mensajeJsonOk").show();
+                        $("#mensajeJsonOk").text(result);
+
+                    }).fail(function (result) {
+                        alert("No se pudo eliminar al usuairo Id: " + $(this).attr("data-id"));
+                    });
+
+            }
+
+            $('#loading').hide();
+
+        });
+
+        $("#NewUserMenu").on("click", function (e) {
+            e.preventDefault();
+
+            $("#mensajeJsonOk").hide();
+            $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllPost").hide();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposEditPage").hide();
+            $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposNewUser").show();
+
+        })
+
+        $("#NewEditBoton").on("click", function (e) {
+            e.preventDefault();
+
+            $("#mensajeJsonOk").hide();
+            $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllPost").hide();
+            $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposEditPost").hide();
+            $("#mostrarCamposEditPage").hide();
+            $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").show();
+
         })
 
 

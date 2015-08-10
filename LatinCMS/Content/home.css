@@ -149,6 +149,23 @@ li.tituloPostColor{
     display: none;
 }
 
+#ocultarTablaAllUser {
+    float: right; 
+    width: 80%;
+    display: none;
+}
+
+#mostrarCamposNewUser{
+    float: right; 
+    width: 80%;
+    display: none;
+}
+
+#mostrarCamposEditUser{
+    float: right; 
+    width: 80%;
+    display: none;
+}
 
 
 
