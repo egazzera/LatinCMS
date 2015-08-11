@@ -130,7 +130,7 @@ namespace LatinCMS.Controllers
             user.Apellido = Request["apellido"];
             user.Email = Request["email"];
             user.Apodo = Request["apodo"];
-            user.Password = Request["password"];
+            user.Password = Request["pwd1"];
 
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
@@ -201,12 +201,13 @@ namespace LatinCMS.Controllers
             Usuario userEdit = new Usuario();
             RolDAO util_rol = new RolDAO();
 
+            userEdit.Id = Convert.ToInt32(Request["id_user"]);
             userEdit.Rol = util_rol.GetRolByDescripcion(Request["rol"]); 
             userEdit.Nombre = Request["nombre"];
             userEdit.Apellido = Request["apellido"];
             userEdit.Email = Request["email"];
             userEdit.Apodo = Request["apodo"];
-            userEdit.Password = Request["password"];
+            userEdit.Password = Request["pwd1"];
 
             int usuario_id = id_usuario;
 

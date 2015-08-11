@@ -368,14 +368,14 @@
                     <div class="control-group">
                         <label class="control-label">Contraseña:</label>
                         <div class="controls">
-                            <input type="password" id="password" placeholder="Contraseña" class="form-control" maxlength="10" required autofocus name="pwd1" onchange="form.pwd2.pattern = this.value;">
+                            <input type="password" id="password" class="form-control" maxlength="10" required autofocus name="pwd1" onchange="form.pwd2.pattern = this.value;">
                         </div>
                         <br />
                     </div>
                     <div class="control-group">
                         <label class="control-label">Confirmar Contraseña:</label>
                         <div class="controls">
-                            <input type="password" placeholder="Contraseña" class="form-control" maxlength="10" required autofocus name="pwd2">
+                            <input type="password" id="password" class="form-control" maxlength="10" required autofocus name="pwd2">
                         </div>
                         <br />
                     </div>
@@ -447,13 +447,14 @@
                     <div class="control-group">
                         <label class="control-label">Perfil:</label>
                         <div class="controls">
-                            <select name="rol" class="form-control">
+                            <select name="rol" id="rolEdit" class="form-control">
                                 <option value="Suscriptor">Suscriptor</option>
                                 <option value="Administrador">Administrador</option>
                             </select>
                         </div>
                         <br />
                     </div>
+                    <input type="hidden" name="id_user" id="idUserEdit">
                     <div class="control-group">
                         <input type="submit" value="Actualizar" class="btn btn-lg btn-primary">
                     </div>
@@ -996,6 +997,7 @@
                     $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
@@ -1003,15 +1005,13 @@
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditUser").show();
 
+                    $("#idUserEdit").val(result.Id);
                     $("#apodoEdit").val(result.Apodo);
                     $("#nombreEdit").val(result.Nombre);
                     $("#apellidoEdit").val(result.Apellido);
                     $("#emailEdit").val(result.Email);
                     $("#passwordEdit").val(result.Password);
-                    $("#rolEdit").select(result.Rol.Descripcion);
-
-                    $("#mensajeJsonOk").show();
-                    $("#mensajeJsonOk").text(result);
+                    $("#rolEdit").val(result.Rol.Descripcion);
 
                 }).fail(function (result) {
                     alert("No se pudo editar el usuario Id: " + $(this).attr("data-id"));
@@ -1033,6 +1033,7 @@
                         $("#mensajeJsonOk").hide();
                         $("#ocultarTablaAllPage").hide();
                         $("#ocultarTablaAllPost").hide();
+                        $("#ocultarTablaAllUser").hide();
                         $("#mostrarCamposNewPage").hide();
                         $("#mostrarCamposNewPost").hide();
                         $("#mostrarCamposNewUser").hide();
@@ -1060,26 +1061,28 @@
             $("#mensajeJsonOk").hide();
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
+            $("#ocultarTablaAllUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewUser").show();
 
         })
 
-        $("#NewEditBoton").on("click", function (e) {
+        $("#NewUserBoton").on("click", function (e) {
             e.preventDefault();
 
             $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
-            $("#mostrarCamposNewPage").hide();
+            $("#ocultarTablaAllPage").hide();
+            $("#ocultarTablaAllUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewUser").show();
 
         })
