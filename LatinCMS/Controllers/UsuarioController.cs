@@ -51,12 +51,12 @@ namespace LatinCMS.Controllers
             RolDAO util = new RolDAO();
 
             usuario.Id = idUsuario;
-            usuario.Rol = util.GetRolByDescripcion("Suscriptor"); 
-            usuario.Apodo = Request["apodo"];
-            usuario.Nombre = Request["nombre"];
-            usuario.Apellido = Request["apellido"];
-            usuario.Email = Request["email"];
-            usuario.Password = Request["password"];
+            usuario.Rol = util.GetRolByDescripcion("Suscriptor");
+            usuario.Apodo = Request["apodo"].Trim();
+            usuario.Nombre = Request["nombre"].Trim();
+            usuario.Apellido = Request["apellido"].Trim();
+            usuario.Email = Request["email"].Trim();
+            usuario.Password = Request["password"].Trim();
 
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
@@ -126,11 +126,11 @@ namespace LatinCMS.Controllers
             RolDAO util_rol = new RolDAO();
 
             user.Rol = util_rol.GetRolByDescripcion(Request["rol"]);
-            user.Nombre = Request["nombre"];
-            user.Apellido = Request["apellido"];
-            user.Email = Request["email"];
-            user.Apodo = Request["apodo"];
-            user.Password = Request["pwd1"];
+            user.Nombre = Request["nombre"].Trim();
+            user.Apellido = Request["apellido"].Trim();
+            user.Email = Request["email"].Trim();
+            user.Apodo = Request["apodo"].Trim();
+            user.Password = Request["pwd1"].Trim();
 
             using (ISession session = NHibernateHelper.OpenSession())
             using (ITransaction transaction = session.BeginTransaction())
@@ -202,12 +202,12 @@ namespace LatinCMS.Controllers
             RolDAO util_rol = new RolDAO();
 
             userEdit.Id = Convert.ToInt32(Request["id_user"]);
-            userEdit.Rol = util_rol.GetRolByDescripcion(Request["rol"]); 
-            userEdit.Nombre = Request["nombre"];
-            userEdit.Apellido = Request["apellido"];
-            userEdit.Email = Request["email"];
-            userEdit.Apodo = Request["apodo"];
-            userEdit.Password = Request["pwd1"];
+            userEdit.Rol = util_rol.GetRolByDescripcion(Request["rol"]);
+            userEdit.Nombre = Request["nombre"].Trim();
+            userEdit.Apellido = Request["apellido"].Trim();
+            userEdit.Email = Request["email"].Trim();
+            userEdit.Apodo = Request["apodo"].Trim();
+            userEdit.Password = Request["pwd1"].Trim();
 
             int usuario_id = id_usuario;
 

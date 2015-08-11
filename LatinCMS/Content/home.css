@@ -167,6 +167,11 @@ li.tituloPostColor{
     display: none;
 }
 
+#mostrarCamposAjustes{
+    float: right; 
+    width: 80%;
+    display: none;
+}
 
 
 

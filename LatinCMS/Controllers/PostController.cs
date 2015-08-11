@@ -82,8 +82,8 @@ namespace LatinCMS.Controllers
             post.Usuario = util_usuario.GetById(id_usuario);
             post.TipoPost = util_tipo_post.GetTipoPostByDescripcion("Post");
             post.Fecha = DateTime.Now;
-            post.Titulo = Request["titulo"];
-            post.Descripcion = Request["descripcion"];
+            post.Titulo = Request["titulo"].Trim();
+            post.Descripcion = Request["descripcion"].Trim();
             post.Eliminado = false;
 
             using (ISession session = NHibernateHelper.OpenSession())
@@ -138,8 +138,8 @@ namespace LatinCMS.Controllers
             postEdit.Usuario = reg_original.Usuario;
             postEdit.TipoPost = reg_original.TipoPost;
             postEdit.Fecha = reg_original.Fecha;
-            postEdit.Titulo = Request["titulo"];
-            postEdit.Descripcion = Request["descripcion"];
+            postEdit.Titulo = Request["titulo"].Trim();
+            postEdit.Descripcion = Request["descripcion"].Trim();
             postEdit.Eliminado = reg_original.Eliminado;
 
             int usuario_id = id_usuario;
@@ -294,8 +294,8 @@ namespace LatinCMS.Controllers
             post.Usuario = util_usuario.GetById(id_usuario);
             post.TipoPost = util_tipo_post.GetTipoPostByDescripcion("Pagina");
             post.Fecha = DateTime.Now;
-            post.Titulo = Request["titulo"];
-            post.Descripcion = Request["descripcion"];
+            post.Titulo = Request["titulo"].Trim();
+            post.Descripcion = Request["descripcion"].Trim();
             post.Eliminado = false;
 
             using (ISession session = NHibernateHelper.OpenSession())
@@ -351,8 +351,8 @@ namespace LatinCMS.Controllers
             postEdit.Usuario = reg_original.Usuario;
             postEdit.TipoPost = reg_original.TipoPost;
             postEdit.Fecha = reg_original.Fecha;
-            postEdit.Titulo = Request["titulo"];
-            postEdit.Descripcion = Request["descripcion"];
+            postEdit.Titulo = Request["titulo"].Trim();
+            postEdit.Descripcion = Request["descripcion"].Trim();
             postEdit.Eliminado = reg_original.Eliminado;
 
             int usuario_id = id_usuario;

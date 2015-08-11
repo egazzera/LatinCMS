@@ -30,7 +30,7 @@ namespace LatinCMS.Controllers
             {
                 try
                 {
-                    comentario.Descripcion = Request["comentario"];
+                    comentario.Descripcion = Request["comentario"].Trim();
                     comentario.Post = util_post.GetById(id_post);
                     comentario.Usuario = util_user.GetById(id_user);
                     comentario.Estadocomen = util_EC.GetEstadoComenByDescripcion("Pendiente");

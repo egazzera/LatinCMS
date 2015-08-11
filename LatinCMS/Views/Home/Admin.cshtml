@@ -81,7 +81,7 @@
                 <li>
                     <a href='#'><span>Ajustes</span></a>
                     <ul>
-                        <li class='last'><a href='/LatinCMS/ajustes.html'><span>Ajustes Generales</span></a></li>
+                        <li class='last'><a href='#' id="ajustes"><span>Ajustes Generales</span></a></li>
                     </ul>
                 </li>
             </ul>
@@ -463,6 +463,44 @@
         </div>
 
 
+        @*AJUSTES*@
+        <div class="container" id="mostrarCamposAjustes">
+            <fieldset class="login">
+                <form action='@Url.Action("SaveAjustes", "Config", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin" style="width: 50%">
+                    <h2 class="form-signin-heading">Ajustes Generales</h2>
+                    <div class="control-group">
+                        <label class="control-label">Título del sitio:</label>
+                        <div class="controls">
+                            <input type="text" name="titulo" id="ajusteTitulo" class="form-control" maxlength="100" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Descripción corta:</label>
+                        <div class="controls">
+                            <input type="text" name="descripcion" id="ajusteDescri" class="form-control" maxlength="100" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Cantidad de post por pagina:</label>
+                        <div class="controls">
+                            <input type="number" name="cant" id="ajusteCantPost" class="form-control" maxlength="10" required autofocus>
+                        </div>
+                        <br />
+                    </div>
+                    <input type="hidden" name="id_ajuste" id="idAjuste">
+                    <div class="control-group">
+                        <input type="submit" value="Guardar" class="btn btn-lg btn-primary">
+                    </div>
+                </form>
+            </fieldset>
+        </div>
+
+
+
+
+
 
 </div>
 
@@ -475,6 +513,7 @@
             e.preventDefault();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
+            $("#mostrarCamposNewUser").hide();
             $("#mensajeJsonOk").hide();
             $('#loading').show();
 
@@ -1088,6 +1127,44 @@
         })
 
 
+
+        //AJUSTES
+        $("#ajustes").on("click", function (e) {
+            e.preventDefault();
+            $('#loading').show();
+
+            $.post('@Url.Action("EditAjustes", "Config")')
+                .done(function (result) {
+
+                    $('#loading').hide();
+                    $("#mensajeJsonOk").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposAjustes").show();
+
+                    $("#idAjuste").val(result.Id);
+                    $("#ajusteTitulo").val(result.Titulo);
+                    $("#ajusteDescri").val(result.Descripcion);
+                    $("#ajusteCantPost").val(result.CantPost);
+
+                }).fail(function (result) {
+                    alert("No se pudo editar el ajuste del sitio.");
+                });
+
+        });
+
+
+
+
+
+       
 
     });
     </script>
