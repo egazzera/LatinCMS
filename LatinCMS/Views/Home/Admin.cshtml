@@ -333,9 +333,9 @@
         </div>
 
         @*New Usuario*@
-        <div class="container" id="mostrarCamposNewUser">
+        <div class="container" id="mostrarCamposNewUser" style="float: none; width: 30%">
             <fieldset class="login">
-                <form action='@Url.Action("NewUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin" style="width: 50%">
+                <form action='@Url.Action("NewUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Añadir Nuevo Usuario</h2>
                     <div class="control-group">
                         <label class="control-label">Nombre Usuario:</label>
@@ -398,9 +398,9 @@
 
 
         @*Edit Usuario*@
-        <div class="container" id="mostrarCamposEditUser">
+        <div class="container" id="mostrarCamposEditUser" style="float: none; width: 30%">
             <fieldset class="login">
-                <form action='@Url.Action("SaveEditUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin" style="width: 50%">
+                <form action='@Url.Action("SaveEditUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Editar Usuario</h2>
                     <div class="control-group">
                         <label class="control-label">Nombre Usuario:</label>
@@ -464,9 +464,9 @@
 
 
         @*AJUSTES*@
-        <div class="container" id="mostrarCamposAjustes">
+        <div class="container" id="mostrarCamposAjustes" style="float: none; width: 30%">
             <fieldset class="login">
-                <form action='@Url.Action("SaveAjustes", "Config", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin" style="width: 50%">
+                <form action='@Url.Action("SaveAjustes", "Config", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Ajustes Generales</h2>
                     <div class="control-group">
                         <label class="control-label">Título del sitio:</label>
