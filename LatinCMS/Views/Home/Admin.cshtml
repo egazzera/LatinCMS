@@ -514,6 +514,7 @@
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mensajeJsonOk").hide();
             $('#loading').show();
 
@@ -522,6 +523,8 @@
 
                     $('#loading').hide();
                     $("#mostrarAllPostTabla").empty();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#ocultarTablaAllPost").show();
 
                     for (var item in result) {
@@ -556,10 +559,12 @@
                     $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposEditPage").hide();
                     $("#mostrarCamposEditEdit").hide();
+                    $("#mostrarCamposAjustes").hide();
                     $("#mostrarCamposEditPost").show();
 
                     $("#tituloEdit").val(result.Titulo);
@@ -584,11 +589,13 @@
                     $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditPage").hide();
                     $("#mostrarCamposEditEdit").hide();
+                    $("#mostrarCamposAjustes").hide();
                     $("#mostrarPopUpDelete").show();
 
                     $('#popupDelete').modal('show');
@@ -609,11 +616,13 @@
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllUser").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mostrarCamposNewPost").show();
         })
 
@@ -624,11 +633,13 @@
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllUser").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mostrarCamposNewPost").show();
         })
 
@@ -640,6 +651,8 @@
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllPage", "Post")')
@@ -687,11 +700,13 @@
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditEdit").hide();
+                    $("#mostrarCamposAjustes").hide();
                     $("#mostrarCamposEditPage").show();
 
                     $("#tituloEditPage").val(result.Titulo);
@@ -717,12 +732,14 @@
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditPage").hide();
                     $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposAjustes").hide();
                     $("#mostrarPopUpDelete").hide();
                     $("#mostrarPopUpDeletePage").show();
 
@@ -744,11 +761,13 @@
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllUser").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mostrarCamposNewPage").show();
         })
 
@@ -759,11 +778,13 @@
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllUser").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mostrarCamposNewPage").show();
         })
 
@@ -775,6 +796,7 @@
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentarios", "Comentario")')
@@ -822,13 +844,14 @@
                         $("#mensajeJsonOk").hide();
                         $("#ocultarTablaAllPage").hide();
                         $("#ocultarTablaAllPost").hide();
+                        $("#ocultarTablaAllComentarios").hide();
                         $("#mostrarCamposNewPage").hide();
                         $("#mostrarCamposNewPost").hide();
                         $("#mostrarCamposNewUser").hide();
                         $("#mostrarCamposEditPage").hide();
                         $("#mostrarCamposEditPost").hide();
                         $("#mostrarCamposEditUser").hide();
-                        $("#ocultarTablaAllComentarios").hide();
+                        $("#mostrarCamposAjustes").hide();
 
                         $("#mensajeJsonOk").show();
                         $("#mensajeJsonOk").text(result);
@@ -864,6 +887,7 @@
                         $("#mostrarCamposEditPage").hide();
                         $("#mostrarCamposEditPost").hide();
                         $("#mostrarCamposEditEdit").hide();
+                        $("#mostrarCamposAjustes").hide();
                         $("#ocultarTablaAllComentarios").hide();
 
                         $("#mensajeJsonOk").show();
@@ -886,6 +910,7 @@
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentarios", "Comentario")')
@@ -922,6 +947,7 @@
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentariosPendientes", "Comentario")')
@@ -958,6 +984,7 @@
             $("#mostrarCamposNewPage").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $('#loading').show();
 
             $.post('@Url.Action("AllComentariosAprobados", "Comentario")')
@@ -995,6 +1022,7 @@
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewUser").hide();
             $("#mostrarCamposEditUser").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mensajeJsonOk").hide();
             $('#loading').show();
 
@@ -1005,6 +1033,7 @@
                     $("#mostrarAllUserTabla").empty();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#ocultarTablaAllUser").show();
 
                     for (var item in result) {
@@ -1037,11 +1066,13 @@
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPage").hide();
                     $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposAjustes").hide();
                     $("#mostrarCamposEditUser").show();
 
                     $("#idUserEdit").val(result.Id);
@@ -1073,13 +1104,14 @@
                         $("#ocultarTablaAllPage").hide();
                         $("#ocultarTablaAllPost").hide();
                         $("#ocultarTablaAllUser").hide();
+                        $("#ocultarTablaAllComentarios").hide();
                         $("#mostrarCamposNewPage").hide();
                         $("#mostrarCamposNewPost").hide();
                         $("#mostrarCamposNewUser").hide();
                         $("#mostrarCamposEditPage").hide();
                         $("#mostrarCamposEditPost").hide();
                         $("#mostrarCamposEditUser").hide();
-                        $("#ocultarTablaAllComentarios").hide();
+                        $("#mostrarCamposAjustes").hide();
 
                         $("#mensajeJsonOk").show();
                         $("#mensajeJsonOk").text(result);
@@ -1101,11 +1133,13 @@
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllUser").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mostrarCamposNewUser").show();
 
         })
@@ -1117,11 +1151,13 @@
             $("#ocultarTablaAllPost").hide();
             $("#ocultarTablaAllPage").hide();
             $("#ocultarTablaAllUser").hide();
+            $("#ocultarTablaAllComentarios").hide();
             $("#mostrarCamposEditPost").hide();
             $("#mostrarCamposEditPage").hide();
             $("#mostrarCamposEditUser").hide();
             $("#mostrarCamposNewPost").hide();
             $("#mostrarCamposNewPage").hide();
+            $("#mostrarCamposAjustes").hide();
             $("#mostrarCamposNewUser").show();
 
         })
@@ -1141,6 +1177,7 @@
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
