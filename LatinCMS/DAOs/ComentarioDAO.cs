@@ -39,7 +39,7 @@ namespace LatinCMS.DAOs
         }
 
 
-        public IList<ComentarioURL> GetAllComentarioPendienteTabla()
+        public IList<Comentario> GetAllComentarioPendienteTabla()
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -47,10 +47,10 @@ namespace LatinCMS.DAOs
                     .Add(Restrictions.Eq("Descripcion", "Pendiente"))
                     .UniqueResult();
 
-                var comentarios = session.CreateCriteria<ComentarioURL>()
+                var comentarios = session.CreateCriteria<Comentario>()
                     .Add(Restrictions.Eq("Estadocomen", estado_comen))
                     .AddOrder(Order.Desc("Fecha"))
-                    .List<ComentarioURL>();
+                    .List<Comentario>();
 
                 session.Close();
                 return comentarios;
@@ -60,7 +60,7 @@ namespace LatinCMS.DAOs
         }
 
 
-        public IList<ComentarioURL> GetAllComentarioAprobadosTabla()
+        public IList<Comentario> GetAllComentarioAprobadosTabla()
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -68,10 +68,10 @@ namespace LatinCMS.DAOs
                     .Add(Restrictions.Eq("Descripcion", "Aprobado"))
                     .UniqueResult();
 
-                var comentarios = session.CreateCriteria<ComentarioURL>()
+                var comentarios = session.CreateCriteria<Comentario>()
                     .Add(Restrictions.Eq("Estadocomen", estado_comen))
                     .AddOrder(Order.Desc("Fecha"))
-                    .List<ComentarioURL>();
+                    .List<Comentario>();
 
                 session.Close();
                 return comentarios;

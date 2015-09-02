@@ -6,7 +6,14 @@
 <head lang="es-ar">
     <meta charset="UTF-8">
     <title>Latin CMS - Editar Perfil</title>
-    <link rel="stylesheet" href="~/Content/bootstrap.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="~/Content/home.css" />
+    <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
+    <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container" style="width: 400px;margin-top: 50px">
@@ -15,7 +22,6 @@
             <form action='@Url.Action("GuardarUsuario", "Usuario", new { idUsuario = Model.Id })' method="POST" id="formulario" class="form-signin">
                 <p style="color: red">@ViewBag.Error</p>
                 <h2 class="form-signin-heading">Editar Usuario</h2>
-
                 <div class="control-group">
                     <label class="control-label">Usuario:</label>
                     <div class="controls">
@@ -53,7 +59,7 @@
                 </div>
                 <div class="control-group">
                     <input type="submit" value="Guardar" class="btn btn-lg btn-primary">
-                    <a href='@Url.Action("Index", "Home")'>
+                    <a href='@Url.Action("Index", "Home", new { id_usuario = Model.Id })'>
                         <input type="button" class="btn btn-lg btn-default" value="Cancelar" />
                     </a>
                 </div>

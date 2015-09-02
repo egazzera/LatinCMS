@@ -134,14 +134,20 @@ namespace LatinCMS.Controllers
 
             try
             {
-                IList<ComentarioURL> TablaAllComenPend = util.GetAllComentarioPendienteTabla();
+                IList<Comentario> TablaAllComenPend = util.GetAllComentarioPendienteTabla();
 
+                List<ComentarioURL> listaComenURL = new List<ComentarioURL>();
+                
                 foreach (var item in TablaAllComenPend)
                 {
-                    item.URL = Url.Action("VerUsuario", "Usuario", new { id_usuario = item.Comentario.Usuario.Id });
+                    ComentarioURL comenURL = new ComentarioURL();
+                    comenURL.Comentario = item;
+                    comenURL.URL = Url.Action("VerUsuario", "Usuario", new { id_usuario = item.Usuario.Id });
+                    
+                    listaComenURL.Add(comenURL);
                 }
 
-                return Json(TablaAllComenPend, JsonRequestBehavior.AllowGet);
+                return Json(listaComenURL, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
@@ -157,14 +163,20 @@ namespace LatinCMS.Controllers
 
             try
             {
-                IList<ComentarioURL> TablaAllComenAprob = util.GetAllComentarioAprobadosTabla();
+                IList<Comentario> TablaAllComenAprob = util.GetAllComentarioAprobadosTabla();
+
+                List<ComentarioURL> listaComenURL = new List<ComentarioURL>();
 
                 foreach (var item in TablaAllComenAprob)
                 {
-                    item.URL = Url.Action("VerUsuario", "Usuario", new { id_usuario = item.Comentario.Usuario.Id });
+                    ComentarioURL comenURL = new ComentarioURL();
+                    comenURL.Comentario = item;
+                    comenURL.URL = Url.Action("VerUsuario", "Usuario", new { id_usuario = item.Usuario.Id });
+
+                    listaComenURL.Add(comenURL);
                 }
 
-                return Json(TablaAllComenAprob, JsonRequestBehavior.AllowGet);
+                return Json(listaComenURL, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {

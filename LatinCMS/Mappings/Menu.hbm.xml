@@ -7,6 +7,12 @@
     <property name="Titulo">
       <column name="titulo" sql-type="nvarchar" not-null="true" />
     </property>
+    <property name="Principal">
+      <column name="principal" sql-type="bit" not-null="false" />
+    </property>
+    <property name="Secundario">
+      <column name="secundario" sql-type="bit" not-null="false" />
+    </property>
     <many-to-one name="MenuVal" column="padre_id" />
     <many-to-one name="Post" column="post_id" />
   </class>

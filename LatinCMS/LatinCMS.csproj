@@ -118,9 +118,11 @@
     <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\SignupController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="DAOs\MenuDAO.cs" />
     <Compile Include="DAOs\ComentarioDAO.cs" />
     <Compile Include="DAOs\TipoPostDAO.cs" />
     <Compile Include="DAOs\EstadoComentarioDAO.cs" />
@@ -566,6 +568,7 @@
     <Content Include="Scripts\jquery.easyui.mobile-1.4.2.min.js" />
     <Content Include="Scripts\jquery.easyui.mobile-1.4.3.js" />
     <Content Include="Scripts\jquery.easyui.mobile-1.4.3.min.js" />
+    <Content Include="Scripts\jquery.nestable.js" />
     <Content Include="Scripts\locale\easyui-lang-af.js" />
     <Content Include="Scripts\locale\easyui-lang-am.js" />
     <Content Include="Scripts\locale\easyui-lang-ar.js" />
@@ -608,6 +611,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Menu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="navbar navbar-default">
+        <div class="navbar navbar-default col-lg-12">
             <div class="navbar-header">
                 <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
                     <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
@@ -54,46 +54,49 @@
 
         <br />
         <p style="color: red">@ViewBag.Error</p>
-        <form action='@Url.Action("NuevoComentatio", "Comentario", new { id_post = post_id, id_user = id_usuario })' method="POST" id="formulario" class="form-signin">
-            <div class="post_post">
-                <h1 class="titulo-post">@titulo_post</h1>
-                <h4 class="descripcion-post">@descripcion_post</h4>
-                <h5 class="fecha-post">@fecha_post</h5>
 
-                <div class="control-group">
-                    <label class="control-label">Comentarios:</label>
-                    <div class="controls">
-                        <input type="text" name="comentario" id="comentario" placeholder="Comentario" class="form-control" maxlength="200" required autofocus>
+        <div class="col-lg-12">
+            <form action='@Url.Action("NuevoComentatio", "Comentario", new { id_post = post_id, id_user = id_usuario })' method="POST" id="formulario" class="form-signin">
+                <div class="post_post">
+                    <h1 class="titulo-post">@titulo_post</h1>
+                    <h4 class="descripcion-post">@descripcion_post</h4>
+                    <h5 class="fecha-post">@fecha_post</h5>
+
+                    <div class="control-group">
+                        <label class="control-label">Comentarios:</label>
+                        <div class="controls">
+                            <input type="text" name="comentario" id="comentario" placeholder="Comentario" class="form-control" maxlength="200" required autofocus>
+                        </div>
+                        <br />
                     </div>
-                    <br />
-                </div>
-               
-                <div class="control-group">
-                    <input type="submit" value="Publicar" class="btn btn-lg btn-primary">
-                </div>
-                </div>
-        </form>
 
-        @foreach (var comentario in Model)
-        {
-            <div class="comentario">
-                <h1 class="usuario-coment">@comentario.Post.Usuario.Apodo</h1>
-                <p class="descripcion-coment">@comentario.Descripcion</p>
-                <h5 class="fecha-coment">@comentario.Fecha</h5>
-            </div>
-        }
-
-
-        <footer>
-            <div id="lastrow" class="row">
-                <div class="e-banner-serverpoint text-center">
-                    <hr>
-                    <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
-                    <small>Latin CMS</small>
+                    <div class="control-group">
+                        <input type="submit" value="Publicar" class="btn btn-lg btn-primary">
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </form>
 
+            @foreach (var comentario in Model)
+            {
+                <div class="comentario">
+                    <h1 class="usuario-coment">@comentario.Post.Usuario.Apodo</h1>
+                    <p class="descripcion-coment">@comentario.Descripcion</p>
+                    <h5 class="fecha-coment">@comentario.Fecha</h5>
+                </div>
+            }
+        </div>
+
+        <div class="col-lg-12">
+            <footer>
+                <div id="lastrow" class="row">
+                    <div class="e-banner-serverpoint text-center">
+                        <hr>
+                        <a href="http://www.latin-net.com.ar/" rel="external" target="_blank"></a>
+                        <small>Latin CMS</small>
+                    </div>
+                </div>
+            </footer>
+        </div>
 </div>
 </body>
 </html>

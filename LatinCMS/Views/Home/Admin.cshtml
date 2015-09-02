@@ -16,12 +16,13 @@
     <link rel="stylesheet" href="~/Content/style.css" />
     <link rel="stylesheet" href="~/Content/font-awesome.min.css" />
     <script src="~/Scripts/jquery-2.1.4.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery.nestable.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <div class="navbar navbar-default">
+        <div class="navbar navbar-default col-lg-12">
             <div class="navbar-header">
                 <a class="navbar-brand" href="http://latin-net.com.ar/" target="_blank">
                     <img class="logo img-responsive" src="~/Images/logo.png" style="width: auto; height: 50px" alt="LatinNet">
@@ -49,9 +50,14 @@
 
         <br />
         <br />
-        
+        <br />
+        <br />
+        <br />
+        <br />
+
+
         @*Menu Izquierdo*@
-        <div id='cssmenu' class="sidebar">
+        <div id='cssmenu' class="sidebar col-lg-4">
             <ul>
                 <li class='has-sub'>
                     <a href='#'><span>Posts</span></a>
@@ -77,7 +83,7 @@
                         <li class='last' id="NewUserMenu"><a href='#'><span>Añadir Nuevo</span></a></li>
                     </ul>
                 </li>
-                <li><a href='#'><span>Apariencia</span></a></li>
+                <li><a href='#' id="AllEditarMenu"><span>Apariencia</span></a></li>
                 <li>
                     <a href='#'><span>Ajustes</span></a>
                     <ul>
@@ -88,15 +94,16 @@
         </div>
 
         <h4 style="text-indent: 4em">Administración de LatinCMS</h4>
-        
+
         <p style="color: green; text-indent: 4em">@ViewBag.SaveOK</p>
-        <p style="color: red; text-indent: 4em">@ViewBag.Error</p>   
-       
+        <p style="color: red; text-indent: 4em">@ViewBag.Error</p>
+
+
         @*Todos los post tabla*@
-         <div class="container" id="ocultarTablaAllPost">
-             <a class="btn btn-primary" id="NewPostBoton" href='#'>Añadir Nuevo</a><br /><br />
-           
-            <table class="table table-bordered">
+        <div class="container col-lg-8" id="ocultarTablaAllPost">
+            <a class="btn btn-primary" id="NewPostBoton" href='#'>Añadir Nuevo</a><br /><br />
+
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Título</th>
@@ -108,14 +115,14 @@
                 </thead>
                 <tbody id="mostrarAllPostTabla"></tbody>
             </table>
-            
+
         </div>
-        
+
         <div class="container" id="loading" style="display: none"></div>
         <p id="mensajeJsonOk" style="display:none; color:green"></p>
-        
+
         @*New Post*@
-        <div class="container" id="mostrarCamposNewPost">
+        <div class="container col-lg-8" id="mostrarCamposNewPost">
             <fieldset class="login">
                 <form action='@Url.Action("NewPost", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Añadir Nuevo Post</h2>
@@ -142,7 +149,7 @@
 
 
         @*Edit Post*@
-        <div class="container" id="mostrarCamposEditPost">
+        <div class="container col-lg-8" id="mostrarCamposEditPost">
             <fieldset class="login">
                 <form action='@Url.Action("SaveEditPost", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Editar Post</h2>
@@ -178,8 +185,8 @@
                             <h4 class="modal-title">Confirma que quiere eliminar el Post? </h4>
                         </div>
                         <div class="modal-body">
-                                <p id="tituloDelete"></p>
-                                <input type="hidden" name="id_post" id="idPostDelete">
+                            <p id="tituloDelete"></p>
+                            <input type="hidden" name="id_post" id="idPostDelete">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -191,12 +198,11 @@
         </div><!-- /.modal -->
 
 
-
         @*Todas las paginas tabla*@
-        <div class="container" id="ocultarTablaAllPage">
+        <div class="container col-lg-8" id="ocultarTablaAllPage">
             <a class="btn btn-primary" id="NewPageBoton" href='#'>Añadir Nuevo</a><br /><br />
 
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Título</th>
@@ -211,8 +217,9 @@
 
         </div>
 
+
         @*New Page*@
-        <div class="container" id="mostrarCamposNewPage">
+        <div class="container col-lg-8" id="mostrarCamposNewPage">
             <fieldset class="login">
                 <form action='@Url.Action("NewPage", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Añadir Nueva Pagina</h2>
@@ -237,8 +244,9 @@
             </fieldset>
         </div>
 
+
         @*Edit Page*@
-        <div class="container" id="mostrarCamposEditPage">
+        <div class="container col-lg-8" id="mostrarCamposEditPage">
             <fieldset class="login">
                 <form action='@Url.Action("SaveEditPage", "Post", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Editar Pagina</h2>
@@ -264,6 +272,7 @@
             </fieldset>
         </div>
 
+
         @*Delete Page*@
         <div class="modal fade" id="popupDeletePage">
             <div class="modal-dialog">
@@ -287,15 +296,14 @@
         </div><!-- /.modal -->
 
 
-
         @*Todos los comentarios tabla*@
-        <div class="container" id="ocultarTablaAllComentarios">
+        <div class="container col-lg-8" id="ocultarTablaAllComentarios">
             <h2 class="form-signin-heading">Comentarios</h2>
             <a id="TodosComenBoton" href='#'>Todos |</a>
             <a id="PendientesComenBoton" href='#'> Pendientes |</a>
             <a id="AprobadosComenBoton" href='#'> Aprobados</a>
 
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Autor</th>
@@ -313,10 +321,10 @@
 
 
         @*Todos los Usuarios tabla*@
-        <div class="container" id="ocultarTablaAllUser">
+        <div class="container col-lg-8" id="ocultarTablaAllUser">
             <a class="btn btn-primary" id="NewUserBoton" href='#'>Añadir Nuevo</a><br /><br />
 
-            <table class="table table-bordered">
+            <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr>
                         <th>Nombre Usuario</th>
@@ -333,7 +341,7 @@
         </div>
 
         @*New Usuario*@
-        <div class="container" id="mostrarCamposNewUser" style="float: none; width: 30%">
+        <div class="container col-lg-8" id="mostrarCamposNewUser" style="float: none; width: 30%">
             <fieldset class="login">
                 <form action='@Url.Action("NewUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Añadir Nuevo Usuario</h2>
@@ -398,7 +406,7 @@
 
 
         @*Edit Usuario*@
-        <div class="container" id="mostrarCamposEditUser" style="float: none; width: 30%">
+        <div class="container col-lg-8" id="mostrarCamposEditUser" style="float: none; width: 30%">
             <fieldset class="login">
                 <form action='@Url.Action("SaveEditUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Editar Usuario</h2>
@@ -464,7 +472,7 @@
 
 
         @*AJUSTES*@
-        <div class="container" id="mostrarCamposAjustes" style="float: none; width: 30%">
+        <div class="container col-lg-8" id="mostrarCamposAjustes" style="float: none; width: 30%">
             <fieldset class="login">
                 <form action='@Url.Action("SaveAjustes", "Config", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
                     <h2 class="form-signin-heading">Ajustes Generales</h2>
@@ -498,713 +506,906 @@
         </div>
 
 
+        @*APARIENCIA*@
+        <div class="container col-lg-8" id="mostrarCamposEditMenu">
+                <form action='@Url.Action("SaveEditUser", "Usuario", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
+                    <h2 class="form-signin-heading">Editar Menús</h2>
+
+                    <div class="panel-group col-lg-4" id="accordion" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingOne">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Paginas
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                <div class="panel-body">
+                                    <ul role="menu" id="titulosEditMenu"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        Enlaces
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <div class="control-group">
+                                        <label class="control-label">URL:</label>
+                                        <div class="controls">
+                                            <input type="text" name="URL" id="urlEnlaceMenu" placeholder="URL" class="form-control" maxlength="150">
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label">Texto:</label>
+                                        <div class="controls">
+                                            <input type="text" name="texto" id="textoEnlaceMenu" placeholder="Texto" class="form-control" maxlength="100" required autofocus>
+                                        </div>
+                                        <br />
+                                    </div>
+                                    <ul role="menu">
+                                        <li style='text-align:right'><button type="submit" class='btn btn-default btn-sm'>Añadir al menu</button></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <ul class="nav nav-tabs">
+                            <li role="presentation" class="active"><a href="#" id="AllMenuPrimario">Principal</a></li>
+                            <li role="presentation"><a href="#">Secundario</a></li>
+                        </ul>
+
+                        <div class="dd">
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="1">
+                                    <div class="dd-handle">Item 1</div>
+                                </li>
+                                <li class="dd-item" data-id="3">
+                                    <div class="dd-handle">Item 3</div>
+                                    <ol class="dd-list">
+                                        <li class="dd-item" data-id="4">
+                                            <div class="dd-handle">Item 4</div>
+                                        </li>
+                                        <li class="dd-item" data-id="5">
+                                            <div class="dd-handle">Item 5</div>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="control-group col-lg-12">
+                        <br />
+                        <input type="submit" value="Guardar menú" class="btn btn-primary">
+                    </div>
+                </form>
+        </div>
 
 
 
 
-</div>
-
-
-    <script type="text/javascript">
-    $(document).ready(function () {
-
-        //POST
-        $("#AllPost").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mensajeJsonOk").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllPost", "Post")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mostrarAllPostTabla").empty();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllComentarios").hide();
-                    $("#ocultarTablaAllPost").show();
-
-                    for (var item in result) {
-
-                        var numeros = result[item].Post.Fecha.replace(/\D/g, '');
-                        var fecha = new Date(parseInt(numeros));
-
-                        $("#mostrarAllPostTabla").append("<tr><td style='text-align:justify'>" + result[item].Post.Titulo + "</td><td style='text-align:center'>"
-                                                        + result[item].Post.Usuario.Apodo + "</td><td style='text-align:center'>"
-                                                        + result[item].Contador + "</td><td style='text-align:center'>"
-                                                        + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Editar' class='EditPostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
-                                                        + "<a href='#' title='Eliminar' class='DeletePostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
-                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
-
-
-        $("#mostrarAllPostTabla").on("click", ".EditPostBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            $.post('@Url.Action("EditPost", "Post")', { id_post: $(this).attr("data-id") })
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mensajeJsonOk").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllComentarios").hide();
-                    $("#mostrarCamposNewPage").hide();
-                    $("#mostrarCamposNewPost").hide();
-                    $("#mostrarCamposEditPage").hide();
-                    $("#mostrarCamposEditEdit").hide();
-                    $("#mostrarCamposAjustes").hide();
-                    $("#mostrarCamposEditPost").show();
-
-                    $("#tituloEdit").val(result.Titulo);
-                    $("#descripcionEdit").val(result.Descripcion);
-                    $("#idPostEdit").val(result.Id);
-
-                }).fail(function (result) {
-                    alert("No se pudo editar el post Id: " + $(this).attr("data-id"));
-                });
-
-        });
-
-
-        $("#mostrarAllPostTabla").on("click", ".DeletePostBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            $.post('@Url.Action("DeletePopUpPost", "Post")', { id_post: $(this).attr("data-id") })
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mensajeJsonOk").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllComentarios").hide();
-                    $("#mostrarCamposNewPage").hide();
-                    $("#mostrarCamposNewPost").hide();
-                    $("#mostrarCamposEditPost").hide();
-                    $("#mostrarCamposEditPage").hide();
-                    $("#mostrarCamposEditEdit").hide();
-                    $("#mostrarCamposAjustes").hide();
-                    $("#mostrarPopUpDelete").show();
-
-                    $('#popupDelete').modal('show');
-
-                    $("#tituloDelete").text(result.Titulo);
-                    $("#idPostDelete").val(result.Id);
-
-                }).fail(function (result) {
-                    alert("No se pudo editar el post Id: " + $(this).attr("data-id"));
-                });
-
-        });
-
-        $("#NewPostMenu").on("click", function (e) {
-            e.preventDefault();
-
-            $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#ocultarTablaAllUser").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mostrarCamposNewPost").show();
-        })
-
-        $("#NewPostBoton").on("click", function (e) {
-            e.preventDefault();
-
-            $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#ocultarTablaAllUser").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mostrarCamposNewPost").show();
-        })
 
 
 
-        //Page
-        $("#AllPages").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllPage", "Post")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mensajeJsonOk").hide();
-                    $("#mostrarAllPostTabla").empty();
-                    $("#mostrarAllPageTabla").empty();
-                    $("#mostrarAllUserTabla").empty();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllPage").show();
-
-                    for (var item in result) {
-
-                        var numeros = result[item].Post.Fecha.replace(/\D/g, '');
-                        var fecha = new Date(parseInt(numeros));
-
-                        $("#mostrarAllPageTabla").append("<tr><td style='text-align:justify'>" + result[item].Post.Titulo + "</td><td style='text-align:center'>"
-                                                        + result[item].Post.Usuario.Apodo + "</td><td style='text-align:center'>"
-                                                        + result[item].Contador + "</td><td style='text-align:center'>"
-                                                        + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Editar' class='EditPageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
-                                                        + "<a href='#' title='Eliminar' class='DeletePageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
-                                                        + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
+    </div>
 
 
-        $("#mostrarAllPageTabla").on("click", ".EditPageBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
+        <script type="text/javascript">
+            $(document).ready(function () {
 
-            $.post('@Url.Action("EditPage", "Post")', { id_post: $(this).attr("data-id") })
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mensajeJsonOk").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllComentarios").hide();
+                //POST
+                $("#AllPost").on("click", function (e) {
+                    e.preventDefault();
                     $("#mostrarCamposNewPage").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
-                    $("#mostrarCamposEditPost").hide();
-                    $("#mostrarCamposEditEdit").hide();
                     $("#mostrarCamposAjustes").hide();
-                    $("#mostrarCamposEditPage").show();
+                    $("#mensajeJsonOk").hide();
+                    $('#loading').show();
 
-                    $("#tituloEditPage").val(result.Titulo);
-                    $("#descripcionEditPage").val(result.Descripcion);
-                    $("#idPageEdit").val(result.Id);
+                    $.post('@Url.Action("AllPost", "Post")')
+                        .done(function (result) {
 
-                }).fail(function (result) {
-                    alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
+                            $('#loading').hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#ocultarTablaAllPost").show();
+
+                            for (var item in result) {
+
+                                var numeros = result[item].Post.Fecha.replace(/\D/g, '');
+                                var fecha = new Date(parseInt(numeros));
+
+                                $("#mostrarAllPostTabla").append("<tr><td style='text-align:justify'>" + result[item].Post.Titulo + "</td><td style='text-align:center'>"
+                                                                + result[item].Post.Usuario.Apodo + "</td><td style='text-align:center'>"
+                                                                + result[item].Contador + "</td><td style='text-align:center'>"
+                                                                + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Editar' class='EditPostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
+                                                                + "<a href='#' title='Eliminar' class='DeletePostBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
+                                                                + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
+
+
+                $("#mostrarAllPostTabla").on("click", ".EditPostBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("EditPost", "Post")', { id_post: $(this).attr("data-id") })
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposNewPage").hide();
+                            $("#mostrarCamposNewPost").hide();
+                            $("#mostrarCamposEditPage").hide();
+                            $("#mostrarCamposEditEdit").hide();
+                            $("#mostrarCamposAjustes").hide();
+                            $("#mostrarCamposEditPost").show();
+
+                            $("#tituloEdit").val(result.Titulo);
+                            $("#descripcionEdit").val(result.Descripcion);
+                            $("#idPostEdit").val(result.Id);
+
+                        }).fail(function (result) {
+                            alert("No se pudo editar el post Id: " + $(this).attr("data-id"));
+                        });
+
                 });
 
-        });
 
+                $("#mostrarAllPostTabla").on("click", ".DeletePostBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
 
-        $("#mostrarAllPageTabla").on("click", ".DeletePageBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
+                    $.post('@Url.Action("DeletePopUpPost", "Post")', { id_post: $(this).attr("data-id") })
+                        .done(function (result) {
 
-            $.post('@Url.Action("DeletePopUpPage", "Post")', { id_post: $(this).attr("data-id") })
-                .done(function (result) {
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposNewPage").hide();
+                            $("#mostrarCamposNewPost").hide();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#mostrarCamposEditPage").hide();
+                            $("#mostrarCamposEditEdit").hide();
+                            $("#mostrarCamposAjustes").hide();
+                            $("#mostrarPopUpDelete").show();
 
-                    $('#loading').hide();
+                            $('#popupDelete').modal('show');
+
+                            $("#tituloDelete").text(result.Titulo);
+                            $("#idPostDelete").val(result.Id);
+
+                        }).fail(function (result) {
+                            alert("No se pudo editar el post Id: " + $(this).attr("data-id"));
+                        });
+
+                });
+
+                $("#NewPostMenu").on("click", function (e) {
+                    e.preventDefault();
+
                     $("#mensajeJsonOk").hide();
                     $("#ocultarTablaAllPage").hide();
                     $("#ocultarTablaAllPost").hide();
                     $("#ocultarTablaAllUser").hide();
                     $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mostrarCamposNewPost").show();
+                })
+
+                $("#NewPostBoton").on("click", function (e) {
+                    e.preventDefault();
+
+                    $("#mensajeJsonOk").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mostrarCamposNewPost").show();
+                })
+
+
+
+                //Page
+                $("#AllPages").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#ocultarTablaAllComentarios").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllPage", "Post")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllUserTabla").empty();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllPage").show();
+
+                            for (var item in result) {
+
+                                var numeros = result[item].Post.Fecha.replace(/\D/g, '');
+                                var fecha = new Date(parseInt(numeros));
+
+                                $("#mostrarAllPageTabla").append("<tr><td style='text-align:justify'>" + result[item].Post.Titulo + "</td><td style='text-align:center'>"
+                                                                + result[item].Post.Usuario.Apodo + "</td><td style='text-align:center'>"
+                                                                + result[item].Contador + "</td><td style='text-align:center'>"
+                                                                + fecha.toLocaleDateString() + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Editar' class='EditPageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-pencil'></i>  </a>"
+                                                                + "<a href='#' title='Eliminar' class='DeletePageBoton' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-times'></i>  </a>"
+                                                                + "<a href='" + result[item].URLVer + "' target='_blank' title='Ver' " + "data-id='" + result[item].Post.Id + "'><i class='fa fa-file-o'></i>  </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
+
+
+                $("#mostrarAllPageTabla").on("click", ".EditPageBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("EditPage", "Post")', { id_post: $(this).attr("data-id") })
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposNewPage").hide();
+                            $("#mostrarCamposNewPost").hide();
+                            $("#mostrarCamposNewUser").hide();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#mostrarCamposEditEdit").hide();
+                            $("#mostrarCamposAjustes").hide();
+                            $("#mostrarCamposEditPage").show();
+
+                            $("#tituloEditPage").val(result.Titulo);
+                            $("#descripcionEditPage").val(result.Descripcion);
+                            $("#idPageEdit").val(result.Id);
+
+                        }).fail(function (result) {
+                            alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
+                        });
+
+                });
+
+
+                $("#mostrarAllPageTabla").on("click", ".DeletePageBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("DeletePopUpPage", "Post")', { id_post: $(this).attr("data-id") })
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposNewPage").hide();
+                            $("#mostrarCamposNewPost").hide();
+                            $("#mostrarCamposNewUser").hide();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#mostrarCamposEditPage").hide();
+                            $("#mostrarCamposEditUser").hide();
+                            $("#mostrarCamposAjustes").hide();
+                            $("#mostrarPopUpDelete").hide();
+                            $("#mostrarPopUpDeletePage").show();
+
+                            $('#popupDeletePage').modal('show');
+
+                            $("#tituloDeletePage").text(result.Titulo);
+                            $("#idPageDelete").val(result.Id);
+
+                        }).fail(function (result) {
+                            alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
+                        });
+
+                });
+
+                $("#NewPageMenu").on("click", function (e) {
+                    e.preventDefault();
+
+                    $("#mensajeJsonOk").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposNewPost").hide();
                     $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditPage").hide();
                     $("#mostrarCamposEditUser").hide();
                     $("#mostrarCamposAjustes").hide();
-                    $("#mostrarPopUpDelete").hide();
-                    $("#mostrarPopUpDeletePage").show();
+                    $("#mostrarCamposNewPage").show();
+                })
 
-                    $('#popupDeletePage').modal('show');
+                $("#NewPageBoton").on("click", function (e) {
+                    e.preventDefault();
 
-                    $("#tituloDeletePage").text(result.Titulo);
-                    $("#idPageDelete").val(result.Id);
-
-                }).fail(function (result) {
-                    alert("No se pudo editar la pagina Id: " + $(this).attr("data-id"));
-                });
-
-        });
-
-        $("#NewPageMenu").on("click", function (e) {
-            e.preventDefault();
-
-            $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#ocultarTablaAllUser").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mostrarCamposNewPage").show();
-        })
-
-        $("#NewPageBoton").on("click", function (e) {
-            e.preventDefault();
-
-            $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#ocultarTablaAllUser").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mostrarCamposNewPage").show();
-        })
-
-
-
-        //COMENTARIOS
-        $("#AllComentarios").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllComentarios", "Comentario")')
-                .done(function (result) {
-
-                    $('#loading').hide();
                     $("#mensajeJsonOk").hide();
-                    $("#mostrarAllPostTabla").empty();
-                    $("#mostrarAllPageTabla").empty();
-                    $("#mostrarAllUserTabla").empty();
-                    $("#mostrarAllComentariosTabla").empty();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
                     $("#mostrarCamposEditPost").hide();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllComentarios").show();
-
-                    for (var item in result) {
-
-                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
-                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
-                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
-
-
-        $("#mostrarAllComentariosTabla").on("click", ".AprobarComenBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            if (confirm("Realmente quiere aprobar el comentario?") == true) {
-
-                $.post('@Url.Action("AprobarComen", "Comentario")', { id_comen: $(this).attr("data-id") })
-                    .done(function (result) {
-
-                        $('#loading').hide();
-                        $("#mensajeJsonOk").hide();
-                        $("#ocultarTablaAllPage").hide();
-                        $("#ocultarTablaAllPost").hide();
-                        $("#ocultarTablaAllComentarios").hide();
-                        $("#mostrarCamposNewPage").hide();
-                        $("#mostrarCamposNewPost").hide();
-                        $("#mostrarCamposNewUser").hide();
-                        $("#mostrarCamposEditPage").hide();
-                        $("#mostrarCamposEditPost").hide();
-                        $("#mostrarCamposEditUser").hide();
-                        $("#mostrarCamposAjustes").hide();
-
-                        $("#mensajeJsonOk").show();
-                        $("#mensajeJsonOk").text(result);
-
-                    }).fail(function (result) {
-                        alert("No se pudo aprobar el comentario Id: " + $(this).attr("data-id"));
-                    });
-
-            }
-
-            $('#loading').hide();
-
-
-        });
-
-
-        $("#mostrarAllComentariosTabla").on("click", ".DeleteComenBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            if (confirm("Realmente quiere eliminar el comentario?") == true) {
-
-                $.post('@Url.Action("EliminarComen", "Comentario")', { id_comen: $(this).attr("data-id") })
-                    .done(function (result) {
-
-                        $('#loading').hide();
-                        $("#mensajeJsonOk").hide();
-                        $("#ocultarTablaAllPage").hide();
-                        $("#ocultarTablaAllPost").hide();
-                        $("#mostrarCamposNewPage").hide();
-                        $("#mostrarCamposNewPost").hide();
-                        $("#mostrarCamposNewUser").hide();
-                        $("#mostrarCamposEditPage").hide();
-                        $("#mostrarCamposEditPost").hide();
-                        $("#mostrarCamposEditEdit").hide();
-                        $("#mostrarCamposAjustes").hide();
-                        $("#ocultarTablaAllComentarios").hide();
-
-                        $("#mensajeJsonOk").show();
-                        $("#mensajeJsonOk").text(result);
-
-                    }).fail(function (result) {
-                        alert("No se pudo eliminar el comentario Id: " + $(this).attr("data-id"));
-                    });
-
-            }
-
-            $('#loading').hide();
-
-
-        });
-
-        
-        $("#TodosComenBoton").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllComentarios", "Comentario")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mostrarAllPostTabla").empty();
-                    $("#mostrarAllPageTabla").empty();
-                    $("#mostrarAllComentariosTabla").empty();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllComentarios").show();
-
-                    for (var item in result) {
-
-                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
-                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
-                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
-
-
-        $("#PendientesComenBoton").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllComentariosPendientes", "Comentario")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mostrarAllPostTabla").empty();
-                    $("#mostrarAllPageTabla").empty();
-                    $("#mostrarAllComentariosTabla").empty();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllComentarios").show();
-
-                    for (var item in result) {
-
-                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
-                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
-                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
-
-
-        $("#AprobadosComenBoton").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllComentariosAprobados", "Comentario")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mostrarAllPostTabla").empty();
-                    $("#mostrarAllPageTabla").empty();
-                    $("#mostrarAllComentariosTabla").empty();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllComentarios").show();
-
-                    for (var item in result) {
-
-                        $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
-                                                        + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
-                                                        + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
-
-
-
-        //USUARIO
-        $("#AllUser").on("click", function (e) {
-            e.preventDefault();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewUser").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mensajeJsonOk").hide();
-            $('#loading').show();
-
-            $.post('@Url.Action("AllUser", "Usuario")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mostrarAllUserTabla").empty();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllComentarios").hide();
-                    $("#ocultarTablaAllUser").show();
-
-                    for (var item in result) {
-
-                        $("#mostrarAllUserTabla").append("<tr><td style='text-align:left'>" + result[item].Usuario.Apodo + "</td><td style='text-align:left'>"
-                                                        + result[item].Usuario.Nombre + " " + result[item].Usuario.Apellido + "</td><td style='text-align:left'>"
-                                                        + result[item].Usuario.Email + "</td><td style='text-align:left'>"
-                                                        + result[item].Usuario.Rol.Descripcion + "</td><td style='text-align:center'>"
-                                                        + result[item].Contador + "</td><td style='text-align:center'>"
-                                                        + "<a href='#' title='Editar' class='EditUsertBoton' " + "data-id='" + result[item].Usuario.Id + "'><i class='fa fa-pencil'></i>  </a>"
-                                                        + "<a href='#' title='Eliminar' class='DeleteUserBoton' " + "data-id='" + result[item].Usuario.Id + "'><i class='fa fa-times'></i>  </a></td></tr>"
-                                                        );
-                    }
-
-                }).fail(function (result) {
-                    $("errorJson").alert(result.errMsg);
-                });
-        })
-
-
-        $("#mostrarAllUserTabla").on("click", ".EditUsertBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            $.post('@Url.Action("EditUser", "Usuario")', { id_user: $(this).attr("data-id") })
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mensajeJsonOk").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllComentarios").hide();
-                    $("#mostrarCamposNewPage").hide();
-                    $("#mostrarCamposNewPost").hide();
-                    $("#mostrarCamposNewUser").hide();
                     $("#mostrarCamposEditPage").hide();
-                    $("#mostrarCamposEditPost").hide();
-                    $("#mostrarCamposAjustes").hide();
-                    $("#mostrarCamposEditUser").show();
-
-                    $("#idUserEdit").val(result.Id);
-                    $("#apodoEdit").val(result.Apodo);
-                    $("#nombreEdit").val(result.Nombre);
-                    $("#apellidoEdit").val(result.Apellido);
-                    $("#emailEdit").val(result.Email);
-                    $("#passwordEdit").val(result.Password);
-                    $("#rolEdit").val(result.Rol.Descripcion);
-
-                }).fail(function (result) {
-                    alert("No se pudo editar el usuario Id: " + $(this).attr("data-id"));
-                });
-
-        });
-
-
-        $("#mostrarAllUserTabla").on("click", ".DeleteUserBoton", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            if (confirm("Realmente quiere eliminar al usuario?") == true) {
-
-                $.post('@Url.Action("DeleteUser", "Usuario")', { id_user: $(this).attr("data-id") })
-                    .done(function (result) {
-
-                        $('#loading').hide();
-                        $("#mensajeJsonOk").hide();
-                        $("#ocultarTablaAllPage").hide();
-                        $("#ocultarTablaAllPost").hide();
-                        $("#ocultarTablaAllUser").hide();
-                        $("#ocultarTablaAllComentarios").hide();
-                        $("#mostrarCamposNewPage").hide();
-                        $("#mostrarCamposNewPost").hide();
-                        $("#mostrarCamposNewUser").hide();
-                        $("#mostrarCamposEditPage").hide();
-                        $("#mostrarCamposEditPost").hide();
-                        $("#mostrarCamposEditUser").hide();
-                        $("#mostrarCamposAjustes").hide();
-
-                        $("#mensajeJsonOk").show();
-                        $("#mensajeJsonOk").text(result);
-
-                    }).fail(function (result) {
-                        alert("No se pudo eliminar al usuairo Id: " + $(this).attr("data-id"));
-                    });
-
-            }
-
-            $('#loading').hide();
-
-        });
-
-        $("#NewUserMenu").on("click", function (e) {
-            e.preventDefault();
-
-            $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#ocultarTablaAllUser").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mostrarCamposNewUser").show();
-
-        })
-
-        $("#NewUserBoton").on("click", function (e) {
-            e.preventDefault();
-
-            $("#mensajeJsonOk").hide();
-            $("#ocultarTablaAllPost").hide();
-            $("#ocultarTablaAllPage").hide();
-            $("#ocultarTablaAllUser").hide();
-            $("#ocultarTablaAllComentarios").hide();
-            $("#mostrarCamposEditPost").hide();
-            $("#mostrarCamposEditPage").hide();
-            $("#mostrarCamposEditUser").hide();
-            $("#mostrarCamposNewPost").hide();
-            $("#mostrarCamposNewPage").hide();
-            $("#mostrarCamposAjustes").hide();
-            $("#mostrarCamposNewUser").show();
-
-        })
-
-
-
-        //AJUSTES
-        $("#ajustes").on("click", function (e) {
-            e.preventDefault();
-            $('#loading').show();
-
-            $.post('@Url.Action("EditAjustes", "Config")')
-                .done(function (result) {
-
-                    $('#loading').hide();
-                    $("#mensajeJsonOk").hide();
-                    $("#ocultarTablaAllPage").hide();
-                    $("#ocultarTablaAllPost").hide();
-                    $("#ocultarTablaAllUser").hide();
-                    $("#ocultarTablaAllComentarios").hide();
-                    $("#mostrarCamposNewPage").hide();
-                    $("#mostrarCamposNewPost").hide();
-                    $("#mostrarCamposNewUser").hide();
-                    $("#mostrarCamposEditPage").hide();
-                    $("#mostrarCamposEditPost").hide();
                     $("#mostrarCamposEditUser").hide();
-                    $("#mostrarCamposAjustes").show();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mostrarCamposNewPage").show();
+                })
 
-                    $("#idAjuste").val(result.Id);
-                    $("#ajusteTitulo").val(result.Titulo);
-                    $("#ajusteDescri").val(result.Descripcion);
-                    $("#ajusteCantPost").val(result.CantPost);
 
-                }).fail(function (result) {
-                    alert("No se pudo editar el ajuste del sitio.");
+
+                //COMENTARIOS
+                $("#AllComentarios").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllComentarios", "Comentario")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllUserTabla").empty();
+                            $("#mostrarAllComentariosTabla").empty();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").show();
+
+                            for (var item in result) {
+
+                                $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                                + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
+                                                                + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
+
+
+                $("#mostrarAllComentariosTabla").on("click", ".AprobarComenBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    if (confirm("Realmente quiere aprobar el comentario?") == true) {
+
+                        $.post('@Url.Action("AprobarComen", "Comentario")', { id_comen: $(this).attr("data-id") })
+                            .done(function (result) {
+
+                                $('#loading').hide();
+                                $("#mensajeJsonOk").hide();
+                                $("#ocultarTablaAllPage").hide();
+                                $("#ocultarTablaAllPost").hide();
+                                $("#ocultarTablaAllComentarios").hide();
+                                $("#mostrarCamposNewPage").hide();
+                                $("#mostrarCamposNewPost").hide();
+                                $("#mostrarCamposNewUser").hide();
+                                $("#mostrarCamposEditPage").hide();
+                                $("#mostrarCamposEditPost").hide();
+                                $("#mostrarCamposEditUser").hide();
+                                $("#mostrarCamposAjustes").hide();
+
+                                $("#mensajeJsonOk").show();
+                                $("#mensajeJsonOk").text(result);
+
+                            }).fail(function (result) {
+                                alert("No se pudo aprobar el comentario Id: " + $(this).attr("data-id"));
+                            });
+
+                    }
+
+                    $('#loading').hide();
+
+
                 });
 
-        });
+
+                $("#mostrarAllComentariosTabla").on("click", ".DeleteComenBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    if (confirm("Realmente quiere eliminar el comentario?") == true) {
+
+                        $.post('@Url.Action("EliminarComen", "Comentario")', { id_comen: $(this).attr("data-id") })
+                            .done(function (result) {
+
+                                $('#loading').hide();
+                                $("#mensajeJsonOk").hide();
+                                $("#ocultarTablaAllPage").hide();
+                                $("#ocultarTablaAllPost").hide();
+                                $("#mostrarCamposNewPage").hide();
+                                $("#mostrarCamposNewPost").hide();
+                                $("#mostrarCamposNewUser").hide();
+                                $("#mostrarCamposEditPage").hide();
+                                $("#mostrarCamposEditPost").hide();
+                                $("#mostrarCamposEditEdit").hide();
+                                $("#mostrarCamposAjustes").hide();
+                                $("#ocultarTablaAllComentarios").hide();
+
+                                $("#mensajeJsonOk").show();
+                                $("#mensajeJsonOk").text(result);
+
+                            }).fail(function (result) {
+                                alert("No se pudo eliminar el comentario Id: " + $(this).attr("data-id"));
+                            });
+
+                    }
+
+                    $('#loading').hide();
+
+
+                });
+
+
+                $("#TodosComenBoton").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllComentarios", "Comentario")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllComentariosTabla").empty();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").show();
+
+                            for (var item in result) {
+
+                                $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                                + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
+                                                                + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
+
+
+                $("#PendientesComenBoton").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllComentariosPendientes", "Comentario")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllComentariosTabla").empty();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").show();
+
+                            for (var item in result) {
+
+                                $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                                + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Aprobar' class='AprobarComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-check'></i>  </a>"
+                                                                + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
+
+
+                $("#AprobadosComenBoton").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllComentariosAprobados", "Comentario")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllComentariosTabla").empty();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllComentarios").show();
+
+                            for (var item in result) {
+
+                                $("#mostrarAllComentariosTabla").append("<tr><td style='text-align:center'><a href='" + result[item].URL + "' title='Ver Perfil' target='_blank' >" + result[item].Comentario.Usuario.Apodo + "</a></td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Descripcion + "</td><td style='text-align:justify'>"
+                                                                + result[item].Comentario.Post.Titulo + "</td><td style='text-align:center'>"
+                                                                + result[item].Comentario.Estadocomen.Descripcion + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Rechazar' class='DeleteComenBoton' " + "data-id='" + result[item].Comentario.Id + "'><i class='fa fa-times'></i>   </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
 
 
 
+                //USUARIO
+                $("#AllUser").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mensajeJsonOk").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllUser", "Usuario")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mostrarAllUserTabla").empty();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#ocultarTablaAllUser").show();
+
+                            for (var item in result) {
+
+                                $("#mostrarAllUserTabla").append("<tr><td style='text-align:left'>" + result[item].Usuario.Apodo + "</td><td style='text-align:left'>"
+                                                                + result[item].Usuario.Nombre + " " + result[item].Usuario.Apellido + "</td><td style='text-align:left'>"
+                                                                + result[item].Usuario.Email + "</td><td style='text-align:left'>"
+                                                                + result[item].Usuario.Rol.Descripcion + "</td><td style='text-align:center'>"
+                                                                + result[item].Contador + "</td><td style='text-align:center'>"
+                                                                + "<a href='#' title='Editar' class='EditUsertBoton' " + "data-id='" + result[item].Usuario.Id + "'><i class='fa fa-pencil'></i>  </a>"
+                                                                + "<a href='#' title='Eliminar' class='DeleteUserBoton' " + "data-id='" + result[item].Usuario.Id + "'><i class='fa fa-times'></i>  </a></td></tr>"
+                                                                );
+                            }
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
 
 
-       
+                $("#mostrarAllUserTabla").on("click", ".EditUsertBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
 
-    });
-    </script>
+                    $.post('@Url.Action("EditUser", "Usuario")', { id_user: $(this).attr("data-id") })
+                        .done(function (result) {
 
-    </body>
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposNewPage").hide();
+                            $("#mostrarCamposNewPost").hide();
+                            $("#mostrarCamposNewUser").hide();
+                            $("#mostrarCamposEditPage").hide();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#mostrarCamposAjustes").hide();
+                            $("#mostrarCamposEditUser").show();
+
+                            $("#idUserEdit").val(result.Id);
+                            $("#apodoEdit").val(result.Apodo);
+                            $("#nombreEdit").val(result.Nombre);
+                            $("#apellidoEdit").val(result.Apellido);
+                            $("#emailEdit").val(result.Email);
+                            $("#passwordEdit").val(result.Password);
+                            $("#rolEdit").val(result.Rol.Descripcion);
+
+                        }).fail(function (result) {
+                            alert("No se pudo editar el usuario Id: " + $(this).attr("data-id"));
+                        });
+
+                });
+
+
+                $("#mostrarAllUserTabla").on("click", ".DeleteUserBoton", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    if (confirm("Realmente quiere eliminar al usuario?") == true) {
+
+                        $.post('@Url.Action("DeleteUser", "Usuario")', { id_user: $(this).attr("data-id") })
+                            .done(function (result) {
+
+                                $('#loading').hide();
+                                $("#mensajeJsonOk").hide();
+                                $("#ocultarTablaAllPage").hide();
+                                $("#ocultarTablaAllPost").hide();
+                                $("#ocultarTablaAllUser").hide();
+                                $("#ocultarTablaAllComentarios").hide();
+                                $("#mostrarCamposNewPage").hide();
+                                $("#mostrarCamposNewPost").hide();
+                                $("#mostrarCamposNewUser").hide();
+                                $("#mostrarCamposEditPage").hide();
+                                $("#mostrarCamposEditPost").hide();
+                                $("#mostrarCamposEditUser").hide();
+                                $("#mostrarCamposAjustes").hide();
+
+                                $("#mensajeJsonOk").show();
+                                $("#mensajeJsonOk").text(result);
+
+                            }).fail(function (result) {
+                                alert("No se pudo eliminar al usuairo Id: " + $(this).attr("data-id"));
+                            });
+
+                    }
+
+                    $('#loading').hide();
+
+                });
+
+                $("#NewUserMenu").on("click", function (e) {
+                    e.preventDefault();
+
+                    $("#mensajeJsonOk").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mostrarCamposNewUser").show();
+
+                })
+
+                $("#NewUserBoton").on("click", function (e) {
+                    e.preventDefault();
+
+                    $("#mensajeJsonOk").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#mostrarCamposEditPage").hide();
+                    $("#mostrarCamposEditUser").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mostrarCamposNewUser").show();
+
+                })
+
+
+
+                //AJUSTES
+                $("#ajustes").on("click", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("EditAjustes", "Config")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposNewPage").hide();
+                            $("#mostrarCamposNewPost").hide();
+                            $("#mostrarCamposNewUser").hide();
+                            $("#mostrarCamposEditPage").hide();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#mostrarCamposEditUser").hide();
+                            $("#mostrarCamposAjustes").show();
+
+                            $("#idAjuste").val(result.Id);
+                            $("#ajusteTitulo").val(result.Titulo);
+                            $("#ajusteDescri").val(result.Descripcion);
+                            $("#ajusteCantPost").val(result.CantPost);
+
+                        }).fail(function (result) {
+                            alert("No se pudo editar el ajuste del sitio.");
+                        });
+
+                });
+
+
+                //Apariencia
+                $("#AllEditarMenu").on("click", function (e) {
+                    e.preventDefault();
+
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+
+                    $('#loading').show();
+
+                    $.post('@Url.Action("AllEditarMenu", "Menu")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllUserTabla").empty();
+                            $("#mostrarAllComentariosTabla").empty();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+                            $("#mostrarCamposEditMenu").show();
+
+                            $("#titulosEditMenu").empty();
+
+                            for (var registro in result) {
+                                $("#titulosEditMenu").append("<li><input type='checkbox'>" + result[registro].Titulo + "</li>"
+                                    + "<a href='#'" + "id='CkboxPagePrincipal'" + "data-id='" + result[registro].Id + "'"
+                                    + "data-titulo='" + result[registro].Titulo + "'></a>"
+                                    );
+                            }
+
+                            $("#titulosEditMenu").append("<br /><li style='text-align:right'>"
+                                    + "<button type='submit' class='btn btn-default btn-sm'>Añadir al menu</button></li>"
+                                    );
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+
+
+                });
+
+
+                $("#AllMenuPrimario").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("GetAllMenuPrimario", "Menu")')
+                        .done(function (result) {
+
+                            $('#loading').hide();
+                            $("#mensajeJsonOk").hide();
+                            $("#mostrarAllPostTabla").empty();
+                            $("#mostrarAllPageTabla").empty();
+                            $("#mostrarAllUserTabla").empty();
+                            $("#mostrarAllComentariosTabla").empty();
+                            $("#mostrarCamposEditPost").hide();
+                            $("#ocultarTablaAllPost").hide();
+                            $("#ocultarTablaAllPage").hide();
+                            $("#ocultarTablaAllUser").hide();
+                            $("#ocultarTablaAllComentarios").hide();
+
+                            $('.dd').nestable('serialize').on('change', function () {
+                                /* on change event */
+                            });
+
+
+                        }).fail(function (result) {
+                            $("errorJson").alert(result.errMsg);
+                        });
+                })
+
+
+                
+                $("#CkboxPagePrincipal").on("click", function (e) {
+                    e.preventDefault();
+                    $("#mostrarCamposNewPage").hide();
+                    $("#mostrarCamposNewPost").hide();
+                    $("#mostrarCamposNewUser").hide();
+                    $("#mostrarCamposAjustes").hide();
+                    $("#mensajeJsonOk").hide();
+                    $("#mostrarAllPostTabla").empty();
+                    $("#mostrarAllPageTabla").empty();
+                    $("#mostrarAllUserTabla").empty();
+                    $("#mostrarAllComentariosTabla").empty();
+                    $("#mostrarCamposEditPost").hide();
+                    $("#ocultarTablaAllPost").hide();
+                    $("#ocultarTablaAllPage").hide();
+                    $("#ocultarTablaAllUser").hide();
+                    $("#ocultarTablaAllComentarios").hide();
+
+                    $('.dd').nestable('serialize').on('change', function () {
+                        $('ol').append('<li class="dd-item" data-id="' + $(this).attr("data-id") + '"><div class="dd-handle">Drag</div><div class="dd-content">Item ' + $(this).attr("data-titulo") + '</div></li>');
+
+                    });
+
+
+                })
+
+
+
+            });
+        </script>
+
+</body>
 </html>
