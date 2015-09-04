@@ -52,7 +52,6 @@ namespace LatinCMS.Controllers
         
         }
 
-
         public JsonResult GetAllMenuSecundario()
         {
 
