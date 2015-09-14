@@ -7,7 +7,7 @@ using System.Web;
 namespace LatinCMS.Models
 {
 
-    public class Config
+    public class Configuracion
     {
         public virtual int Id { get; set; }
         public virtual int? Clave { get; set; }

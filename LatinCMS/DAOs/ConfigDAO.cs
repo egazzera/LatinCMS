@@ -7,14 +7,14 @@ using System.Web;
 
 namespace LatinCMS.DAOs
 {
-    public class ConfigDAO : GenericDAO<Config>
+    public class ConfigDAO : GenericDAO<Configuracion>
     {
         
-        public Config GetAllConfig()
+        public Configuracion GetAllConfig()
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                return session.CreateCriteria<Config>().UniqueResult<Config>();
+                return session.CreateCriteria<Configuracion>().UniqueResult<Configuracion>();
             }
 
         }

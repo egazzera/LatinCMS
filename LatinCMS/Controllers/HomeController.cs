@@ -27,7 +27,7 @@ namespace LatinCMS.Controllers
                         ViewBag.Save_Comen_Ok = TempData["Save_Comen_Ok"];
 
                     ConfigDAO util_config = new ConfigDAO();
-                    Config registro_config = util_config.GetAllConfig();
+                    Configuracion registro_config = util_config.GetAllConfig();
                     GenericDAO<Usuario> util_user = new GenericDAO<Usuario>();
 
                     Usuario usuario = util_user.GetById(id_usuario);

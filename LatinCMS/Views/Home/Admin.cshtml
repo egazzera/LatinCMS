@@ -97,7 +97,7 @@
 
         <p style="color: green; text-indent: 4em">@ViewBag.SaveOK</p>
         <p style="color: red; text-indent: 4em">@ViewBag.Error</p>
-
+        <p style="color: red; text-indent: 4em" id="errorJson"></p>
 
         @*Todos los post tabla*@
         <div class="container col-lg-8" id="ocultarTablaAllPost">
@@ -508,77 +508,75 @@
 
         @*APARIENCIA*@
         <div class="container col-lg-8" id="mostrarCamposEditMenu">
-                <form action='@Url.Action("#", "Menu", new { id_usuario = usuario_id })' method="POST" id="formulario" class="form-signin">
-                    <h2 class="form-signin-heading">Editar Menús</h2>
+                <h2 class="form-signin-heading">Editar Menús</h2>
 
-                    <div class="panel-group col-lg-4" id="accordion" role="tablist" aria-multiselectable="true">
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
-                                <h4 class="panel-title">
-                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                        Paginas
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="panel-body">
-                                    <ul role="menu" id="titulosEditMenu"></ul>
-                                </div>
-                                <ul>
-                                    <li style='text-align:right'>
-                                        <a href="#" class='btn btn-default btn-sm' id="anadirPageAlTab">Añadir al menu</a>
-                                    </li>
-                                </ul>                       
-                            </div>
+                <div class="panel-group col-lg-4" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Paginas
+                                </a>
+                            </h4>
                         </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        Enlaces
-                                    </a>
-                                </h4>
+                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <ul role="menu" id="titulosEditMenu"></ul>
                             </div>
-                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
-                                    <div class="control-group">
-                                        <label class="control-label">URL:</label>
-                                        <div class="controls">
-                                            <input type="text" name="URL" id="urlEnlaceMenu" placeholder="URL" class="form-control" maxlength="150">
-                                        </div>
-                                        <br />
+                            <ul>
+                                <li style='text-align:right'>
+                                    <a href="#" class='btn btn-default btn-sm' id="anadirPageAlTab">Añadir al menu</a>
+                                </li>
+                            </ul>                       
+                        </div>
+                    </div>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingTwo">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Enlaces
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                            <div class="panel-body">
+                                <div class="control-group">
+                                    <label class="control-label">URL:</label>
+                                    <div class="controls">
+                                        <input type="text" name="URL" id="urlEnlaceMenu" placeholder="URL" class="form-control" maxlength="150">
                                     </div>
-                                    <div class="control-group">
-                                        <label class="control-label">Texto:</label>
-                                        <div class="controls">
-                                            <input type="text" name="texto" id="textoEnlaceMenu" placeholder="Texto" class="form-control" maxlength="100">
-                                        </div>
-                                        <br />
-                                    </div>
-                                    <ul role="menu">
-                                        <li style='text-align:right'><a href="#" class='btn btn-default btn-sm' id="anadirURLAlTab">Añadir al menu</a></li>
-                                    </ul>
+                                    <br />
                                 </div>
+                                <div class="control-group">
+                                    <label class="control-label">Texto:</label>
+                                    <div class="controls">
+                                        <input type="text" name="texto" id="textoEnlaceMenu" placeholder="Texto" class="form-control" maxlength="100">
+                                    </div>
+                                    <br />
+                                </div>
+                                <ul role="menu">
+                                    <li style='text-align:right'><a href="#" class='btn btn-default btn-sm' id="anadirURLAlTab">Añadir al menu</a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-lg-8">
-                        <ul class="nav nav-tabs">
-                            <li role="presentation"><a href="#" id="AllMenuPrimario">Principal</a></li>
-                            <li role="presentation"><a href="#" id="AllMenuSecundario">Secundario</a></li>
-                        </ul>
-                        <div class="dd">
-                            <ol class="dd-list" id="listaItems"></ol>
-                        </div>
+                <div class="col-lg-8">
+                    <ul class="nav nav-tabs">
+                        <li role="presentation"><a href="#" id="AllMenuPrimario">Principal</a></li>
+                        <li role="presentation"><a href="#" id="AllMenuSecundario">Secundario</a></li>
+                    </ul>
+                    <div class="dd">
+                        <ol class="dd-list" id="listaItems"></ol>
                     </div>
+                </div>
 
-                    <div class="control-group col-lg-12">
-                        <br />
-                        <input type="submit" value="Guardar menú" class="btn btn-primary">
-                    </div>
-                </form>
+                <div class="control-group col-lg-12">
+                    <br />
+                    <input type="button" value="Guardar menú" class="btn btn-primary" id="SaveMenuApa">
+                </div>
         </div>
 
 
@@ -1442,15 +1440,19 @@
                     $('input.CkboxPage:checked').each(function (Index, Element) {
 
                         var div = $("<div>")
-                            .attr("data-titulo", $(Element).attr('data-titulo'))
-                            .attr("data-id", $(Element).attr('data-id'))
                             .attr("class", "dd-handle")
                             .text($(Element).attr('data-titulo'));
 
-                        var item = $("<li>").attr("class", "dd-item").append(div);
+                        var item = $("<li>").attr("class", "dd-item")
+                            .attr("data-id_post", $(Element).attr('data-id'))//post_id
+                            //.attr("data-padre_id", null)
+                            .attr("data-texto", $(Element).attr('data-titulo'))
+                            //.attr("data-principal", null)
+                            //.attr("data-secundario", null)
+                            .append(div);
 
                         $('#listaItems').append(item);
-
+    
                         $(Element).removeAttr('checked');
 
                     });                    
@@ -1467,12 +1469,17 @@
                     $(idMenuSeleccionado).tab('show');
 
                     var div = $("<div>")
-                        .attr("data-texto", $("#textoEnlaceMenu").val())
-                        .attr("data-url", $("#urlEnlaceMenu").val())
-                        .attr("class", "dd-handle")
-                        .text($("#textoEnlaceMenu").val());
+                            .attr("class", "dd-handle")
+                            .text($("#textoEnlaceMenu").val());
 
-                    var item = $("<li>").attr("class", "dd-item").append(div);
+                    var item = $("<li>").attr("class", "dd-item")
+                            //.attr("data-post_id", null)
+                            //.attr("data-padre_id", null)
+                            .attr("data-texto", $("#textoEnlaceMenu").val())
+                            //.attr("data-principal", null)
+                            //.attr("data-secundario", null)
+                            .attr("data-URL", $("#urlEnlaceMenu").val())
+                            .append(div);
 
                     $('#listaItems').append(item);
 
@@ -1482,8 +1489,23 @@
                 });
 
 
+                
+                $("#SaveMenuApa").on("click", function (e) {
+                    e.preventDefault();
+                    $('#loading').show();
+
+                    $.post('@Url.Action("SaveMenuApariencia", "Menu")', { tap: idMenuSeleccionado, menu: JSON.stringify($('.dd').nestable('serialize')) })
+                       .done(function (result) {
+
+                           $('#loading').hide();
+                           $("errorJson").alert(result);
+
+                       }).fail(function (result) {
+                           $("errorJson").alert(result.errMsg);
+                       });
 
 
+                });
 
             });
         </script>

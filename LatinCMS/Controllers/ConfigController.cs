@@ -27,7 +27,7 @@ namespace LatinCMS.Controllers
             {
                 ConfigDAO util = new ConfigDAO();
 
-                Config registro_config = util.GetAllConfig();
+                Configuracion registro_config = util.GetAllConfig();
 
                 return Json(registro_config, JsonRequestBehavior.AllowGet);
             }
@@ -40,10 +40,10 @@ namespace LatinCMS.Controllers
 
         public ActionResult SaveAjustes(int id_usuario) {
 
-            GenericDAO<Config> util = new GenericDAO<Config>();
-            Config configNew = new Config();
+            GenericDAO<Configuracion> util = new GenericDAO<Configuracion>();
+            Configuracion configNew = new Configuracion();
             
-            Config config_old = util.GetById(Convert.ToInt32(Request["id_ajuste"]));
+            Configuracion config_old = util.GetById(Convert.ToInt32(Request["id_ajuste"]));
 
             configNew.Id = config_old.Id;
             configNew.Titulo = Request["titulo"].Trim();

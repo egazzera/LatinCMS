@@ -139,7 +139,7 @@
     <Compile Include="Models\UsuarioPost.cs" />
     <Compile Include="Models\ComentarioURL.cs" />
     <Compile Include="Models\Comentario.cs" />
-    <Compile Include="Models\Config.cs" />
+    <Compile Include="Models\Configuracion.cs" />
     <Compile Include="Models\PostComen.cs" />
     <Compile Include="Models\PostURL.cs" />
     <Compile Include="Models\EstadoComen.cs" />
@@ -506,12 +506,16 @@
     <Content Include="Global.asax" />
     <Content Include="Content\DataTables\css\dataTables.responsive.scss" />
     <Content Include="Content\DataTables\css\dataTables.jqueryui.scss" />
-    <EmbeddedResource Include="Mappings\Config.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Configuracion.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mappings\Comentario.hbm.xml" />
     <EmbeddedResource Include="Mappings\EstadoComen.hbm.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Mappings\Menu.hbm.xml" />
+    <EmbeddedResource Include="Mappings\Menu.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Mappings\Post.hbm.xml" />
     <EmbeddedResource Include="Mappings\Rol.hbm.xml" />
     <EmbeddedResource Include="Mappings\TipoPost.hbm.xml" />
@@ -545,6 +549,7 @@
     <Content Include="Scripts\DataTables\jquery.dataTables.min.js" />
     <Content Include="hibernate.cfg.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />

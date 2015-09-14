@@ -69,7 +69,41 @@ namespace LatinCMS.DAOs
         }
 
 
+        public Menu GetByNewLastId() {
 
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                try
+                {
+                    Menu menu = session.CreateCriteria<Menu>()
+                        .SetFirstResult(0)
+                        .SetMaxResults(1)
+                        .AddOrder(Order.Desc("Id"))
+                        .UniqueResult<Menu>();
+                    
+                    return menu;
+                }
+                catch (Exception e)
+                {
+                    Console.Write(e.Message);
+                    session.Close();
+                    return null;
+                }
+
+            }
+        
+        }
+
+
+        public void DeleteMenu() {
+
+            using (ISession session = NHibernateHelper.OpenSession())
+            {
+                session.Delete("from Menu m");
+                session.Flush();
+            }
+        
+        }
 
 
 

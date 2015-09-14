@@ -13,10 +13,14 @@
     <property name="Secundario">
       <column name="secundario" sql-type="bit" not-null="false" />
     </property>
-     <property name="Url">
+    <property name="Url">
       <column name="URL" sql-type="nvarchar" not-null="false" />
     </property>
-    <many-to-one name="MenuVal" column="padre_id" />
+    <many-to-one name="MenuPadre" column="padre_id" />
     <many-to-one name="Post" column="post_id" />
+    <bag name="children" cascade="all">
+      <key column="padre_id"/>
+      <one-to-many class="Menu"/>
+    </bag>
   </class>
 </hibernate-mapping>
