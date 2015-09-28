@@ -95,9 +95,9 @@
 
         <h4 style="text-indent: 4em">Administración de LatinCMS</h4>
 
-        <p style="color: green; text-indent: 4em">@ViewBag.SaveOK</p>
-        <p style="color: red; text-indent: 4em">@ViewBag.Error</p>
-        <p style="color: red; text-indent: 4em" id="errorJson"></p>
+        <p style="color: green">@ViewBag.SaveOK</p>
+        <p style="color: red">@ViewBag.Error</p>
+        <p style="color: red" id="errorJson"></p>
 
         @*Todos los post tabla*@
         <div class="container col-lg-8" id="ocultarTablaAllPost">
@@ -1323,7 +1323,7 @@
                                     .attr("data-titulo", result[registro].Titulo);
 
                                 var item = $("<li>").append(input).append(result[registro].Titulo);
-
+                                 
                                 $("#titulosEditMenu").append(item);
                             }
 
@@ -1439,9 +1439,20 @@
 
                     $('input.CkboxPage:checked').each(function (Index, Element) {
 
+                        var borrar2 = $("<i>")
+                            .attr("class", "col-md-1 fa fa-times")
+                            .attr("style", "color: red");
+
+                        var borrar = $("<a>")
+                            .attr("href", "#")
+                            .attr("title", "Eliminar")
+                            .attr("id", "BorrarSeleccionTab")
+                            .append(borrar2);
+
                         var div = $("<div>")
                             .attr("class", "dd-handle")
-                            .text($(Element).attr('data-titulo'));
+                            .text($(Element).attr('data-titulo'))
+                            .append(borrar);
 
                         var item = $("<li>").attr("class", "dd-item")
                             .attr("data-id_post", $(Element).attr('data-id'))//post_id
@@ -1504,8 +1515,23 @@
                            $("errorJson").alert(result.errMsg);
                        });
 
-
                 });
+
+                
+                $("#BorrarSeleccionTab").on("click", function (e) {
+                    e.preventDefault();
+                    $('.dd').hide();
+                        
+                });
+
+
+
+
+
+
+
+
+
 
             });
         </script>

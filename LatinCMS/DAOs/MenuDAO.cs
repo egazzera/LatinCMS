@@ -76,7 +76,7 @@ namespace LatinCMS.DAOs
                 try
                 {
                     Menu menu = session.CreateCriteria<Menu>()
-                        .SetFirstResult(0)
+                        //.SetFirstResult(0)
                         .SetMaxResults(1)
                         .AddOrder(Order.Desc("Id"))
                         .UniqueResult<Menu>();
